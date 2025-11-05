@@ -1,0 +1,560 @@
+{
+  "name": "Soccer_LST_M2_Assignment",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "tQJXulRJf8KP1oFP",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/tQJXulRJf8KP1oFP",
+          "cachedResultName": "Soccer_LST_Parse_Excel_File"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -1360,
+        -80
+      ],
+      "name": "Call Soccer_LST_Parse_Excel_File2",
+      "id": "34f46ae1-bd8a-45fd-9c96-9f7107b69b22"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "workingShift",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "m2-switch-ws-001"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "workingShift"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "m2-switch-mm-001",
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "mismatch",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "mismatch"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -880,
+        -112
+      ],
+      "id": "d1cb0a77-8235-48a6-a43f-cb8032a42469",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 999970609,
+          "mode": "list",
+          "cachedResultName": "Mismatch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=999970609"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.rowNumber }}",
+            "HDP": "={{ $json.hdp }}",
+            "OU": "={{ $json.ou }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "HDP",
+              "displayName": "HDP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "OU",
+              "displayName": "OU",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {
+              "headerRow": 2,
+              "firstDataRow": 3
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        -64
+      ],
+      "id": "e0fe2a4c-af93-4318-8a19-b69b37ad0025",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "assignments",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        432,
+        -64
+      ],
+      "id": "69131018-3586-4dc4-9a1b-79e26cd0789c",
+      "name": "Split Out2"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "custom",
+              "cronExpression": "0/5 * * * * *"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1135612027,
+          "mode": "list",
+          "cachedResultName": "Trigger",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=1135612027"
+        },
+        "includeInOutput": "both",
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRangeA1",
+              "range": "C1:C2"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1648,
+        -80
+      ],
+      "id": "cd06bf4c-cf7a-482f-8293-88c136da1f62",
+      "name": "M2_trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "adamG53HoHZejHHG",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\r\n * Parse existing assignedJobs from shift data\r\n */\r\nfunction parseAssignedJobs(shift) {\r\n  if (!shift.assignedJobs) {\r\n    return [];\r\n  }\r\n\r\n  if (typeof shift.assignedJobs === 'string') {\r\n    try {\r\n      return JSON.parse(shift.assignedJobs);\r\n    } catch (e) {\r\n      return [];\r\n    }\r\n  }\r\n\r\n  if (Array.isArray(shift.assignedJobs)) {\r\n    return [...shift.assignedJobs];\r\n  }\r\n\r\n  return [];\r\n}\r\n\r\n/**\r\n * Create an assigned job object from a match\r\n */\r\nfunction createAssignedJob(match) {\r\n  return {\r\n    type: match.betType,\r\n    start: match.matchDate,\r\n    end: match.endDate\r\n  };\r\n}\r\n\r\n/**\r\n * Check if match starts during or after shift start\r\n */\r\nfunction matchStartsAfterShift(shift, match) {\r\n  const shiftStart = new Date(shift.startTime);\r\n  const matchStart = new Date(match.matchDate);\r\n\r\n  // Match must start at or after shift start\r\n  return shiftStart <= matchStart;\r\n}\r\n\r\n/**\r\n * Check if match ends within acceptable timeframe (shift end + 2 hours)\r\n */\r\nfunction matchEndsWithinShiftExtension(shift, match) {\r\n  const shiftEnd = new Date(shift.endTime);\r\n  const matchEnd = new Date(match.endDate);\r\n\r\n  // Add 2 hours to shift end time (in milliseconds)\r\n  const shiftEndPlus2Hours = new Date(shiftEnd.getTime() + (2 * 60 * 60 * 1000));\r\n\r\n  // Match end must be <= shift end + 2 hours\r\n  return matchEnd <= shiftEndPlus2Hours;\r\n}\r\n\r\n/**\r\n * Find matches for a trader that start at or after shift start\r\n * AND end within shift end + 2 hours\r\n */\r\nfunction findTraderMatchesInShift(matches, traderName, shift) {\r\n  return matches.filter(match => {\r\n    const isTraderMatch = match.hdpTrader === traderName || match.ouTrader === traderName;\r\n    const matchStartsInShift = matchStartsAfterShift(shift, match);\r\n    const matchEndsInTime = matchEndsWithinShiftExtension(shift, match);\r\n    return isTraderMatch && matchStartsInShift && matchEndsInTime;\r\n  });\r\n}\r\n\r\n// Main execution\r\nconst allItems = $input.all();\r\n\r\n// Filter and sort matches by priority\r\n// MJ (all), M1 (all), M2 (unchanged only)\r\nconst matchesToConsider = allItems\r\n  .filter(item => {\r\n    if (item.json.nodeType !== 'mismatch') return false;\r\n\r\n    const betType = item.json.betType;\r\n    const isUnchanged = item.json.isUnchanged === true;\r\n\r\n    // Include all MJ and M1 matches\r\n    if (betType === 'MJ' || betType === 'M1') return true;\r\n\r\n    // Include only unchanged M2 matches\r\n    if (betType === 'M2' && isUnchanged) return true;\r\n\r\n    return false;\r\n  })\r\n  .sort((a, b) => {\r\n    const dateA = new Date(a.json.matchDate);\r\n    const dateB = new Date(b.json.matchDate);\r\n    return dateA - dateB; // ascending order\r\n  });\r\n\r\n// Process all items - enrich working shifts, pass through others\r\nconst enrichedItems = allItems.map(item => {\r\n  // Only enrich working shifts\r\n  if (item.json.nodeType === 'workingShift') {\r\n    const shift = item.json;\r\n    let assignedJobs = parseAssignedJobs(shift);\r\n\r\n    // Find all MJ (all), M1 (all), and M2 (unchanged) matches for this trader\r\n    // that start at or after shift start AND end within shift end + 2 hours\r\n    const traderMatches = findTraderMatchesInShift(\r\n      matchesToConsider.map(m => m.json),\r\n      shift.traderName,\r\n      shift\r\n    );\r\n\r\n    // Append matched jobs to assignedJobs\r\n    for (const match of traderMatches) {\r\n      const job = createAssignedJob(match);\r\n      assignedJobs.push(job);\r\n    }\r\n\r\n    // Return enriched working shift\r\n    return {\r\n      json: {\r\n        ...shift,\r\n        assignedJobs: assignedJobs,\r\n        nodeType: 'workingShift'\r\n      },\r\n      pairedItem: item.pairedItem\r\n    };\r\n  }\r\n\r\n  // Pass through all other items unchanged\r\n  return item;\r\n});\r\n\r\nreturn enrichedItems;\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        -80
+      ],
+      "id": "b162078c-25b6-4186-b478-d7d178b5cac8",
+      "name": "M2_enrich_assigned_jobs_for_working_shift"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "m2-filter-elite",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "elite",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "m2-filter-member",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "member",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "m2-filter-first",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "first",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "m2-filter-second",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "second",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "m2-filter-third",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "third",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -576,
+        -224
+      ],
+      "id": "5bb0714f-2cb0-4a0d-a8eb-6b1c139c4aa2",
+      "name": "get_m2_trader"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "m2-filter-match-001",
+              "leftValue": "={{ $json.betType }}",
+              "rightValue": "M2",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -576,
+        -32
+      ],
+      "id": "f2a55ebd-abbe-4432-9774-57ecb0114f17",
+      "name": "get_m2_matches"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -176,
+        -80
+      ],
+      "id": "9ba03c0f-50a6-44f4-8f1e-d1750cb46627",
+      "name": "prepare_data_to_build_m2_api_param"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://soccer-lst.poc.consultechailab.com/api/TraderAssignment/M2",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "matches",
+              "value": "={{ $json.matches }}"
+            },
+            {
+              "name": "traderShifts",
+              "value": "={{ $json.traderShifts }}"
+            },
+            {
+              "name": "preconfiguredPairs",
+              "value": "={{ $json.preconfiguredPairs }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        -64
+      ],
+      "id": "72623274-2215-48fe-9bc2-a4b215009549",
+      "name": "api m2"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\r\n * Transform n8n data to Trader Assignment API format for M2 matches\r\n *\r\n * This code node transforms the input data from two different node types:\r\n * - mismatch (matches to assign)\r\n * - workingShift (trader availability)\r\n *\r\n * M2 matches don't require skills or preconfigured pairs since one trader handles both HDP and OU.\r\n */\r\n\r\nconst allItems = $input.all();\r\n\r\n/**\r\n * Capitalize first letter of a string\r\n * Used for level transformation: \"elite\" → \"Elite\", \"first\" → \"First\"\r\n */\r\nfunction capitalizeFirst(str) {\r\n  if (!str) return str;\r\n  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();\r\n}\r\n\r\n// Initialize result arrays\r\nconst matches = [];\r\nconst traderShifts = [];\r\n\r\n// Define transformation handlers for each nodeType\r\nconst nodeTypeHandlers = {\r\n  mismatch: (data) => {\r\n    // Only include M2 matches\r\n    if (data.betType === 'M2') {\r\n      matches.push({\r\n        id: data.rowNumber?.toString() || '',\r\n        matchNo: data.no?.toString() || '',\r\n        start: data.matchDate,\r\n        end: data.endDate,\r\n        maxBet: data.maxBet || 0,\r\n        leagueCode: data.leagueCode || null,\r\n        leagueName: data.league || null,\r\n        isAlreadyHandled: data.isUnchanged || false,\r\n        isEXPT: data.isEXPT !== undefined ? data.isEXPT : true,\r\n        isEAL: data.isEAL || false\r\n      });\r\n    }\r\n  },\r\n\r\n  workingShift: (data) => {\r\n    traderShifts.push({\r\n      id: data.rowNumber?.toString() || '',\r\n      name: data.traderName || '',\r\n      start: data.startTime,\r\n      end: data.endTime,\r\n      level: capitalizeFirst(data.staffLevel),\r\n      isManager: data.isManager || false,\r\n      isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,\r\n      m2Capacity: data.m2Capacity || 1,\r\n      ignoreLeague: data.ignoreLeague || [],\r\n      assignedJobs: data.assignedJobs?.map(job => ({\r\n        type: job.type,\r\n        start: job.start,\r\n        end: job.end\r\n      })) || []\r\n    });\r\n  }\r\n};\r\n\r\n// Process each item using the appropriate handler\r\nfor (const item of allItems) {\r\n  const data = item.json;\r\n  const handler = nodeTypeHandlers[data.nodeType];\r\n\r\n  if (handler) {\r\n    handler(data);\r\n  }\r\n}\r\n\r\n// Return transformed data in API format\r\nreturn [{\r\n  json: {\r\n    traderShifts: traderShifts,\r\n    matches: matches,\r\n    preconfiguredPairs: []\r\n  }\r\n}];\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -80
+      ],
+      "id": "8da12118-d5a5-4248-9679-0c6a34b9e5e6",
+      "name": "build_m2_api_param"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Call Soccer_LST_Parse_Excel_File2": {
+      "main": [
+        [
+          {
+            "node": "M2_enrich_assigned_jobs_for_working_shift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "get_m2_trader",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_m2_matches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "M2_trigger": {
+      "main": [
+        [
+          {
+            "node": "Call Soccer_LST_Parse_Excel_File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "M2_enrich_assigned_jobs_for_working_shift": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_m2_trader": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_build_m2_api_param",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_m2_matches": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_build_m2_api_param",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "prepare_data_to_build_m2_api_param": {
+      "main": [
+        [
+          {
+            "node": "build_m2_api_param",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "api m2": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "build_m2_api_param": {
+      "main": [
+        [
+          {
+            "node": "api m2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7232d9da-5f67-4a3c-aa0b-f61d4107fbe6",
+  "meta": {
+    "instanceId": "d6dcc4053c897f1eebaaa4209b12d8b342c939eb2cb95d99c56792d7ff00ca87"
+  },
+  "id": "qoIraRdayRMfaLR9",
+  "tags": []
+}

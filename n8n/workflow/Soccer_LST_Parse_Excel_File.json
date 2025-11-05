@@ -1,0 +1,742 @@
+{
+  "name": "Soccer_LST_Parse_Excel_File",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1952158985,
+          "mode": "list",
+          "cachedResultName": "TimeTable",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=1952158985"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 18,
+              "firstDataRow": 19
+            }
+          },
+          "outputFormatting": {
+            "values": {
+              "general": "UNFORMATTED_VALUE",
+              "date": "SERIAL_NUMBER"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        -80
+      ],
+      "id": "bb85f287-28b6-44fc-ada3-ef58ff1dcd3a",
+      "name": "get_working_shift"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Convert Excel date (days since Dec 30, 1899) to JavaScript Date\n */\nfunction excelDateToJSDate(excelDate) {\n    const excelEpoch = new Date(Date.UTC(1899, 11, 30));\n    const msPerDay = 24 * 60 * 60 * 1000;\n    return new Date(excelEpoch.getTime() + excelDate * msPerDay);\n}\n\n/**\n * Parse LST Note for early in (E) and late out (L) adjustments\n */\nfunction parseLSTNote(lstNote) {\n    if (!lstNote || typeof lstNote !== 'string') {\n        return { earlyInHours: 0, lateOutHours: 0 };\n    }\n\n    const cleanNote = lstNote.trim().toUpperCase();\n    let earlyInHours = 0;\n    let lateOutHours = 0;\n\n    // Match E pattern (Early in): E1, E0.5, E2.5, etc.\n    const earlyMatch = cleanNote.match(/E(\\d+(?:\\.\\d+)?)/);\n    if (earlyMatch) {\n        earlyInHours = parseFloat(earlyMatch[1]);\n    }\n\n    // Match L pattern (Late out): L1, L0.5, L1.5, etc.\n    const lateMatch = cleanNote.match(/L(\\d+(?:\\.\\d+)?)/);\n    if (lateMatch) {\n        lateOutHours = parseFloat(lateMatch[1]);\n    }\n\n    return { earlyInHours, lateOutHours };\n}\n\n/**\n * Create a time range from start/end hour and minute\n * @param {Date} baseDate - Base date to use for creating the time range\n * @param {number} startHour - Start hour (0-23)\n * @param {number} startMinute - Start minute (0-59)\n * @param {number} endHour - End hour (0-23)\n * @param {number} endMinute - End minute (0-59)\n * @returns {Object} Object with startTime and endTime Date objects\n */\nfunction createTimeRange(baseDate, startHour, startMinute, endHour, endMinute) {\n    // Create startTime using UTC to avoid timezone issues\n    const startTime = new Date(Date.UTC(\n        baseDate.getUTCFullYear(),\n        baseDate.getUTCMonth(),\n        baseDate.getUTCDate(),\n        startHour,\n        startMinute,\n        0,\n        0\n    ));\n\n    // Create endTime\n    const endTime = new Date(Date.UTC(\n        baseDate.getUTCFullYear(),\n        baseDate.getUTCMonth(),\n        baseDate.getUTCDate(),\n        endHour,\n        endMinute,\n        0,\n        0\n    ));\n\n    // If end time is before or equal to start time, add 1 day to endTime (midnight crossing)\n    if (endTime <= startTime) {\n        endTime.setUTCDate(endTime.getUTCDate() + 1);\n    }\n\n    return { startTime, endTime };\n}\n\n/**\n * Parse MYT time format and create Date objects for start and end times\n */\nfunction parseMYTTime(mytString, shiftDate, lstNote) {\n    if (!mytString || typeof mytString !== 'string') {\n        throw new Error(`Invalid MYT format: ${mytString}`);\n    }\n\n    const cleanString = mytString.trim();\n    const isCrossingShift = cleanString.toUpperCase().includes('(REAL)');\n    const timeString = cleanString.replace(/\\(REAL\\)/i, '').trim();\n\n    const timeMatch = timeString.match(/^(\\d{1,2})(?::(\\d{2}))?\\s*>\\s*(\\d{1,2})(?::(\\d{2}))?$/);\n\n    if (!timeMatch) {\n        throw new Error(`Invalid MYT time format: ${mytString}`);\n    }\n\n    const startHour = parseInt(timeMatch[1], 10);\n    const startMinute = parseInt(timeMatch[2] || '0', 10);\n    const endHour = parseInt(timeMatch[3], 10);\n    const endMinute = parseInt(timeMatch[4] || '0', 10);\n\n    // Use the extracted createTimeRange function\n    const { startTime, endTime } = createTimeRange(shiftDate, startHour, startMinute, endHour, endMinute);\n\n    // Apply LST Note adjustments\n    // E (Early in) = both start and end earlier (subtract hours from both)\n    // L (Late out) = both start and end later (add hours to both)\n    const { earlyInHours, lateOutHours } = parseLSTNote(lstNote);\n\n    if (earlyInHours > 0) {\n        // Convert hours to milliseconds for accurate decimal handling\n        const msToSubtract = earlyInHours * 60 * 60 * 1000;\n        startTime.setTime(startTime.getTime() - msToSubtract);\n        endTime.setTime(endTime.getTime() - msToSubtract);\n    }\n\n    if (lateOutHours > 0) {\n        // Convert hours to milliseconds for accurate decimal handling\n        const msToAdd = lateOutHours * 60 * 60 * 1000;\n        startTime.setTime(startTime.getTime() + msToAdd);\n        endTime.setTime(endTime.getTime() + msToAdd);\n    }\n\n    return {\n        startTime,\n        endTime,\n        isCrossingShift\n    };\n}\n\n/**\n * Parse BUSY column format and create assignedJobs array\n * Format: \"start > end, start > end, ...\"\n * @param {string} busyString - BUSY times from Excel\n * @param {Date} shiftStartTime - Shift start time\n * @param {Date} shiftEndTime - Shift end time\n */\nfunction parseBusyColumn(busyString, shiftStartTime, shiftEndTime) {\n    const assignedJobs = [];\n\n    if (!busyString || typeof busyString !== 'string' || busyString.trim() === '') {\n        return assignedJobs;\n    }\n\n    // Get the shift start hour to determine which date to use for BUSY times\n    const shiftStartHour = shiftStartTime.getUTCHours();\n\n    // Split by comma to get individual time ranges\n    const timeRanges = busyString.split(',');\n\n    for (const range of timeRanges) {\n        const trimmedRange = range.trim();\n        if (!trimmedRange) continue;\n\n        // Match pattern: \"start > end\" or \"start>end\"\n        const rangeMatch = trimmedRange.match(/^(\\d{1,2})(?::(\\d{2}))?\\s*>\\s*(\\d{1,2})(?::(\\d{2}))?$/);\n\n        if (rangeMatch) {\n            const startHour = parseInt(rangeMatch[1], 10);\n            const startMinute = parseInt(rangeMatch[2] || '0', 10);\n            const endHour = parseInt(rangeMatch[3], 10);\n            const endMinute = parseInt(rangeMatch[4] || '0', 10);\n\n            // Determine which date to use based on the BUSY start hour\n            // If BUSY hour >= shift start hour, it's on the start date\n            // If BUSY hour < shift start hour, it's on the end date (next day portion)\n            const baseDate = startHour >= shiftStartHour ? shiftStartTime : shiftEndTime;\n\n            // Use the extracted createTimeRange function\n            const { startTime, endTime } = createTimeRange(baseDate, startHour, startMinute, endHour, endMinute);\n\n            assignedJobs.push({\n                type: \"IC\",\n                start: startTime.toISOString(),\n                end: endTime.toISOString()\n            });\n        }\n    }\n\n    return assignedJobs;\n}\n\n// Transform timeline data\nconst result = [];\n\nfor (const item of $input.all()) {\n    const shiftDate = excelDateToJSDate(item.json.Date);\n    const { startTime, endTime, isCrossingShift } = parseMYTTime(item.json.MYT, shiftDate, item.json['LST Note']);\n\n    // Parse BUSY column to get assignedJobs\n    // Pass both start and end times to handle crossing shifts correctly\n    const assignedJobs = parseBusyColumn(item.json.Busy, startTime, endTime);\n\n    result.push({\n        json: {\n            id: item.json.row_number,\n            rowNumber: item.json.row_number,\n            shiftDate: shiftDate,\n            startTime,\n            endTime,\n            traderName: item.json.Trader,\n            isCrossingShift,\n            assignedJobs,\n            nodeType: 'workingShift'\n        }\n    });\n}\n\nreturn result;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        -80
+      ],
+      "id": "89bf6f70-915c-4bb0-9e6b-c43268efbf14",
+      "name": "format_working_shift"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "traderName",
+        "joinMode": "enrichInput1",
+        "options": {
+          "clashHandling": {
+            "values": {
+              "resolveClash": "preferInput1"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        592,
+        16
+      ],
+      "id": "cfae3e5e-a210-4df4-a8ba-08ba599f6fde",
+      "name": "enrich_working_shift"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Add nodeType to each working shift item\nconst items = $input.all();\n\nreturn items.map(item => ({\n  json: {\n    ...item.json,\n    nodeType: 'workingShift'\n  },\n  pairedItem: item.pairedItem\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        16
+      ],
+      "id": "2974bda6-784d-46a9-a520-572e859b9b05",
+      "name": "wrap_working_shift"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1280,
+        32
+      ],
+      "id": "25b1dab4-0976-40eb-8a2e-1d3400447705",
+      "name": "merge_previous_mismatch_and_working_shift"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Create an assigned job object from a match\n */\nfunction createAssignedJob(traderMatch) {\n  return {\n    type: traderMatch.betType,\n    start: traderMatch.matchDate,\n    end: traderMatch.endDate\n  };\n}\n\n/**\n * Parse existing assignedJobs from shift data\n */\nfunction parseAssignedJobs(shift) {\n  if (!shift.assignedJobs) {\n    return [];\n  }\n  \n  if (typeof shift.assignedJobs === 'string') {\n    try {\n      return JSON.parse(shift.assignedJobs);\n    } catch (e) {\n      return [];\n    }\n  }\n  \n  if (Array.isArray(shift.assignedJobs)) {\n    return [...shift.assignedJobs];\n  }\n  \n  return [];\n}\n\n/**\n * Check if shift is a crossing shift for previous day\n */\nfunction isPreviousDayCrossingShift(shift, previousDate) {\n  if (!shift.isCrossingShift || !previousDate) {\n    return false;\n  }\n  \n  const shiftDate = new Date(shift.shiftDate);\n  shiftDate.setUTCHours(0, 0, 0, 0);\n  \n  return shiftDate.getTime() === previousDate.getTime();\n}\n\n/**\n * Get previous date from matches\n */\nfunction getPreviousDate(previousMatches) {\n  if (previousMatches.length === 0) {\n    return null;\n  }\n  \n  const firstMatch = previousMatches[0].json;\n  if (!firstMatch.matchDate) {\n    return null;\n  }\n  \n  const matchDate = new Date(firstMatch.matchDate);\n  const previousDate = new Date(matchDate);\n  previousDate.setUTCHours(0, 0, 0, 0);\n  \n  return previousDate;\n}\n\n/**\n * Find all matches for a trader\n */\nfunction findTraderMatches(previousMatches, traderName) {\n  return previousMatches.filter(matchItem => {\n    const match = matchItem.json;\n    return match.hdpTrader === traderName || match.ouTrader === traderName;\n  });\n}\n\n/**\n * Enrich shift with assigned jobs from previous day matches\n */\nfunction enrichShiftWithPreviousJobs(shift, previousMatches, previousDate) {\n  let assignedJobs = parseAssignedJobs(shift);\n  \n  if (isPreviousDayCrossingShift(shift, previousDate)) {\n    const traderMatchItems = findTraderMatches(previousMatches, shift.traderName);\n    \n    // Add all matched trader's jobs\n    for (const traderMatchItem of traderMatchItems) {\n      const job = createAssignedJob(traderMatchItem.json);\n      assignedJobs.push(job);\n    }\n  }\n  \n  return assignedJobs;\n}\n\n// Main execution\nconst allItems = $input.all();\n\n// Filter items by nodeType\nconst workingShifts = allItems.filter(item => item.json.nodeType === 'workingShift');\nconst previousMatches = allItems\n  .filter(item => item.json.nodeType === 'mismatch')\n  .sort((a, b) => {\n    const dateA = new Date(a.json.matchDate);\n    const dateB = new Date(b.json.matchDate);\n    return dateA - dateB; // ascending order\n  });\n\nif (workingShifts.length === 0) {\n  return [];\n}\n\n// Get previous date from first match\nconst previousDate = getPreviousDate(previousMatches);\n\n// Enrich each working shift\nconst enrichedShifts = workingShifts.map(item => {\n  const shift = item.json;\n  const assignedJobs = enrichShiftWithPreviousJobs(shift, previousMatches, previousDate);\n  \n  return {\n    json: {\n      ...shift,\n      assignedJobs: assignedJobs,\n      nodeType: 'workingShift'\n    },\n    pairedItem: item.pairedItem\n  };\n});\n\nreturn enrichedShifts;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        32
+      ],
+      "id": "92b8d1a3-00f7-46bd-95b0-420305e75e01",
+      "name": "enrich_assinged_job"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n* Map staff level values to normalized format\n*/\nfunction mapStaffLevel(level) {\n    if (!level) return null;\n\n    const levelMap = {\n        'elite': 'elite',\n        'member': 'member',\n        '(1st)': 'first',\n        '(2nd)': 'second',\n        '(3rd)': 'third',\n        '(4th)': 'fourth',\n        'op(1st)': 'op_first',\n        'op(2nd)': 'op_second'\n    };\n\n    const lowerLevel = level.toLowerCase();\n    return levelMap[lowerLevel] || level;\n}\n\n/**\n * Parse M1 and M2 capacity from bettype string\n * Default capacity is 1 if not specified\n * Examples:\n * - \"HDP/M1*2\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"OU/M2*3\" → { m1Capacity: 1, m2Capacity: 3 }\n * - \"2/M1*2/M2*1\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"HDP/OU\" → { m1Capacity: 1, m2Capacity: 1 } (default)\n */\nfunction parseCapacity(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return { m1Capacity: 1, m2Capacity: 2 };\n    }\n\n    // Default capacity is 1\n    let m1Capacity = 1;\n    let m2Capacity = 1;\n\n    // Match M1*<number>\n    const m1Match = bettype.match(/M1\\*(\\d+)/i);\n    if (m1Match) {\n        m1Capacity = parseInt(m1Match[1], 10);\n    }\n\n    // Match M2*<number>\n    const m2Match = bettype.match(/M2\\*(\\d+)/i);\n    if (m2Match) {\n        m2Capacity = parseInt(m2Match[1], 10);\n    }\n\n    return { m1Capacity, m2Capacity };\n}\n\n/**\n * Parse ignore league string into array\n * Examples:\n * - \"league 1, league 2\" → [\"league 1\", \"league 2\"]\n * - \"EPL, LaLiga, SerieA\" → [\"EPL\", \"LaLiga\", \"SerieA\"]\n * - \"\" or null → []\n */\nfunction parseIgnoreLeague(ignoreLeagueStr) {\n    if (!ignoreLeagueStr || typeof ignoreLeagueStr !== 'string') {\n        return [];\n    }\n\n    // Split by comma and trim whitespace\n    return ignoreLeagueStr\n        .split(',')\n        .map(league => league.trim())\n        .filter(league => league.length > 0);\n}\n\n/**\n * Check if trader can be assigned to EXPT matches\n * Default is true, unless bettype contains \"[No Expt]\" (case-insensitive)\n * Examples:\n * - \"HDP/M1*2\" → true\n * - \"2/M1*2[No Expt]\" → false\n * - \"OU/M2*3 [no expt]\" → false\n * - \"\" or null → true\n */\nfunction parseIsEXPTAssignable(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return true;\n    }\n\n    // Check if bettype contains \"[No Expt]\" (case-insensitive)\n    return !bettype.match(/\\[no\\s*expt\\]/i);\n}\n\nconst result = [];\n\nfor (const item of $input.all()) {\n    // Extract data from input\n    const traderName = item.json.NAME;\n    const traderLevel = item.json.LEVEL;\n    const bettype = item.json['MAIN BET TYPE'];\n    const group = item.json.GROUP;\n    const ignoreLeague = item.json['Ignore League'];\n    const rowNumber = item.json.row_number;\n\n    // Initialize level objects\n    let managementLevel = null;\n    let staffLevel = null;\n    let isManager = false;\n\n    // Check if trader has PIC (People In Charge) - management level\n    if (traderLevel && traderLevel.includes('[PIC]')) {\n        isManager = true;\n        managementLevel = '[PIC]';\n\n        // Extract staff level from the remaining part\n        const levelParts = traderLevel.split('/');\n\n        if (levelParts.length > 1) {\n            // Has both management and staff level (e.g., \"[PIC]/Elite\", \"[PIC]/(1st)\")\n            staffLevel = levelParts[1];\n        } else {\n            // Only management level (e.g., \"[PIC]\")\n            staffLevel = null;\n        }\n    } else {\n        // No management level, only staff level\n        managementLevel = null;\n        staffLevel = traderLevel;\n    }\n\n    // Parse M1 and M2 capacity from bettype\n    const { m1Capacity, m2Capacity } = parseCapacity(bettype);\n\n    // Parse ignore league into array\n    const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);\n\n    // Parse EXPT assignability from bettype\n    const isEXPTAssignable = parseIsEXPTAssignable(bettype);\n\n    // Add to result array in n8n format\n    result.push({\n        json: {\n            id: rowNumber,\n            group: group,\n            traderName,\n            originalLevel: traderLevel,\n            managementLevel: managementLevel,\n            staffLevel: mapStaffLevel(staffLevel),\n            isManager: isManager,\n            bettype,\n            ignoreLeague: ignoreLeagueArray,\n            m1Capacity: m1Capacity,\n            m2Capacity: m2Capacity,\n            isEXPTAssignable: isEXPTAssignable,\n            nodeType: 'trader'\n        }\n    });\n}\n\nreturn result;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        96
+      ],
+      "id": "3f2eecaa-0947-4449-bffa-f255082cdb67",
+      "name": "format_trader_list"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Traders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        96
+      ],
+      "id": "1805474e-ddd4-481f-a964-442bdbc4fcdc",
+      "name": "get_trader_list"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter items from 10:00 AM to 12:00 PM (not including 12:00 PM)\nfunction parseTime(timeString) {\n  const cleanTime = timeString.trim().replace(/\\s+/g, ' ');\n  const timeMatch = cleanTime.match(/^(\\d{1,2}):(\\d{2})\\s*(AM|PM)$/i);\n\n  if (!timeMatch) return null;\n\n  let hours = parseInt(timeMatch[1], 10);\n  const minutes = parseInt(timeMatch[2], 10);\n  const period = timeMatch[3].toUpperCase();\n\n  // Convert to 24-hour format for comparison\n  if (period === 'PM' && hours !== 12) {\n    hours += 12;\n  } else if (period === 'AM' && hours === 12) {\n    hours = 0;\n  }\n\n  return hours * 60 + minutes; // Return total minutes from midnight\n}\n\nconst filtered = [];\n\nfor (const item of $input.all()) {\n  const timeString = item.json.Time;\n  const timeInMinutes = parseTime(timeString);\n\n  // 10:00 AM = 600 minutes, 12:00 PM = 720 minutes\n  if (timeInMinutes !== null && timeInMinutes >= 600 && timeInMinutes < 720) {\n    filtered.push({\n      json: {\n        ...item.json,\n        nodeType: 'previousMismatch'\n      },\n      pairedItem: item.pairedItem\n    });\n  }\n}\n\nreturn filtered;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        272
+      ],
+      "id": "a67c6d8d-afeb-40fc-87b8-ee7df26d1cd5",
+      "name": "filter_and_prepare_previous_mismatch",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1058945639,
+          "mode": "list",
+          "cachedResultName": "Previous Mismatch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=1058945639"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 2,
+              "firstDataRow": 3
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        272
+      ],
+      "id": "fecc8038-fe79-408d-9677-4f1e577b419e",
+      "name": "get_previous_mismatch",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        592,
+        432
+      ],
+      "id": "e86fa286-73aa-4228-9b1a-9b1159b30202",
+      "name": "prepare_data_to_format_mismatch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.isPreviousMatch }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "b5442f92-7c09-4487-b66e-f9303211b883"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Previous match"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "54e975ff-e941-49bd-8213-23fc9c19f326",
+                    "leftValue": "={{ $json.isPreviousMatch }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "false",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Current Match"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        960,
+        448
+      ],
+      "id": "f83bbde3-a15b-4ccb-bd77-391f0a70fcf7",
+      "name": "seperate_current_and_previous_mismatch"
+    },
+    {
+      "parameters": {
+        "jsCode": "function convertTimeToDate(currentDate, timeString) {\n  // Clean the time string - remove extra spaces\n  const cleanTime = timeString.trim().replace(/\\s+/g, ' ');\n\n  // Parse the time string\n  const timeMatch = cleanTime.match(/^(\\d{1,2}):(\\d{2})\\s*(AM|PM)$/i);\n\n  if (!timeMatch) {\n    throw new Error(`Invalid time format: ${timeString}. Expected format: \"12:00PM\", \"12:00 PM\", \"01:00 AM\", \"01:00AM\"`);\n  }\n\n  let hours = parseInt(timeMatch[1], 10);\n  const minutes = parseInt(timeMatch[2], 10);\n  const period = timeMatch[3].toUpperCase();\n\n  // Validate hours and minutes\n  if (hours < 1 || hours > 12) {\n    throw new Error(`Invalid hours: ${hours}. Hours must be between 1 and 12`);\n  }\n\n  if (minutes < 0 || minutes > 59) {\n    throw new Error(`Invalid minutes: ${minutes}. Minutes must be between 0 and 59`);\n  }\n\n  // Create a new date object based on currentDate\n  const resultDate = new Date(currentDate);\n\n  // Handle AM/PM logic\n  if (period === 'PM') {\n    // PM: Use currentDate with the specified time\n    if (hours === 12) {\n      // 12:xx PM = 12:xx (noon)\n      resultDate.setUTCHours(12, minutes, 0, 0);\n    } else {\n      // 1:xx PM to 11:xx PM = 13:xx to 23:xx\n      resultDate.setUTCHours(hours + 12, minutes, 0, 0);\n    }\n  } else { // AM\n    // AM: Add one day to currentDate with the specified time\n    resultDate.setUTCDate(resultDate.getUTCDate() + 1);\n\n    if (hours === 12) {\n      // 12:xx AM = 00:xx (midnight)\n      resultDate.setUTCHours(0, minutes, 0, 0);\n    } else {\n      // 1:xx AM to 11:xx AM = 01:xx to 11:xx\n      resultDate.setUTCHours(hours, minutes, 0, 0);\n    }\n  }\n\n  return resultDate;\n}\n\nfunction convertMaxBet(valueString) {\n  if (!valueString || typeof valueString !== 'string') {\n    return 0;\n  }\n  // Clean the string - remove extra spaces\n  const cleanString = valueString.trim();\n\n  // Find number followed by 'k' or 'K' anywhere in the string\n  // Examples: \"30K\", \"123Kxxx\", \"abc 30Kxxx\"\n  const kMatch = cleanString.match(/(\\d+(?:\\.\\d+)?)\\s*[kK]/i);\n\n  if (!kMatch) {\n    return 0;\n  }\n\n  // Extract the numeric part\n  const numericValue = parseFloat(kMatch[1]);\n\n  // Validate the numeric value\n  if (isNaN(numericValue)) {\n    return 0;\n  }\n\n  // Convert to number by multiplying by 1000\n  return numericValue * 1000;\n}\n\nfunction detectBetType(match) {\n  const league = (match.League || '').toUpperCase();\n  const no = (match.No || '').toString().toUpperCase();\n  const maxBet = convertMaxBet(match.Maxbet);\n\n  // 1. Check special bet types by No suffix (order matters!)\n  if (no.endsWith('TB1')) return 'TB1';  // Next Booking\n  if (no.endsWith('TB')) return 'TB';    // Booking\n  if (no.endsWith('C1')) return 'C1';    // Next Corner\n  if (no.endsWith('C')) return 'CR';     // Corner\n\n  // 2. Check for child product format: numbers followed by letters, optionally followed by numbers\n  // Examples: 12B, 13FS, 12B1, 13FS2 - This indicates OtherSport category\n  const childProductPattern = /^\\d+[A-Z]+\\d*$/;\n  if (childProductPattern.test(no)) return 'CP'; //child product\n\n  // 3. Check by League name\n  if (league.includes('FUTSAL')) return 'FS';\n\n  // 4. Check Virtual PES games\n  if (league.includes('SABA CLUB FRIENDLY') && league.includes('PES 21')) return 'PESCF';\n  if (league.includes('SABA INTERNATIONAL FRIENDLY') && league.includes('PES 21')) return 'PESIF';\n  if (league.includes('SABA VIETNAM V LEAGUE 1') && league.includes('PES 24')) return 'PES24';\n  if (league.includes('SABA ELITE FRIENDLY') && league.includes('PES 21')) return 'PES5MIN';\n  if (league.includes('PENALTY SHOOTOUTS') && league.includes('PES 23')) {\n    if (league.includes('INTERNATIONAL')) return 'PKIF';\n    if (league.includes('CLUB')) return 'PKCF';\n  }\n\n  // 5. Fall back to MaxBet-based classification\n  if (maxBet >= 70000) return 'MJ';   // Major\n  if (maxBet >= 40000 && maxBet < 70000) return 'M1';    // Minor 1\n  if (maxBet >= 20000 && maxBet < 40000) return 'M2';    // Minor 2\n  if (maxBet >= 8000 && maxBet < 20000) return 'M3';     // Minor 3\n  if (maxBet >= 1500 && maxBet < 8000) return 'M4';      // Minor 4\n\n  return 'Unknown';\n}\n\nfunction isRealGame(betType) {\n  const virtualBetTypes = ['PESCF', 'PESIF', 'PES24', 'PES5MIN', 'PKIF', 'PKCF'];\n  return !virtualBetTypes.includes(betType);\n}\n\n/**\n * Calculate end time for a real match\n * Rules:\n * - Both ET and PK: 3 hours\n * - Only PK: 2.5 hours\n * - Only ET: 3 hours\n * - Neither: 2 hours\n */\nfunction calculateRealMatchEndTime(matchDate, etpkValue) {\n  const endDate = new Date(matchDate);\n\n  if (!etpkValue) {\n    // No ET/PK: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  } else if (etpkValue.includes(\"ET\") && etpkValue.includes(\"PK\")) {\n    // Both ET and PK: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else if (etpkValue.includes(\"PK\")) {\n    // Only PK: 2.5 hours (2 hours 30 minutes)\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n    endDate.setUTCMinutes(endDate.getUTCMinutes() + 30);\n  } else if (etpkValue.includes(\"ET\")) {\n    // Only ET: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else {\n    // Default: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  }\n\n  return endDate;\n}\n\n/**\n * Calculate end time for a virtual match based on bet type\n */\nfunction calculateVirtualMatchEndTime(matchDate, betType) {\n  const endDate = new Date(matchDate);\n\n  const durationMap = {\n    'PES5MIN': 15,\n    'PESCF': 20,\n    'PESIF': 20,\n    'PKIF': 5,\n    'PKCF': 5,\n    'PES24': 15\n  };\n\n  const minutesToAdd = durationMap[betType] || 15; // default 15 minutes\n  endDate.setUTCMinutes(endDate.getUTCMinutes() + minutesToAdd);\n  return endDate;\n}\n\n/**\n * Calculate match end date\n */\nfunction calculateMatchEndDate(matchDate, isReal, etpkValue, betType) {\n  return isReal\n    ? calculateRealMatchEndTime(matchDate, etpkValue)\n    : calculateVirtualMatchEndTime(matchDate, betType);\n}\n\nconst allItems = $input.all();\n\n// Find config item with nodeType\nconst currentDateItem = allItems.find(_ => _.json.nodeType === 'config');\n// Find mismatch items with nodeType\nconst mismatchItems = allItems.filter(_ => _.json.nodeType === 'mismatch');\n// Find previous mismatch items with nodeType\nconst previousMismatchItems = allItems.filter(_ => _.json.nodeType === 'previousMismatch');\n\nconst currentDate = currentDateItem.json.currentDate;\nconst result = [];\n\n// Process current mismatch items\nfor (const item of mismatchItems) {\n  const value = item.json;\n  const betType = detectBetType(value);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n\n  result.push({\n    json: {\n      matchDate: matchDate,\n      endDate: endDate,\n      league: value.League,\n      isETPK: isETPK,\n      maxBet: convertMaxBet(value.Maxbet),\n      provider: value.Provider,\n      rowNumber: value.row_number,\n      no: value.No,\n      isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n      isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n      betType: betType,\n      isReal: isReal,\n      hdpTrader: value.HDP || null,\n      ouTrader: value.OU || null,\n      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n      isPreviousMatch: false,\n      nodeType: 'mismatch'\n    }\n  });\n}\n\n// Process previous mismatch items\nfor (const item of previousMismatchItems) {\n  const value = item.json;\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  // Subtract 1 day from matchDate\n  matchDate.setUTCDate(matchDate.getUTCDate() - 1);\n\n  const betType = detectBetType(value);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n\n  result.push({\n    json: {\n      matchDate: matchDate,\n      endDate: endDate,\n      league: value.League,\n      isETPK: isETPK,\n      maxBet: convertMaxBet(value.Maxbet),\n      provider: value.Provider,\n      rowNumber: value.row_number,\n      no: value.No,\n      isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n      isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n      betType: betType,\n      isReal: isReal,\n      hdpTrader: value.HDP,\n      ouTrader: value.OU,\n      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n      isPreviousMatch: true,\n      nodeType: 'mismatch'\n    }\n  });\n}\n\nreturn result;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        448
+      ],
+      "id": "fc574b51-d220-497b-965b-d83d686e4ebc",
+      "name": "format_mismatch"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Add nodeType to each mismatch item\nconst items = $input.all();\n\nreturn items.map(item => ({\n  json: {\n    ...item.json,\n    nodeType: 'mismatch'\n  },\n  pairedItem: item.pairedItem\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        464
+      ],
+      "id": "0cc45d56-7fc2-4866-9469-b84dd05a519b",
+      "name": "prepare_current_mismatch"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 999970609,
+          "mode": "list",
+          "cachedResultName": "Mismatch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=999970609"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 2,
+              "firstDataRow": 3
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        464
+      ],
+      "id": "b2f427de-dfb1-410c-b559-9618ab2362cd",
+      "name": "get_current_mismatch"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1920,
+        416
+      ],
+      "id": "20b89cd2-a09f-41b7-8493-496c46a731aa",
+      "name": "output_parse_soccer_lst"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter for CurrentDate type, take first, extract value\nconst allItems = $input.all();\n\n// Filter items where Type = \"CurrentDate\" (case insensitive)\nconst currentDateItems = allItems.filter(item => {\n  const type = item.json.Type;\n  return type && type.toString().toLowerCase() === 'currentdate';\n});\n\n// Take first item (Limit behavior)\nif (currentDateItems.length === 0) {\n  return [];\n}\n\nconst firstItem = currentDateItems[0];\n\n// Extract currentDate from Value field\nconst currentDate = firstItem.json.Value;\n\n// Return config item with nodeType\nreturn [{\n  json: {\n    currentDate: currentDate,\n    nodeType: 'config'\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        656
+      ],
+      "id": "9d1542d4-6c85-4d8d-a268-ced45f9eb28b",
+      "name": "format_config",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 360485273,
+          "mode": "list",
+          "cachedResultName": "Config",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=360485273"
+        },
+        "options": {
+          "outputFormatting": {
+            "values": {
+              "general": "UNFORMATTED_VALUE",
+              "date": "FORMATTED_STRING"
+            }
+          },
+          "returnFirstMatch": false
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        656
+      ],
+      "id": "33cdc11f-c9ff-4a5c-8bf7-d267afab113a",
+      "name": "get_config"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2001711102,
+          "mode": "list",
+          "cachedResultName": "Pair Trader",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=2001711102"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 2,
+              "firstDataRow": 3
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        160,
+        832
+      ],
+      "id": "237416eb-cb4a-4539-bca3-f4ca2a402958",
+      "name": "get_pair_trader"
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $input.all();\r\nconst result = [];\r\n\r\nfor (const item of allItems) {\r\n  const data = item.json;\r\n\r\n  // Build league priority object\r\n  const leaguePriority = {};\r\n  if (data['1st']) {\r\n    leaguePriority[1] = [data['1st']];\r\n  }\r\n  if (data['2nd']) {\r\n    leaguePriority[2] = [data['2nd']];\r\n  }\r\n  if (data['3rd']) {\r\n    leaguePriority[3] = [data['3rd']];\r\n  }\r\n\r\n  // Primary tier: HDP + OU1 (only if OU1 exists and is not empty)\r\n  if (data.HDP && data.OU1 && data.OU1.trim() !== '') {\r\n    result.push({\r\n      json: {\r\n        hdp: data.HDP,\r\n        ou: data.OU1,\r\n        tier: \"primary\",\r\n        league_priority: leaguePriority,\r\n        nodeType: \"pairTrader\"\r\n      }\r\n    });\r\n  }\r\n\r\n  // Secondary tier: HDP + OU2 (only if OU2 exists and is not empty)\r\n  if (data.HDP && data.OU2 && data.OU2.trim() !== '') {\r\n    result.push({\r\n      json: {\r\n        hdp: data.HDP,\r\n        ou: data.OU2,\r\n        tier: \"secondary\",\r\n        league_priority: leaguePriority,\r\n        nodeType: \"pairTrader\"\r\n      }\r\n    });\r\n  }\r\n\r\n  // Backup tier: HDPBK + OUBK (only if both exist and are not empty)\r\n  if (data.HDPBK && data.HDPBK.trim() !== '' && data.OUBK && data.OUBK.trim() !== '') {\r\n    result.push({\r\n      json: {\r\n        hdp: data.HDPBK,\r\n        ou: data.OUBK,\r\n        tier: \"backup\",\r\n        league_priority: leaguePriority,\r\n        nodeType: \"pairTrader\"\r\n      }\r\n    });\r\n  }\r\n}\r\n\r\nreturn result;\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        368,
+        832
+      ],
+      "id": "7848d423-449f-48e7-99ad-4800949678b6",
+      "name": "format_pair_trader"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "d65bc105-4cc2-4190-a3e7-8972941b2a89",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -240,
+        352
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "format_config": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_format_mismatch",
+            "type": "main",
+            "index": 2
+          },
+          {
+            "node": "output_parse_soccer_lst",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "prepare_current_mismatch": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_format_mismatch",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "enrich_working_shift": {
+      "main": [
+        [
+          {
+            "node": "wrap_working_shift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "wrap_working_shift": {
+      "main": [
+        [
+          {
+            "node": "merge_previous_mismatch_and_working_shift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_working_shift": {
+      "main": [
+        [
+          {
+            "node": "format_working_shift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_trader_list": {
+      "main": [
+        [
+          {
+            "node": "format_trader_list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_previous_mismatch": {
+      "main": [
+        [
+          {
+            "node": "filter_and_prepare_previous_mismatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_current_mismatch": {
+      "main": [
+        [
+          {
+            "node": "prepare_current_mismatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_config": {
+      "main": [
+        [
+          {
+            "node": "format_config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_pair_trader": {
+      "main": [
+        [
+          {
+            "node": "format_pair_trader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format_working_shift": {
+      "main": [
+        [
+          {
+            "node": "enrich_working_shift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format_trader_list": {
+      "main": [
+        [
+          {
+            "node": "enrich_working_shift",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "filter_and_prepare_previous_mismatch": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_format_mismatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "seperate_current_and_previous_mismatch": {
+      "main": [
+        [
+          {
+            "node": "merge_previous_mismatch_and_working_shift",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "output_parse_soccer_lst",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "merge_previous_mismatch_and_working_shift": {
+      "main": [
+        [
+          {
+            "node": "enrich_assinged_job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format_mismatch": {
+      "main": [
+        [
+          {
+            "node": "seperate_current_and_previous_mismatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prepare_data_to_format_mismatch": {
+      "main": [
+        [
+          {
+            "node": "format_mismatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "enrich_assinged_job": {
+      "main": [
+        [
+          {
+            "node": "output_parse_soccer_lst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "format_pair_trader": {
+      "main": [
+        [
+          {
+            "node": "output_parse_soccer_lst",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "get_working_shift",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_trader_list",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_previous_mismatch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_current_mismatch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_config",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_pair_trader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2df2a4c3-1994-4c58-b2ac-0289979be3e7",
+  "meta": {
+    "instanceId": "98bfed1c0f22fa9e07d0e38dc58da94b0281d63095bd4ba14894d42a90a063e3"
+  },
+  "id": "E50RJmsG1GPE0WS1",
+  "tags": []
+}

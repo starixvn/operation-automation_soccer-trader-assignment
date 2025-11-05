@@ -1,0 +1,158 @@
+/**
+* Map staff level values to normalized format
+*/
+function mapStaffLevel(level) {
+    if (!level) return null;
+
+    const levelMap = {
+        'elite': 'elite',
+        'member': 'member',
+        '(1st)': 'first',
+        '(2nd)': 'second',
+        '(3rd)': 'third',
+        '(4th)': 'fourth',
+        'op(1st)': 'op_first',
+        'op(2nd)': 'op_second'
+    };
+
+    const lowerLevel = level.toLowerCase();
+    return levelMap[lowerLevel] || level;
+}
+
+/**
+ * Parse M1 and M2 capacity from bettype string
+ * Default capacity is 1 if not specified
+ * Examples:
+ * - "HDP/M1*2" → { m1Capacity: 2, m2Capacity: 1 }
+ * - "OU/M2*3" → { m1Capacity: 1, m2Capacity: 3 }
+ * - "2/M1*2/M2*1" → { m1Capacity: 2, m2Capacity: 1 }
+ * - "HDP/OU" → { m1Capacity: 1, m2Capacity: 1 } (default)
+ */
+function parseCapacity(bettype) {
+    if (!bettype || typeof bettype !== 'string') {
+        return { m1Capacity: 1, m2Capacity: 2 };
+    }
+
+    // Default capacity is 1
+    let m1Capacity = 1;
+    let m2Capacity = 1;
+
+    // Match M1*<number>
+    const m1Match = bettype.match(/M1\*(\d+)/i);
+    if (m1Match) {
+        m1Capacity = parseInt(m1Match[1], 10);
+    }
+
+    // Match M2*<number>
+    const m2Match = bettype.match(/M2\*(\d+)/i);
+    if (m2Match) {
+        m2Capacity = parseInt(m2Match[1], 10);
+    }
+
+    return { m1Capacity, m2Capacity };
+}
+
+/**
+ * Parse ignore league string into array
+ * Examples:
+ * - "league 1, league 2" → ["league 1", "league 2"]
+ * - "EPL, LaLiga, SerieA" → ["EPL", "LaLiga", "SerieA"]
+ * - "" or null → []
+ */
+function parseIgnoreLeague(ignoreLeagueStr) {
+    if (!ignoreLeagueStr || typeof ignoreLeagueStr !== 'string') {
+        return [];
+    }
+
+    // Split by comma and trim whitespace
+    return ignoreLeagueStr
+        .split(',')
+        .map(league => league.trim())
+        .filter(league => league.length > 0);
+}
+
+/**
+ * Check if trader can be assigned to EXPT matches
+ * Default is true, unless bettype contains "[No Expt]" (case-insensitive)
+ * Examples:
+ * - "HDP/M1*2" → true
+ * - "2/M1*2[No Expt]" → false
+ * - "OU/M2*3 [no expt]" → false
+ * - "" or null → true
+ */
+function parseIsEXPTAssignable(bettype) {
+    if (!bettype || typeof bettype !== 'string') {
+        return true;
+    }
+
+    // Check if bettype contains "[No Expt]" (case-insensitive)
+    return !bettype.match(/\[no\s*expt\]/i);
+}
+
+const result = [];
+
+for (const item of $input.all()) {
+    // Extract data from input
+    const traderName = item.json.NAME;
+    const traderLevel = item.json.LEVEL;
+    const bettype = item.json['MAIN BET TYPE'];
+    const group = item.json.GROUP;
+    const ignoreLeague = item.json['Ignore League'];
+    const rowNumber = item.json.row_number;
+
+    // Initialize level objects
+    let managementLevel = null;
+    let staffLevel = null;
+    let isManager = false;
+
+    // Check if trader has PIC (People In Charge) - management level
+    if (traderLevel && traderLevel.includes('[PIC]')) {
+        isManager = true;
+        managementLevel = '[PIC]';
+
+        // Extract staff level from the remaining part
+        const levelParts = traderLevel.split('/');
+
+        if (levelParts.length > 1) {
+            // Has both management and staff level (e.g., "[PIC]/Elite", "[PIC]/(1st)")
+            staffLevel = levelParts[1];
+        } else {
+            // Only management level (e.g., "[PIC]")
+            staffLevel = null;
+        }
+    } else {
+        // No management level, only staff level
+        managementLevel = null;
+        staffLevel = traderLevel;
+    }
+
+    // Parse M1 and M2 capacity from bettype
+    const { m1Capacity, m2Capacity } = parseCapacity(bettype);
+
+    // Parse ignore league into array
+    const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);
+
+    // Parse EXPT assignability from bettype
+    const isEXPTAssignable = parseIsEXPTAssignable(bettype);
+
+    // Add to result array in n8n format
+    result.push({
+        json: {
+            id: rowNumber,
+            group: group,
+            traderName,
+            originalLevel: traderLevel,
+            managementLevel: managementLevel,
+            staffLevel: mapStaffLevel(staffLevel),
+            isManager: isManager,
+            bettype,
+            ignoreLeague: ignoreLeagueArray,
+            m1Capacity: m1Capacity,
+            m2Capacity: m2Capacity,
+            isEXPTAssignable: isEXPTAssignable,
+            nodeType: 'trader'
+        }
+    });
+}
+
+return result;

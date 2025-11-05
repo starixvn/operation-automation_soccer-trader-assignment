@@ -1,0 +1,275 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// File exclusions from explorer
+		"files.exclude": {
+			"**/bin": true,
+			"**/obj": true,
+			"**/.vs": true,
+			"**/.git": false,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true
+		},
+		// Search exclusions
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/bin": true,
+			"**/obj": true,
+			"**/tempcode": false,
+			"**/.git": true,
+			"**/output": false
+		},
+		// .NET settings
+		"dotnet.defaultSolution": "soccer-lst.sln",
+		"omnisharp.enableRoslynAnalyzers": true,
+		"omnisharp.enableEditorConfigSupport": true,
+		// File associations
+		"files.associations": {
+			"*.csproj": "xml",
+			"*.sln": "text",
+			"*.json": "jsonc",
+			"Dockerfile*": "dockerfile",
+			".dockerignore": "ignore",
+			".gitignore": "ignore"
+		},
+		// Editor settings
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		},
+		"editor.tabSize": 2,
+		"editor.detectIndentation": true,
+		// C# specific
+		"[csharp]": {
+			"editor.tabSize": 4,
+			"editor.insertSpaces": true,
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "ms-dotnettools.csharp"
+		},
+		// JavaScript specific
+		"[javascript]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true,
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "vscode.typescript-language-features"
+		},
+		// JSON specific
+		"[json]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true,
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "vscode.json-language-features"
+		},
+		"[jsonc]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true
+		},
+		// Markdown specific
+		"[markdown]": {
+			"editor.wordWrap": "on",
+			"editor.quickSuggestions": {
+				"comments": "off",
+				"strings": "off",
+				"other": "off"
+			}
+		},
+		// Terminal settings
+		"terminal.integrated.cwd": "${workspaceFolder}",
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		// Git settings
+		"git.ignoreLimitWarning": true,
+		"git.autofetch": true,
+		// Docker settings
+		"docker.showStartPage": false,
+		"dotnet.formatting.organizeImportsOnFormat": true
+	},
+	"extensions": {
+		"recommendations": [
+			// .NET Development
+			"ms-dotnettools.csharp",
+			"ms-dotnettools.csdevkit",
+			"ms-dotnettools.vscode-dotnet-runtime",
+			// Docker
+			"ms-azuretools.vscode-docker",
+			// JSON & Data
+			"redhat.vscode-yaml",
+			// Git
+			"eamodio.gitlens",
+			// Utilities
+			"streetsidesoftware.code-spell-checker",
+			"editorconfig.editorconfig",
+			// Markdown
+			"yzhang.markdown-all-in-one"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Build Solution",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"build",
+					"${workspaceFolder}/soccer-lst.sln",
+					"/property:GenerateFullPaths=true",
+					"/consoleloggerparameters:NoSummary"
+				],
+				"problemMatcher": "$msCompile",
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "Build API",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"build",
+					"${workspaceFolder}/src/SoccerLST.TraderAssignment.API/SoccerLST.TraderAssignment.API.csproj"
+				],
+				"problemMatcher": "$msCompile",
+				"group": "build"
+			},
+			{
+				"label": "Build Core",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"build",
+					"${workspaceFolder}/src/SoccerLST.TraderAssignment.Core/SoccerLST.TraderAssignment.Core.csproj"
+				],
+				"problemMatcher": "$msCompile",
+				"group": "build"
+			},
+			{
+				"label": "Run API (Development)",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"run",
+					"--project",
+					"${workspaceFolder}/src/SoccerLST.TraderAssignment.API/SoccerLST.TraderAssignment.API.csproj"
+				],
+				"problemMatcher": "$msCompile",
+				"group": "none",
+				"presentation": {
+					"reveal": "always",
+					"panel": "new"
+				}
+			},
+			{
+				"label": "Run Tests",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"test",
+					"${workspaceFolder}/tests/SoccerLST.TraderAssignment.Core.Tests/SoccerLST.TraderAssignment.Core.Tests.csproj"
+				],
+				"problemMatcher": "$msCompile",
+				"group": {
+					"kind": "test",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "Docker: Build Image",
+				"type": "shell",
+				"command": "docker",
+				"args": [
+					"build",
+					"-t",
+					"trader-assignment-api",
+					"."
+				],
+				"problemMatcher": [],
+				"group": "none"
+			},
+			{
+				"label": "Docker: Run (Development)",
+				"type": "shell",
+				"command": "docker",
+				"args": [
+					"run",
+					"-d",
+					"-p",
+					"8080:8080",
+					"-e",
+					"ASPNETCORE_ENVIRONMENT=Development",
+					"--name",
+					"trader-assignment-api",
+					"trader-assignment-api"
+				],
+				"problemMatcher": [],
+				"group": "none"
+			},
+			{
+				"label": "Docker: Stop and Remove",
+				"type": "shell",
+				"command": "docker stop trader-assignment-api && docker rm trader-assignment-api",
+				"problemMatcher": [],
+				"group": "none"
+			},
+			{
+				"label": "Docker: View Logs",
+				"type": "shell",
+				"command": "docker",
+				"args": [
+					"logs",
+					"-f",
+					"trader-assignment-api"
+				],
+				"problemMatcher": [],
+				"group": "none",
+				"isBackground": true
+			},
+			{
+				"label": "Clean Solution",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"clean",
+					"${workspaceFolder}/soccer-lst.sln"
+				],
+				"problemMatcher": "$msCompile",
+				"group": "none"
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": ".NET: Launch API",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "Build API",
+				"program": "${workspaceFolder}/src/SoccerLST.TraderAssignment.API/bin/Debug/net8.0/SoccerLST.TraderAssignment.API.dll",
+				"args": [],
+				"cwd": "${workspaceFolder}/src/SoccerLST.TraderAssignment.API",
+				"stopAtEntry": false,
+				"serverReadyAction": {
+					"action": "openExternally",
+					"pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+					"uriFormat": "%s/swagger"
+				},
+				"env": {
+					"ASPNETCORE_ENVIRONMENT": "Development"
+				},
+				"sourceFileMap": {
+					"/Views": "${workspaceFolder}/Views"
+				}
+			},
+			{
+				"name": ".NET: Attach to Process",
+				"type": "coreclr",
+				"request": "attach"
+			}
+		]
+	}
+}

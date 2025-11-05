@@ -1,0 +1,77 @@
+{
+  "TraderShifts": [
+    {
+      "Id": "30",
+      "Name": "CLGKelven",
+      "Start": "2025-09-28T02:00:00.000Z",
+      "End": "2025-09-29T13:00:00.000Z",
+      "Skills": ["OU"],
+      "Level": "First",
+      "IsManager": true
+    },
+    {
+      "Id": "31",
+      "Name": "CLGHoo",
+      "Start": "2025-09-28T03:00:00.000Z",
+      "End": "2025-09-28T14:00:00.000Z",
+      "Skills": ["OU"],
+      "Level": "Elite",
+      "IsManager": true,
+      "AssignedJobs": [
+        {
+          "Type": "BS",
+          "Start": "2025-09-28T05:00:00.000Z",
+          "End": "2025-09-28T14:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "Id": "52",
+      "Name": "CLGShootbird",
+      "Start": "2025-09-28T13:00:00.000Z",
+      "End": "2025-09-29T00:00:00.000Z",
+      "Skills": ["OU"],
+      "Level": "Elite",
+      "IsManager": false
+    },
+    {
+      "Id": "87",
+      "Name": "CLGKilos",
+      "Start": "2025-09-28T18:00:00.000Z",
+      "End": "2025-09-29T05:00:00.000Z",
+      "Skills": ["HDP"],
+      "Level": "Elite",
+      "IsManager": false
+    }
+  ],
+  "Matches": [
+    {
+      "Id": "152",
+      "MatchNo": "152",
+      "Start": "2025-09-28T18:30:00.000Z",
+      "End": "2025-09-28T20:30:00.000Z",
+      "MaxBet": 120000,
+      "LeagueCode": "ITA"
+    },
+    {
+      "Id": "211",
+      "MatchNo": "211",
+      "Start": "2025-09-28T20:00:00.000Z",
+      "End": "2025-09-28T22:00:00.000Z",
+      "MaxBet": 120000,
+      "LeagueCode": "SPA"
+    }
+  ],
+  "PreconfiguredPairs": [
+    {
+      "Hdp": "CLGKilos",
+      "Ou": "CLGShootbird",
+      "Tier": "primary",
+      "LeaguePriority": {
+        "1": ["SPA"],
+        "2": ["ITA"],
+        "3": ["EPL"]
+      }
+    }
+  ]
+}

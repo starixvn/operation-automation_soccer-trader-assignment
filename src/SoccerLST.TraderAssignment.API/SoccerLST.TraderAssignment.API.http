@@ -1,0 +1,6 @@
+@SoccerLST_TraderAssignment_API_HostAddress = http://localhost:5165
+
+GET {{SoccerLST_TraderAssignment_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

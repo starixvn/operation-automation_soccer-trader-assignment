@@ -1,0 +1,4 @@
+include:
+  - project: "raid/digital-wallet/gitlab-cicd-configs"
+    ref: "main"
+    file: "/soccer-lst/.gitlab-ci.yaml"

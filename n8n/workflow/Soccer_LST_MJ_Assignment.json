@@ -1,0 +1,791 @@
+{
+  "name": "Soccer_LST_MJ_Assignment",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "tQJXulRJf8KP1oFP",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/tQJXulRJf8KP1oFP",
+          "cachedResultName": "Soccer_LST_Parse_Excel_File"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -2848,
+        400
+      ],
+      "name": "Call Soccer_LST_Parse_Excel_File",
+      "id": "6f41d3be-a950-4c0e-8387-237f82877d58"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "workingShift",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cfc35e84-5658-4eb3-bd5f-a3cd646ab17b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "workingShift"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "efceb071-e01c-4bbd-a327-4ea98a7613af",
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "mismatch",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "mismatch"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "78f0f601-9f00-4f43-b1ea-48f1f89b89a9",
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "config",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "config"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "69392a5c-f034-458a-822c-0dbc6d3b9468",
+                    "leftValue": "={{ $json.nodeType }}",
+                    "rightValue": "pairTrader",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "pairTrader"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -2352,
+        240
+      ],
+      "id": "bd48ce00-77bc-420b-99ed-dadc70e6a0ac",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\r\n * Parse existing assignedJobs from shift data\r\n */\r\nfunction parseAssignedJobs(shift) {\r\n  if (!shift.assignedJobs) {\r\n    return [];\r\n  }\r\n  \r\n  if (typeof shift.assignedJobs === 'string') {\r\n    try {\r\n      return JSON.parse(shift.assignedJobs);\r\n    } catch (e) {\r\n      return [];\r\n    }\r\n  }\r\n  \r\n  if (Array.isArray(shift.assignedJobs)) {\r\n    return [...shift.assignedJobs];\r\n  }\r\n  \r\n  return [];\r\n}\r\n\r\n/**\r\n * Create an assigned job object from a match\r\n */\r\nfunction createAssignedJob(match) {\r\n  return {\r\n    type: match.betType,\r\n    start: match.matchDate,\r\n    end: match.endDate\r\n  };\r\n}\r\n\r\n/**\r\n * Check if match starts during or after shift start\r\n */\r\nfunction matchStartsAfterShift(shift, match) {\r\n  const shiftStart = new Date(shift.startTime);\r\n  const matchStart = new Date(match.matchDate);\r\n  \r\n  // Match must start at or after shift start\r\n  return shiftStart <= matchStart;\r\n}\r\n\r\n/**\r\n * Find matches for a trader that start at or after shift start\r\n */\r\nfunction findTraderMatchesInShift(matches, traderName, shift) {\r\n  return matches.filter(match => {\r\n    const isTraderMatch = match.hdpTrader === traderName || match.ouTrader === traderName;\r\n    const matchStartsInShift = matchStartsAfterShift(shift, match);\r\n    return isTraderMatch && matchStartsInShift;\r\n  });\r\n}\r\n\r\n// Main execution\r\nconst allItems = $input.all();\r\n\r\n// Filter Major unchanged matches (for enrichment)\r\nconst mjUnchangedMatches = allItems\r\n  .filter(item => \r\n    item.json.nodeType === 'mismatch' && \r\n    item.json.betType === 'MJ' && \r\n    item.json.isUnchanged === true\r\n  )\r\n  .sort((a, b) => {\r\n    const dateA = new Date(a.json.matchDate);\r\n    const dateB = new Date(b.json.matchDate);\r\n    return dateA - dateB; // ascending order\r\n  });\r\n\r\n// Process all items - enrich working shifts, pass through others\r\nconst enrichedItems = allItems.map(item => {\r\n  // Only enrich working shifts\r\n  if (item.json.nodeType === 'workingShift') {\r\n    const shift = item.json;\r\n    let assignedJobs = parseAssignedJobs(shift);\r\n    \r\n    // Find all MJ unchanged matches for this trader that start at or after shift start\r\n    const traderMatches = findTraderMatchesInShift(\r\n      mjUnchangedMatches.map(m => m.json), \r\n      shift.traderName,\r\n      shift\r\n    );\r\n    \r\n    // Append matched jobs to assignedJobs\r\n    for (const match of traderMatches) {\r\n      const job = createAssignedJob(match);\r\n      assignedJobs.push(job);\r\n    }\r\n    \r\n    // Return enriched working shift\r\n    return {\r\n      json: {\r\n        ...shift,\r\n        assignedJobs: assignedJobs,\r\n        nodeType: 'workingShift'\r\n      },\r\n      pairedItem: item.pairedItem\r\n    };\r\n  }\r\n  \r\n  // Pass through all other items unchanged\r\n  return item;\r\n});\r\n\r\nreturn enrichedItems;\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2576,
+        400
+      ],
+      "id": "45e6fc3a-cea1-415a-945e-99e8e3419809",
+      "name": "enrich_assigned_jobs_with_pointed_trader"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6a562003-b84e-4d18-a100-7bf696cd2fab",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "elite",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "3b2f930b-51c7-4ebf-8271-939a03bc19c8",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "member",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "37dd405f-635b-400a-8b6f-e14112b2838d",
+              "leftValue": "={{ $json.staffLevel }}",
+              "rightValue": "first",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -2112,
+        16
+      ],
+      "id": "f0faed4d-968f-4ad3-9c79-088bbeb2406a",
+      "name": "get_mj_trader"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a3fb6baf-c02a-4ca0-b8d2-917d41c73659",
+              "leftValue": "={{ $json.betType }}",
+              "rightValue": "MJ",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -2112,
+        224
+      ],
+      "id": "6e9f3cf4-6313-4a1e-aa4b-58ded179a802",
+      "name": "get_mj_league"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\r\n * Transform n8n data to Trader Assignment API format\r\n *\r\n * This code node transforms the input data from three different node types:\r\n * - mismatch (matches to assign)\r\n * - workingShift (trader availability)\r\n * - pairTrader (preconfigured trader pairs)\r\n *\r\n * Into the API format with proper field mappings and skill parsing.\r\n */\r\n\r\nconst allItems = $input.all();\r\n\r\n/**\r\n * Parse bettype string into skills array (HDP and/or OU only)\r\n *\r\n * Rules:\r\n * - \"2\" means trader can handle BOTH HDP and OU\r\n * - \"2[OP]\" is ignored (not relevant for MJ assignment)\r\n * - \"R-FS\" is ignored (not relevant for MJ assignment)\r\n * - Only HDP and OU skills are extracted\r\n *\r\n * Examples:\r\n * - \"HDP/M1*2\" → [\"HDP\"]\r\n * - \"OU/M1*2\" → [\"OU\"]\r\n * - \"2/M1*2\" → [\"HDP\", \"OU\"]\r\n * - \"2[OP]\" → []\r\n * - \"OU/R-FS/M1*2\" → [\"OU\"]\r\n */\r\nfunction parseBetTypeToSkills(bettype) {\r\n  if (!bettype) return [];\r\n\r\n  const parts = bettype.split('/');\r\n  const skills = new Set();\r\n\r\n  for (const part of parts) {\r\n    const trimmed = part.trim();\r\n\r\n    // Skip multiplier patterns (M1*2, M2*1, etc.)\r\n    if (trimmed.match(/^M\\d+\\*\\d+/)) continue;\r\n\r\n    // Skip irrelevant skills\r\n    if (trimmed.startsWith('2[OP]') || trimmed.startsWith('R-FS')) continue;\r\n\r\n    // \"2\" means can handle both HDP and OU\r\n    if (trimmed === '2' || trimmed.startsWith('2 ')) {\r\n      skills.add('HDP');\r\n      skills.add('OU');\r\n    }\r\n    // Direct HDP or OU\r\n    else if (trimmed.startsWith('HDP')) {\r\n      skills.add('HDP');\r\n    }\r\n    else if (trimmed.startsWith('OU')) {\r\n      skills.add('OU');\r\n    }\r\n    // Handle patterns like \"Solo HDP\", \"Priority HDP\"\r\n    else if (trimmed.match(/^[A-Z]/)) {\r\n      if (trimmed.includes('HDP')) skills.add('HDP');\r\n      if (trimmed.includes('OU')) skills.add('OU');\r\n    }\r\n  }\r\n\r\n  return Array.from(skills);\r\n}\r\n\r\n/**\r\n * Capitalize first letter of a string\r\n * Used for level transformation: \"elite\" → \"Elite\", \"first\" → \"First\"\r\n */\r\nfunction capitalizeFirst(str) {\r\n  if (!str) return str;\r\n  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();\r\n}\r\n\r\n// Initialize result arrays\r\nconst matches = [];\r\nconst traderShifts = [];\r\nconst preconfiguredPairs = [];\r\n\r\n// Define transformation handlers for each nodeType\r\nconst nodeTypeHandlers = {\r\n  mismatch: (data) => {\r\n    // Only include MJ matches\r\n    if (data.betType === 'MJ') {\r\n      matches.push({\r\n        id: data.rowNumber?.toString() || '',\r\n        matchNo: data.no?.toString() || '',\r\n        start: data.matchDate,\r\n        end: data.endDate,\r\n        maxBet: data.maxBet || 0,\r\n        leagueCode: data.leagueCode || null,\r\n        leagueName: data.league || null,\r\n        isAlreadyHandled: data.isUnchanged || false,\r\n        isEXPT: data.isEXPT !== undefined ? data.isEXPT : true,\r\n        isEAL: data.isEAL || false\r\n      });\r\n    }\r\n  },\r\n\r\n  workingShift: (data) => {\r\n    traderShifts.push({\r\n      id: data.rowNumber?.toString() || '',\r\n      name: data.traderName || '',\r\n      start: data.startTime,\r\n      end: data.endTime,\r\n      skills: parseBetTypeToSkills(data.bettype),\r\n      level: capitalizeFirst(data.staffLevel),\r\n      isManager: data.isManager || false,\r\n      isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,\r\n      ignoreLeague: data.ignoreLeague || [],\r\n      assignedJobs: data.assignedJobs?.map(job => ({\r\n        type: job.type,\r\n        start: job.start,\r\n        end: job.end\r\n      })) || []\r\n    });\r\n  },\r\n\r\n  pairTrader: (data) => {\r\n    preconfiguredPairs.push({\r\n      hdp: data.hdp,\r\n      ou: data.ou,\r\n      tier: data.tier,\r\n      leaguePriority: data.league_priority || {}\r\n    });\r\n  }\r\n};\r\n\r\n// Process each item using the appropriate handler\r\nfor (const item of allItems) {\r\n  const data = item.json;\r\n  const handler = nodeTypeHandlers[data.nodeType];\r\n\r\n  if (handler) {\r\n    handler(data);\r\n  }\r\n}\r\n\r\n// Return transformed data in API format\r\nreturn [{\r\n  json: {\r\n    traderShifts: traderShifts,\r\n    matches: matches,\r\n    preconfiguredPairs: preconfiguredPairs\r\n  }\r\n}];\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1024,
+        272
+      ],
+      "id": "6c6ec9d3-d29e-4949-a2b1-f862a566d328",
+      "name": "build_mj_api_param"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://soccer-lst.poc.consultechailab.com/api/TraderAssignment/MJ",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=matches",
+              "value": "={{ $json.matches }}"
+            },
+            {
+              "name": "traderShifts",
+              "value": "={{ $json.traderShifts }}"
+            },
+            {
+              "name": "preconfiguredPairs",
+              "value": "={{ $json.preconfiguredPairs }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -832,
+        272
+      ],
+      "id": "55007ed6-62ca-4c56-b968-498bea10b87b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Code-based League Code Detection\r\n// Replaces AI-based detection with a mapping approach\r\n\r\nconst input = $input.all();\r\n\r\n// Extract matches and pair configurations from input\r\nconst matches = [];\r\nconst pairConfig = [];\r\n\r\nfor (const item of input) {\r\n  const data = item.json;\r\n\r\n  // Check if this is a Major match (betType = MJ)\r\n  if (data.nodeType === 'mismatch' && data.betType === 'MJ') {\r\n    matches.push({\r\n      rowNumber: data.rowNumber,\r\n      matchNo: data.no,\r\n      league: data.league,\r\n      start: data.matchDate,\r\n      end: data.endDate\r\n    });\r\n  }\r\n\r\n  // Check if this is pair trader config\r\n  else if (data.nodeType === 'pairTrader') {\r\n    const leaguePriority = {\r\n      '1st': null,\r\n      '2nd': null,\r\n      '3rd': null\r\n    };\r\n\r\n    // Extract league priorities from league_priority object\r\n    if (data.league_priority) {\r\n      if (data.league_priority[1] && Array.isArray(data.league_priority[1]) && data.league_priority[1].length > 0) {\r\n        leaguePriority['1st'] = data.league_priority[1][0];\r\n      }\r\n      if (data.league_priority[2] && Array.isArray(data.league_priority[2]) && data.league_priority[2].length > 0) {\r\n        leaguePriority['2nd'] = data.league_priority[2][0];\r\n      }\r\n      if (data.league_priority[3] && Array.isArray(data.league_priority[3]) && data.league_priority[3].length > 0) {\r\n        leaguePriority['3rd'] = data.league_priority[3][0];\r\n      }\r\n    }\r\n\r\n    pairConfig.push({\r\n      hdp: data.hdp,\r\n      ou: data.ou,\r\n      tier: data.tier,\r\n      '1st': leaguePriority['1st'],\r\n      '2nd': leaguePriority['2nd'],\r\n      '3rd': leaguePriority['3rd']\r\n    });\r\n  }\r\n}\r\n\r\n// Extract all unique league codes from pair configurations\r\nconst leagueCodesSet = new Set();\r\n\r\nfor (const config of pairConfig) {\r\n  if (config['1st']) leagueCodesSet.add(config['1st']);\r\n  if (config['2nd']) leagueCodesSet.add(config['2nd']);\r\n  if (config['3rd']) leagueCodesSet.add(config['3rd']);\r\n}\r\n\r\n// Convert to sorted array\r\nconst availableLeagueCodes = Array.from(leagueCodesSet).sort();\r\n\r\n/**\r\n * League name to code mapping\r\n * Maps common league name patterns to their standard codes\r\n * Only supports top 5 major European leagues\r\n */\r\nconst LEAGUE_MAPPINGS = {\r\n  // English Premier League\r\n  'EPL': [\r\n    'ENGLISH PREMIER LEAGUE',\r\n    'EPL',\r\n    'PREMIER LEAGUE',\r\n    'ENGLAND PREMIER LEAGUE',\r\n    '*ENGLISH PREMIER LEAGUE'\r\n  ],\r\n\r\n  // Spanish La Liga\r\n  'SPA': [\r\n    'SPAIN PRIMERA LALIGA',\r\n    'LA LIGA',\r\n    'LALIGA',\r\n    'SPAIN LA LIGA',\r\n    'SPANISH PRIMERA',\r\n    '*SPAIN PRIMERA LALIGA',\r\n    'SPAIN PRIMERA DIVISION'\r\n  ],\r\n\r\n  // Italian Serie A\r\n  'ITA': [\r\n    'ITALY SERIE A',\r\n    'SERIE A',\r\n    'ITALIAN SERIE A',\r\n    '*ITALY SERIE A',\r\n    'ITALY SERIE-A'\r\n  ],\r\n\r\n  // German Bundesliga\r\n  'GER': [\r\n    'GERMANY-BUNDESLIGA I',\r\n    'BUNDESLIGA',\r\n    'GERMANY BUNDESLIGA',\r\n    'GERMAN BUNDESLIGA',\r\n    '*GERMANY-BUNDESLIGA I',\r\n    'GERMANY BUNDESLIGA 1'\r\n  ],\r\n\r\n  // French Ligue 1\r\n  'FRA': [\r\n    'FRANCE LIGUE 1',\r\n    'LIGUE 1',\r\n    'FRENCH LIGUE 1',\r\n    '*FRANCE LIGUE 1',\r\n    'FRANCE LIGUE-1'\r\n  ]\r\n};\r\n\r\n/**\r\n * Normalize league name for comparison\r\n * Removes special characters, extra spaces, and converts to uppercase\r\n */\r\nfunction normalizeLeagueName(name) {\r\n  if (!name) return '';\r\n\r\n  return name\r\n    .toUpperCase()\r\n    .replace(/[^\\w\\s-]/g, ' ')  // Replace special chars with space\r\n    .replace(/\\s+/g, ' ')        // Collapse multiple spaces\r\n    .trim();\r\n}\r\n\r\n/**\r\n * Match league name to league code\r\n * Returns the matching code or null if no match found\r\n */\r\nfunction matchLeagueCode(leagueName, availableCodes) {\r\n  if (!leagueName) return null;\r\n\r\n  const normalized = normalizeLeagueName(leagueName);\r\n\r\n  // First, try exact match with available codes (for efficiency)\r\n  for (const code of availableCodes) {\r\n    const patterns = LEAGUE_MAPPINGS[code];\r\n    if (patterns) {\r\n      for (const pattern of patterns) {\r\n        const normalizedPattern = normalizeLeagueName(pattern);\r\n\r\n        // Check for exact match\r\n        if (normalized === normalizedPattern) {\r\n          return code;\r\n        }\r\n\r\n        // Check if league name contains the pattern (for cases like \"*ITALY SERIE A\" in data)\r\n        if (normalized.includes(normalizedPattern) || normalizedPattern.includes(normalized)) {\r\n          return code;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  // Second pass: Try all mappings even if not in available codes\r\n  // This helps catch leagues that should be mapped but aren't in pair config yet\r\n  for (const [code, patterns] of Object.entries(LEAGUE_MAPPINGS)) {\r\n    for (const pattern of patterns) {\r\n      const normalizedPattern = normalizeLeagueName(pattern);\r\n\r\n      if (normalized === normalizedPattern ||\r\n          normalized.includes(normalizedPattern) ||\r\n          normalizedPattern.includes(normalized)) {\r\n        return code;\r\n      }\r\n    }\r\n  }\r\n\r\n  // No match found\r\n  return null;\r\n}\r\n\r\n/**\r\n * Detect league codes for all matches\r\n */\r\nconst matchLeagueDetections = matches.map(match => {\r\n  const leagueCode = matchLeagueCode(match.league, availableLeagueCodes);\r\n\r\n  return {\r\n    matchNo: match.matchNo,\r\n    leagueName: match.league,\r\n    leagueCode: leagueCode\r\n  };\r\n});\r\n\r\n// Return result in the same format as AI node output\r\nreturn [{\r\n  json: {\r\n    matchLeagueDetections: matchLeagueDetections\r\n  }\r\n}];\r\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2176,
+        608
+      ],
+      "id": "1f1641ce-6fbe-473e-aa24-53638ab25f27",
+      "name": "detect_league_code"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "matchLeagueDetections",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1616,
+        560
+      ],
+      "id": "f1ca161d-10d8-40e1-af0d-470a4a4c18b0",
+      "name": "split_league_code"
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "query": "SELECT a.*, b.leagueCode FROM input1 as a left join input2 as b on CAST(a.[no] as VARCHAR) = b.matchNo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1456,
+        448
+      ],
+      "id": "b2083072-3f32-4c07-8d90-d8d806f28785",
+      "name": "enrich_league_code"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1232,
+        256
+      ],
+      "id": "4126c4c6-9abf-4ad8-b422-ad95df86b2cb",
+      "name": "prepare_data_to_build_api_param"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 999970609,
+          "mode": "list",
+          "cachedResultName": "Mismatch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=999970609"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.rowNumber }}",
+            "HDP": "={{ $json.hdp }}",
+            "OU": "={{ $json.ou }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "No",
+              "displayName": "No",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Provider",
+              "displayName": "Provider",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Home",
+              "displayName": "Home",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Away",
+              "displayName": "Away",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "League",
+              "displayName": "League",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LINK",
+              "displayName": "LINK",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Maxbet",
+              "displayName": "Maxbet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Spread",
+              "displayName": "Spread",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ET_PK",
+              "displayName": "ET_PK",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "HDP",
+              "displayName": "HDP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "OU",
+              "displayName": "OU",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Unchanged",
+              "displayName": "Unchanged",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {
+              "headerRow": 2,
+              "firstDataRow": 3
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -432,
+        272
+      ],
+      "id": "a50f577f-ab08-4a65-8f43-397274021999",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "assignments",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        272
+      ],
+      "id": "6f3430d2-4a9a-47a2-ac8c-62bc1da52a24",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "custom",
+              "cronExpression": "0/5 * * * * *"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
+          "mode": "list",
+          "cachedResultName": "Soccer LST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1135612027,
+          "mode": "list",
+          "cachedResultName": "Trigger",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=1135612027"
+        },
+        "includeInOutput": "both",
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRangeA1",
+              "range": "A1:A2"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3136,
+        400
+      ],
+      "id": "51256b85-475d-4ba6-a852-cf30d14bafff",
+      "name": "mj_update_trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "adamG53HoHZejHHG",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Call Soccer_LST_Parse_Excel_File": {
+      "main": [
+        [
+          {
+            "node": "enrich_assigned_jobs_with_pointed_trader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "enrich_assigned_jobs_with_pointed_trader": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "detect_league_code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "get_mj_trader",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_mj_league",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "prepare_data_to_build_api_param",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "get_mj_league": {
+      "main": [
+        [
+          {
+            "node": "enrich_league_code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "build_mj_api_param": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_mj_trader": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_build_api_param",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "split_league_code": {
+      "main": [
+        [
+          {
+            "node": "enrich_league_code",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "enrich_league_code": {
+      "main": [
+        [
+          {
+            "node": "prepare_data_to_build_api_param",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "prepare_data_to_build_api_param": {
+      "main": [
+        [
+          {
+            "node": "build_mj_api_param",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mj_update_trigger": {
+      "main": [
+        [
+          {
+            "node": "Call Soccer_LST_Parse_Excel_File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "detect_league_code": {
+      "main": [
+        [
+          {
+            "node": "split_league_code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7b975ed5-7c23-4f67-9ed2-0a43d62f1184",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6dcc4053c897f1eebaaa4209b12d8b342c939eb2cb95d99c56792d7ff00ca87"
+  },
+  "id": "jonuK8nDuOneih4L",
+  "tags": []
+}
