@@ -117,10 +117,4 @@ public class TraderAssignmentController : ControllerBase
         }
     }
 
-    [HttpGet("health")]
-    public ActionResult<object> Health()
-    {
-        return Ok(new { status = "Healthy", timestamp = DateTime.UtcNow });
-    }
-
 }
