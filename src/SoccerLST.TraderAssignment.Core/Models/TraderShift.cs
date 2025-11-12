@@ -22,7 +22,17 @@ public class TraderShift
 
     public List<string>? IgnoreLeague { get; set; }
 
+    public List<string>? NonSoloLeagues { get; set; }
+
     public List<AssignedJob>? AssignedJobs { get; set; }
 
     public bool IsEXPTMatchAssignable { get; set; } = true;
+
+    public int MaxBet { get; set; } = 1000000;
+
+    /// <summary>
+    /// Priority skill for trader (e.g., "HDP", "OU", null)
+    /// When assigned, this trader gets a 1.1x bonus multiplier for Major match assignments in their priority skill
+    /// </summary>
+    public string? PrioritySkill { get; set; }
 }

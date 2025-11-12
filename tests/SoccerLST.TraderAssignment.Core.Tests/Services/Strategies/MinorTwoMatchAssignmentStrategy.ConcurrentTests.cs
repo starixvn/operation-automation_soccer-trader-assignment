@@ -548,4 +548,220 @@ public partial class MinorTwoMatchAssignmentStrategyConcurrentTests
     }
 
     #endregion
+
+    #region M2 Overlap Bug Prevention Tests
+    // Tests for preventing traders from being assigned to overlapping matches with DIFFERENT start times
+    // M2Capacity should only allow concurrent matches with the SAME start time
+
+    /// <summary>
+    /// This test reproduces the exact bug reported by the user:
+    /// SLGRuby (M2Capacity=2) was assigned to:
+    /// - Match 341: 23:15 - 01:15
+    /// - Match 346: 23:30 - 01:30
+    /// These matches overlap but have different start times.
+    /// </summary>
+    [Test]
+    public void Assign_TwoOverlappingMatches_DifferentStartTimes_WithM2Capacity2_ShouldNotAssignBoth()
+    {
+        // Arrange
+        var trader = CreateTraderShift("1", "SLGRuby", new string[] { }, "Second", false,
+            start: DateTimeOffset.Parse("2024-11-08T15:00:00Z"),
+            end: DateTimeOffset.Parse("2024-11-09T03:00:00Z"),
+            m2Capacity: 2);
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift> { trader },
+            Matches = new List<Match>
+            {
+                // Match 341: 23:15 - 01:15
+                CreateMatch("341", "341",
+                    DateTimeOffset.Parse("2024-11-08T23:15:00Z"),
+                    DateTimeOffset.Parse("2024-11-09T01:15:00Z"),
+                    30000),
+                // Match 346: 23:30 - 01:30 (overlaps with 341 from 23:30-01:15)
+                CreateMatch("346", "346",
+                    DateTimeOffset.Parse("2024-11-08T23:30:00Z"),
+                    DateTimeOffset.Parse("2024-11-09T01:30:00Z"),
+                    30000)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().BeLessThan(2,
+            "Trader should NOT be assigned to both overlapping matches with different start times, " +
+            "even with M2Capacity=2. M2Capacity only applies to matches with the SAME start time.");
+
+        // If both were assigned, this is the bug
+        var bothAssigned = result.Assignments.Count(a => a.Hdp == "SLGRuby") == 2;
+        bothAssigned.Should().BeFalse(
+            "BUG: Trader SLGRuby was assigned to both overlapping matches (341: 23:15-01:15 and 346: 23:30-01:30). " +
+            "These matches overlap from 23:30-01:15 but have different start times. " +
+            "M2Capacity=2 should only allow concurrent matches with the SAME start time.");
+    }
+
+    [Test]
+    public void Assign_ThreeOverlappingMatches_AllDifferentStartTimes_WithM2Capacity3_ShouldNotAssignAll()
+    {
+        // Arrange - 3 matches that all overlap but have different start times
+        var trader = CreateTraderShift("1", "TraderA", new string[] { }, "Elite", false,
+            start: DateTimeOffset.Parse("2024-11-08T15:00:00Z"),
+            end: DateTimeOffset.Parse("2024-11-09T05:00:00Z"),
+            m2Capacity: 3);
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift> { trader },
+            Matches = new List<Match>
+            {
+                // Match 1: 22:00 - 00:00
+                CreateMatch("1", "100",
+                    DateTimeOffset.Parse("2024-11-08T22:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-09T00:00:00Z"),
+                    30000),
+                // Match 2: 22:30 - 00:30 (overlaps with 1)
+                CreateMatch("2", "101",
+                    DateTimeOffset.Parse("2024-11-08T22:30:00Z"),
+                    DateTimeOffset.Parse("2024-11-09T00:30:00Z"),
+                    30000),
+                // Match 3: 23:00 - 01:00 (overlaps with both 1 and 2)
+                CreateMatch("3", "102",
+                    DateTimeOffset.Parse("2024-11-08T23:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-09T01:00:00Z"),
+                    30000)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().BeLessThan(3,
+            "Trader should NOT be assigned to all 3 overlapping matches with different start times, " +
+            "even with M2Capacity=3. M2Capacity only applies to matches with the SAME start time.");
+    }
+
+    [Test]
+    public void Assign_TwoPartiallyOverlappingMatches_DifferentStartTimes_WithM2Capacity2_ShouldNotAssignBoth()
+    {
+        // Arrange - Matches with 30 minute overlap but different start times
+        var trader = CreateTraderShift("1", "TraderB", new string[] { }, "Member", false,
+            start: DateTimeOffset.Parse("2024-11-08T08:00:00Z"),
+            end: DateTimeOffset.Parse("2024-11-08T18:00:00Z"),
+            m2Capacity: 2);
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift> { trader },
+            Matches = new List<Match>
+            {
+                // Match 1: 10:00 - 11:30
+                CreateMatch("1", "200",
+                    DateTimeOffset.Parse("2024-11-08T10:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T11:30:00Z"),
+                    25000),
+                // Match 2: 11:00 - 12:30 (overlaps 10:00-11:30 from 11:00-11:30)
+                CreateMatch("2", "201",
+                    DateTimeOffset.Parse("2024-11-08T11:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T12:30:00Z"),
+                    25000)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().BeLessThan(2,
+            "Trader should NOT be assigned to both matches that overlap (11:00-11:30) " +
+            "even though they have different start times and M2Capacity=2.");
+    }
+
+    [Test]
+    public void Assign_TwoSequentialMatches_NoOverlap_WithM2Capacity2_ShouldAssignBoth()
+    {
+        // Arrange - Matches that don't overlap (second starts after first ends)
+        var trader = CreateTraderShift("1", "TraderC", new string[] { }, "First", false,
+            start: DateTimeOffset.Parse("2024-11-08T08:00:00Z"),
+            end: DateTimeOffset.Parse("2024-11-08T18:00:00Z"),
+            m2Capacity: 2);
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift> { trader },
+            Matches = new List<Match>
+            {
+                // Match 1: 10:00 - 11:00
+                CreateMatch("1", "300",
+                    DateTimeOffset.Parse("2024-11-08T10:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T11:00:00Z"),
+                    20000),
+                // Match 2: 11:00 - 12:00 (starts exactly when first ends - no overlap)
+                CreateMatch("2", "301",
+                    DateTimeOffset.Parse("2024-11-08T11:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T12:00:00Z"),
+                    20000)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().Be(2,
+            "Trader SHOULD be assigned to both sequential matches since they don't overlap.");
+        result.Assignments.Should().AllSatisfy(a => a.Hdp.Should().Be("TraderC"));
+    }
+
+    [Test]
+    public void Assign_TwoMatches_SameStartTime_DifferentEndTime_WithM2Capacity2_ShouldAssignBoth()
+    {
+        // Arrange - Matches with SAME start time but different duration (this is allowed)
+        var trader = CreateTraderShift("1", "TraderD", new string[] { }, "Elite", false,
+            start: DateTimeOffset.Parse("2024-11-08T08:00:00Z"),
+            end: DateTimeOffset.Parse("2024-11-08T18:00:00Z"),
+            m2Capacity: 2);
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift> { trader },
+            Matches = new List<Match>
+            {
+                // Match 1: 10:00 - 11:30
+                CreateMatch("1", "400",
+                    DateTimeOffset.Parse("2024-11-08T10:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T11:30:00Z"),
+                    30000),
+                // Match 2: 10:00 - 12:00 (same start, different end)
+                CreateMatch("2", "401",
+                    DateTimeOffset.Parse("2024-11-08T10:00:00Z"),
+                    DateTimeOffset.Parse("2024-11-08T12:00:00Z"),
+                    30000)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().Be(2,
+            "Trader SHOULD be assigned to both matches with the SAME start time, " +
+            "regardless of different end times. This is what M2Capacity=2 allows.");
+        result.Assignments.Should().AllSatisfy(a => a.Hdp.Should().Be("TraderD"));
+    }
+
+    #endregion
 }

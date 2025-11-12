@@ -78,10 +78,11 @@ function convertMaxBet(valueString) {
   return numericValue * 1000;
 }
 
-function detectBetType(match) {
+function detectBetType(match, mjLeagueInclude = []) {
   const league = (match.League || '').toUpperCase();
   const no = (match.No || '').toString().toUpperCase();
   const maxBet = convertMaxBet(match.Maxbet);
+  const lGroup = (match['L.Group'] || '').toUpperCase().trim();
 
   // 1. Check special bet types by No suffix (order matters!)
   if (no.endsWith('TB1')) return 'TB1';  // Next Booking
@@ -107,7 +108,26 @@ function detectBetType(match) {
     if (league.includes('CLUB')) return 'PKCF';
   }
 
-  // 5. Fall back to MaxBet-based classification
+  // 5. Check MJLeagueInclude configuration - leagues explicitly marked as MJ (HIGHEST PRIORITY)
+  if (mjLeagueInclude && mjLeagueInclude.length > 0) {
+    const isInMJIncludeList = mjLeagueInclude.some(includedLeague => {
+      const normalizedIncluded = includedLeague.toUpperCase().trim();
+      return league.includes(normalizedIncluded) || normalizedIncluded.includes(league);
+    });
+    if (isInMJIncludeList) {
+      return 'MJ';
+    }
+  }
+
+  // 6. Priority: L.Group column for MJ/M1/M2/M3/M4 league groups
+  if (lGroup) {
+    const validGroups = ['MJ', 'M1', 'M2', 'M3', 'M4'];
+    if (validGroups.includes(lGroup)) {
+      return lGroup;
+    }
+  }
+
+  // 7. Fall back to MaxBet-based classification
   if (maxBet >= 70000) return 'MJ';   // Major
   if (maxBet >= 40000 && maxBet < 70000) return 'M1';    // Minor 1
   if (maxBet >= 20000 && maxBet < 40000) return 'M2';    // Minor 2
@@ -183,6 +203,43 @@ function calculateMatchEndDate(matchDate, isReal, etpkValue, betType) {
     : calculateVirtualMatchEndTime(matchDate, betType);
 }
 
+/**
+ * Check if a match is a solo match
+ * A match is solo if there's no other match in the same league within 45 minutes from its start time
+ *
+ * Rules:
+ * - Matches at the exact same time in same league are NOT solo
+ * - Matches within 45 minutes in same league are NOT solo
+ * - Matches > 45 minutes apart or in different leagues are solo
+ *
+ * @param {Date} matchDate - The start time of the match
+ * @param {string} league - The league name
+ * @param {number} currentIndex - The index of the current match in allMatches
+ * @param {Array} allMatches - All matches to compare against
+ * @returns {boolean} - True if the match is solo
+ */
+function isSoloMatch(matchDate, league, currentIndex, allMatches) {
+  if (!league) return true; // If no league, consider it solo
+
+  const matchTime = matchDate.getTime();
+  const fortyFiveMinutes = 45 * 60 * 1000; // 45 minutes in milliseconds
+
+  // Check if any other match in the same league starts within 45 minutes (including same time)
+  const hasNearbyMatch = allMatches.some((otherMatch, idx) => {
+    // Skip self (same array index)
+    if (idx === currentIndex) return false;
+
+    // Skip if different league
+    if (otherMatch.league !== league) return false;
+
+    // Check if other match starts within 45 minutes (or at the same time)
+    const timeDiff = Math.abs(otherMatch.matchDate.getTime() - matchTime);
+    return timeDiff <= fortyFiveMinutes;
+  });
+
+  return !hasNearbyMatch;
+}
+
 const allItems = $input.all();
 
 // Find config item with nodeType
@@ -193,38 +250,52 @@ const mismatchItems = allItems.filter(_ => _.json.nodeType === 'mismatch');
 const previousMismatchItems = allItems.filter(_ => _.json.nodeType === 'previousMismatch');
 
 const currentDate = currentDateItem.json.currentDate;
-const result = [];
+const mjLeagueInclude = currentDateItem.json.mjLeagueInclude || [];
+const mjLeagueAlternativeAssignRule = currentDateItem.json.mjLeagueAlternativeAssignRule || [];
+const tempMatches = [];
 
-// Process current mismatch items
+/**
+ * Check if a league matches the alternative MJ rule list
+ */
+function isLeagueInAlternativeRule(league, altRuleList) {
+  if (!league || !altRuleList || altRuleList.length === 0) return false;
+
+  const normalizedLeague = league.toUpperCase().trim();
+  return altRuleList.some(altLeague => {
+    const normalizedAlt = altLeague.toUpperCase().trim();
+    return normalizedLeague.includes(normalizedAlt) || normalizedAlt.includes(normalizedLeague);
+  });
+}
+
+// First pass: Process current mismatch items and collect basic match data
 for (const item of mismatchItems) {
   const value = item.json;
-  const betType = detectBetType(value);
+  const betType = detectBetType(value, mjLeagueInclude);
   const etpkValue = value.ET_PK || "";
   const isETPK = !!value.ET_PK && (value.ET_PK.includes("ET") || value.ET_PK.includes("PK"));
   const isReal = isRealGame(betType);
   const matchDate = convertTimeToDate(currentDate, value.Time);
   const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);
+  const isUseAlternativeMJRule = isLeagueInAlternativeRule(value.League, mjLeagueAlternativeAssignRule);
 
-  result.push({
-    json: {
-      matchDate: matchDate,
-      endDate: endDate,
-      league: value.League,
-      isETPK: isETPK,
-      maxBet: convertMaxBet(value.Maxbet),
-      provider: value.Provider,
-      rowNumber: value.row_number,
-      no: value.No,
-      isEAL: !!value["Link EAL"] && value["Link EAL"].toUpperCase().includes("EAL"),
-      isEXPT: !(value["Link EAL"] && value["Link EAL"].toUpperCase() === "NO EXPT"),
-      betType: betType,
-      isReal: isReal,
-      hdpTrader: value.HDP || null,
-      ouTrader: value.OU || null,
-      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === "x",
-      isPreviousMatch: false,
-      nodeType: 'mismatch'
-    }
+  tempMatches.push({
+    matchDate: matchDate,
+    endDate: endDate,
+    league: value.League,
+    isETPK: isETPK,
+    maxBet: convertMaxBet(value.Maxbet),
+    provider: value.Provider,
+    rowNumber: value.row_number,
+    no: value.No,
+    isEAL: !!value["Link EAL"] && value["Link EAL"].toUpperCase().includes("EAL"),
+    isEXPT: !(value["Link EAL"] && value["Link EAL"].toUpperCase() === "NO EXPT"),
+    betType: betType,
+    isReal: isReal,
+    isUseAlternativeMJRule: isUseAlternativeMJRule,
+    hdpTrader: value.HDP || null,
+    ouTrader: value.OU || null,
+    isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === "x",
+    isPreviousMatch: false
   });
 }
 
@@ -235,30 +306,45 @@ for (const item of previousMismatchItems) {
   // Subtract 1 day from matchDate
   matchDate.setUTCDate(matchDate.getUTCDate() - 1);
 
-  const betType = detectBetType(value);
+  const betType = detectBetType(value, mjLeagueInclude);
   const etpkValue = value.ET_PK || "";
   const isETPK = !!value.ET_PK && (value.ET_PK.includes("ET") || value.ET_PK.includes("PK"));
   const isReal = isRealGame(betType);
   const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);
+  const isUseAlternativeMJRule = isLeagueInAlternativeRule(value.League, mjLeagueAlternativeAssignRule);
+
+  tempMatches.push({
+    matchDate: matchDate,
+    endDate: endDate,
+    league: value.League,
+    isETPK: isETPK,
+    maxBet: convertMaxBet(value.Maxbet),
+    provider: value.Provider,
+    rowNumber: value.row_number,
+    no: value.No,
+    isEAL: !!value["Link EAL"] && value["Link EAL"].toUpperCase().includes("EAL"),
+    isEXPT: !(value["Link EAL"] && value["Link EAL"].toUpperCase() === "NO EXPT"),
+    betType: betType,
+    isReal: isReal,
+    isUseAlternativeMJRule: isUseAlternativeMJRule,
+    hdpTrader: value.HDP,
+    ouTrader: value.OU,
+    isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === "x",
+    isPreviousMatch: true
+  });
+}
+
+// Second pass: Calculate isSoloMatch for each match and build final result
+const result = [];
+for (let i = 0; i < tempMatches.length; i++) {
+  const match = tempMatches[i];
+  const soloMatch = isSoloMatch(match.matchDate, match.league, i, tempMatches);
 
   result.push({
     json: {
-      matchDate: matchDate,
-      endDate: endDate,
-      league: value.League,
-      isETPK: isETPK,
-      maxBet: convertMaxBet(value.Maxbet),
-      provider: value.Provider,
-      rowNumber: value.row_number,
-      no: value.No,
-      isEAL: !!value["Link EAL"] && value["Link EAL"].toUpperCase().includes("EAL"),
-      isEXPT: !(value["Link EAL"] && value["Link EAL"].toUpperCase() === "NO EXPT"),
-      betType: betType,
-      isReal: isReal,
-      hdpTrader: value.HDP,
-      ouTrader: value.OU,
-      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === "x",
-      isPreviousMatch: true,
+      ...match,
+      isSoloMatch: soloMatch,
+      isUseAlternativeMJRule: match.isUseAlternativeMJRule,
       nodeType: 'mismatch'
     }
   });

@@ -20,6 +20,8 @@ public class MatchAssignment
 
     public string OuLevel { get; set; } = string.Empty;
 
+    public string? FirstHalfTrader { get; set; }
+
     public string PairType { get; set; } = string.Empty;
 
     public long Score { get; set; }

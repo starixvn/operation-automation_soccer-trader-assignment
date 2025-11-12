@@ -36,11 +36,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        160,
-        -80
+        640,
+        224
       ],
-      "id": "bb85f287-28b6-44fc-ada3-ef58ff1dcd3a",
-      "name": "get_working_shift"
+      "id": "8e38ea01-85b7-4c21-a1fa-5bd8d0163daa",
+      "name": "get_working_shift",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
     },
     {
       "parameters": {
@@ -49,10 +55,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        -80
+        848,
+        224
       ],
-      "id": "89bf6f70-915c-4bb0-9e6b-c43268efbf14",
+      "id": "2232eb68-1f5a-4e0b-8f17-53f40391aab4",
       "name": "format_working_shift"
     },
     {
@@ -71,10 +77,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        592,
-        16
+        1072,
+        320
       ],
-      "id": "cfae3e5e-a210-4df4-a8ba-08ba599f6fde",
+      "id": "686fed16-388d-4bde-b1ab-df99a5e9d686",
       "name": "enrich_working_shift"
     },
     {
@@ -84,10 +90,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        800,
-        16
+        1280,
+        320
       ],
-      "id": "2974bda6-784d-46a9-a520-572e859b9b05",
+      "id": "60e4fbb3-90e4-4d81-b7e8-817c8bbd8ce8",
       "name": "wrap_working_shift"
     },
     {
@@ -95,10 +101,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1280,
-        32
+        1760,
+        336
       ],
-      "id": "25b1dab4-0976-40eb-8a2e-1d3400447705",
+      "id": "f1d80e10-8e48-4ade-a293-2a4a1cc9ff9a",
       "name": "merge_previous_mismatch_and_working_shift"
     },
     {
@@ -108,23 +114,23 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1504,
-        32
+        2000,
+        336
       ],
-      "id": "92b8d1a3-00f7-46bd-95b0-420305e75e01",
+      "id": "76ef5b07-3d71-4e49-b76a-15502d701d37",
       "name": "enrich_assinged_job"
     },
     {
       "parameters": {
-        "jsCode": "/**\n* Map staff level values to normalized format\n*/\nfunction mapStaffLevel(level) {\n    if (!level) return null;\n\n    const levelMap = {\n        'elite': 'elite',\n        'member': 'member',\n        '(1st)': 'first',\n        '(2nd)': 'second',\n        '(3rd)': 'third',\n        '(4th)': 'fourth',\n        'op(1st)': 'op_first',\n        'op(2nd)': 'op_second'\n    };\n\n    const lowerLevel = level.toLowerCase();\n    return levelMap[lowerLevel] || level;\n}\n\n/**\n * Parse M1 and M2 capacity from bettype string\n * Default capacity is 1 if not specified\n * Examples:\n * - \"HDP/M1*2\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"OU/M2*3\" → { m1Capacity: 1, m2Capacity: 3 }\n * - \"2/M1*2/M2*1\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"HDP/OU\" → { m1Capacity: 1, m2Capacity: 1 } (default)\n */\nfunction parseCapacity(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return { m1Capacity: 1, m2Capacity: 2 };\n    }\n\n    // Default capacity is 1\n    let m1Capacity = 1;\n    let m2Capacity = 1;\n\n    // Match M1*<number>\n    const m1Match = bettype.match(/M1\\*(\\d+)/i);\n    if (m1Match) {\n        m1Capacity = parseInt(m1Match[1], 10);\n    }\n\n    // Match M2*<number>\n    const m2Match = bettype.match(/M2\\*(\\d+)/i);\n    if (m2Match) {\n        m2Capacity = parseInt(m2Match[1], 10);\n    }\n\n    return { m1Capacity, m2Capacity };\n}\n\n/**\n * Parse ignore league string into array\n * Examples:\n * - \"league 1, league 2\" → [\"league 1\", \"league 2\"]\n * - \"EPL, LaLiga, SerieA\" → [\"EPL\", \"LaLiga\", \"SerieA\"]\n * - \"\" or null → []\n */\nfunction parseIgnoreLeague(ignoreLeagueStr) {\n    if (!ignoreLeagueStr || typeof ignoreLeagueStr !== 'string') {\n        return [];\n    }\n\n    // Split by comma and trim whitespace\n    return ignoreLeagueStr\n        .split(',')\n        .map(league => league.trim())\n        .filter(league => league.length > 0);\n}\n\n/**\n * Check if trader can be assigned to EXPT matches\n * Default is true, unless bettype contains \"[No Expt]\" (case-insensitive)\n * Examples:\n * - \"HDP/M1*2\" → true\n * - \"2/M1*2[No Expt]\" → false\n * - \"OU/M2*3 [no expt]\" → false\n * - \"\" or null → true\n */\nfunction parseIsEXPTAssignable(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return true;\n    }\n\n    // Check if bettype contains \"[No Expt]\" (case-insensitive)\n    return !bettype.match(/\\[no\\s*expt\\]/i);\n}\n\nconst result = [];\n\nfor (const item of $input.all()) {\n    // Extract data from input\n    const traderName = item.json.NAME;\n    const traderLevel = item.json.LEVEL;\n    const bettype = item.json['MAIN BET TYPE'];\n    const group = item.json.GROUP;\n    const ignoreLeague = item.json['Ignore League'];\n    const rowNumber = item.json.row_number;\n\n    // Initialize level objects\n    let managementLevel = null;\n    let staffLevel = null;\n    let isManager = false;\n\n    // Check if trader has PIC (People In Charge) - management level\n    if (traderLevel && traderLevel.includes('[PIC]')) {\n        isManager = true;\n        managementLevel = '[PIC]';\n\n        // Extract staff level from the remaining part\n        const levelParts = traderLevel.split('/');\n\n        if (levelParts.length > 1) {\n            // Has both management and staff level (e.g., \"[PIC]/Elite\", \"[PIC]/(1st)\")\n            staffLevel = levelParts[1];\n        } else {\n            // Only management level (e.g., \"[PIC]\")\n            staffLevel = null;\n        }\n    } else {\n        // No management level, only staff level\n        managementLevel = null;\n        staffLevel = traderLevel;\n    }\n\n    // Parse M1 and M2 capacity from bettype\n    const { m1Capacity, m2Capacity } = parseCapacity(bettype);\n\n    // Parse ignore league into array\n    const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);\n\n    // Parse EXPT assignability from bettype\n    const isEXPTAssignable = parseIsEXPTAssignable(bettype);\n\n    // Add to result array in n8n format\n    result.push({\n        json: {\n            id: rowNumber,\n            group: group,\n            traderName,\n            originalLevel: traderLevel,\n            managementLevel: managementLevel,\n            staffLevel: mapStaffLevel(staffLevel),\n            isManager: isManager,\n            bettype,\n            ignoreLeague: ignoreLeagueArray,\n            m1Capacity: m1Capacity,\n            m2Capacity: m2Capacity,\n            isEXPTAssignable: isEXPTAssignable,\n            nodeType: 'trader'\n        }\n    });\n}\n\nreturn result;\n"
+        "jsCode": "/**\n* Map staff level values to normalized format\n*/\nfunction mapStaffLevel(level) {\n    if (!level) return null;\n\n    const levelMap = {\n        'elite': 'elite',\n        'member': 'member',\n        '(1st)': 'first',\n        '(2nd)': 'second',\n        '(3rd)': 'third',\n        '(4th)': 'fourth',\n        'op(1st)': 'op_first',\n        'op(2nd)': 'op_second'\n    };\n\n    const lowerLevel = level.toLowerCase();\n    return levelMap[lowerLevel] || level;\n}\n\n/**\n * Parse M1 and M2 capacity from bettype string\n * Default capacity is 1 for M1, 2 for M2 if not specified\n * Examples:\n * - \"HDP/M1*2\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"OU/M2*3\" → { m1Capacity: 1, m2Capacity: 3 }\n * - \"2/M1*2/M2*1\" → { m1Capacity: 2, m2Capacity: 1 }\n * - \"HDP/OU\" → { m1Capacity: 1, m2Capacity: 1 } (default)\n */\nfunction parseCapacity(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return { m1Capacity: 1, m2Capacity: 2 };\n    }\n\n    // Default capacity\n    let m1Capacity = 1;\n    let m2Capacity = 2;\n\n    // Match M1*<number>\n    const m1Match = bettype.match(/M1\\*(\\d+)/i);\n    if (m1Match) {\n        m1Capacity = parseInt(m1Match[1], 10);\n    }\n\n    // Match M2*<number>\n    const m2Match = bettype.match(/M2\\*(\\d+)/i);\n    if (m2Match) {\n        m2Capacity = parseInt(m2Match[1], 10);\n    }\n\n    return { m1Capacity, m2Capacity };\n}\n\n/**\n * Parse ignore league string into array\n * Examples:\n * - \"league 1, league 2\" → [\"league 1\", \"league 2\"]\n * - \"EPL, LaLiga, SerieA\" → [\"EPL\", \"LaLiga\", \"SerieA\"]\n * - \"\" or null → []\n */\nfunction parseIgnoreLeague(ignoreLeagueStr) {\n    if (!ignoreLeagueStr || typeof ignoreLeagueStr !== 'string') {\n        return [];\n    }\n\n    // Split by comma and trim whitespace\n    return ignoreLeagueStr\n        .split(',')\n        .map(league => league.trim())\n        .filter(league => league.length > 0);\n}\n\n/**\n * Parse non-solo league string into array\n * Traders cannot trade solo matches in these leagues\n * Examples:\n * - \"EPL, LaLiga\" → [\"EPL\", \"LaLiga\"]\n * - \"JAPAN J-LEAGUE DIVISION 1, AUSTRALIA A-LEAGUE\" → [\"JAPAN J-LEAGUE DIVISION 1\", \"AUSTRALIA A-LEAGUE\"]\n * - \"\" or null → []\n */\nfunction parseNonSoloLeague(nonSoloLeagueStr) {\n    if (!nonSoloLeagueStr || typeof nonSoloLeagueStr !== 'string') {\n        return [];\n    }\n\n    // Split by comma and trim whitespace\n    return nonSoloLeagueStr\n        .split(',')\n        .map(league => league.trim())\n        .filter(league => league.length > 0);\n}\n\n/**\n * Check if trader can be assigned to EXPT matches\n * Default is true, unless bettype contains \"[No Expt]\" (case-insensitive)\n * Examples:\n * - \"HDP/M1*2\" → true\n * - \"2/M1*2[No Expt]\" → false\n * - \"OU/M2*3 [no expt]\" → false\n * - \"\" or null → true\n */\nfunction parseIsEXPTAssignable(bettype) {\n    if (!bettype || typeof bettype !== 'string') {\n        return true;\n    }\n\n    // Check if bettype contains \"[No Expt]\" (case-insensitive)\n    return !bettype.match(/\\[no\\s*expt\\]/i);\n}\n\n/**\n * Parse MaxBet from various formats and convert to integer\n * Examples:\n * - \"14k\" or \"14K\" → 14000\n * - \"14 k\" or \"14 K\" → 14000\n * - \"14000\" → 14000\n * - 14000 → 14000\n * - \"\" or null → 1000000 (default no limit)\n */\nfunction parseMaxBet(maxBetValue) {\n    const DEFAULT_MAX_BET = 1000000; // Default: 1 million (no MaxBet limit)\n\n    if (!maxBetValue) {\n        return DEFAULT_MAX_BET;\n    }\n\n    // Convert to string and trim whitespace\n    const maxBetStr = String(maxBetValue).trim().toLowerCase();\n\n    // Match patterns like \"14k\", \"14 k\", or plain numbers\n    const match = maxBetStr.match(/^(\\d+(?:\\.\\d+)?)\\s*k?$/);\n\n    if (!match) {\n        return DEFAULT_MAX_BET; // Invalid format defaults to no limit\n    }\n\n    const numericValue = parseFloat(match[1]);\n\n    // If the original string contained 'k', multiply by 1000\n    if (maxBetStr.includes('k')) {\n        return Math.round(numericValue * 1000);\n    }\n\n    // Otherwise, just return the numeric value as integer\n    return Math.round(numericValue);\n}\n\nconst result = [];\n\nfor (const item of $input.all()) {\n    // Extract data from input\n    const traderName = item.json.NAME;\n    const traderLevel = item.json.LEVEL;\n    const bettype = item.json['MAIN BET TYPE'];\n    const group = item.json.GROUP;\n    const ignoreLeague = item.json['Ignore League'];\n    const nonSoloLeague = item.json['Non-Solo league'];\n    const prioritySkill = item.json['Priority skill'];\n    const rowNumber = item.json.row_number;\n\n    // Initialize level objects\n    let managementLevel = null;\n    let staffLevel = null;\n    let isManager = false;\n\n    // Check if trader has PIC (People In Charge) - management level\n    if (traderLevel && traderLevel.includes('[PIC]')) {\n        isManager = true;\n        managementLevel = '[PIC]';\n\n        // Extract staff level from the remaining part\n        const levelParts = traderLevel.split('/');\n\n        if (levelParts.length > 1) {\n            // Has both management and staff level (e.g., \"[PIC]/Elite\", \"[PIC]/(1st)\")\n            staffLevel = levelParts[1];\n        } else {\n            // Only management level (e.g., \"[PIC]\")\n            staffLevel = null;\n        }\n    } else {\n        // No management level, only staff level\n        managementLevel = null;\n        staffLevel = traderLevel;\n    }\n\n    // Parse M1 and M2 capacity from bettype\n    const { m1Capacity, m2Capacity } = parseCapacity(bettype);\n\n    // Parse ignore league into array\n    const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);\n\n    // Parse non-solo league into array\n    const nonSoloLeagueArray = parseNonSoloLeague(nonSoloLeague);\n\n    // Parse EXPT assignability from bettype\n    const isEXPTAssignable = parseIsEXPTAssignable(bettype);\n\n    // Parse MaxBet from Excel (optional field, supports formats like \"14k\", \"14K\", \"14 K\", \"14000\")\n    const maxBet = parseMaxBet(item.json.MaxBet);\n\n    // Add to result array in n8n format\n    result.push({\n        json: {\n            id: rowNumber,\n            group: group,\n            traderName,\n            originalLevel: traderLevel,\n            managementLevel: managementLevel,\n            staffLevel: mapStaffLevel(staffLevel),\n            isManager: isManager,\n            bettype,\n            ignoreLeague: ignoreLeagueArray,\n            nonSoloLeague: nonSoloLeagueArray,\n            m1Capacity: m1Capacity,\n            m2Capacity: m2Capacity,\n            isEXPTAssignable: isEXPTAssignable,\n            maxBet: maxBet,\n            prioritySkill: prioritySkill || null,\n            nodeType: 'trader'\n        }\n    });\n}\n\nreturn result;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        96
+        848,
+        400
       ],
-      "id": "3f2eecaa-0947-4449-bffa-f255082cdb67",
+      "id": "8df3972b-5482-4328-8055-c129f50389e2",
       "name": "format_trader_list"
     },
     {
@@ -140,7 +146,7 @@
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "Traders",
+          "cachedResultName": "Grade",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=0"
         },
         "options": {}
@@ -148,61 +154,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        160,
-        96
+        640,
+        400
       ],
-      "id": "1805474e-ddd4-481f-a964-442bdbc4fcdc",
-      "name": "get_trader_list"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Filter items from 10:00 AM to 12:00 PM (not including 12:00 PM)\nfunction parseTime(timeString) {\n  const cleanTime = timeString.trim().replace(/\\s+/g, ' ');\n  const timeMatch = cleanTime.match(/^(\\d{1,2}):(\\d{2})\\s*(AM|PM)$/i);\n\n  if (!timeMatch) return null;\n\n  let hours = parseInt(timeMatch[1], 10);\n  const minutes = parseInt(timeMatch[2], 10);\n  const period = timeMatch[3].toUpperCase();\n\n  // Convert to 24-hour format for comparison\n  if (period === 'PM' && hours !== 12) {\n    hours += 12;\n  } else if (period === 'AM' && hours === 12) {\n    hours = 0;\n  }\n\n  return hours * 60 + minutes; // Return total minutes from midnight\n}\n\nconst filtered = [];\n\nfor (const item of $input.all()) {\n  const timeString = item.json.Time;\n  const timeInMinutes = parseTime(timeString);\n\n  // 10:00 AM = 600 minutes, 12:00 PM = 720 minutes\n  if (timeInMinutes !== null && timeInMinutes >= 600 && timeInMinutes < 720) {\n    filtered.push({\n      json: {\n        ...item.json,\n        nodeType: 'previousMismatch'\n      },\n      pairedItem: item.pairedItem\n    });\n  }\n}\n\nreturn filtered;\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        368,
-        272
-      ],
-      "id": "a67c6d8d-afeb-40fc-87b8-ee7df26d1cd5",
-      "name": "filter_and_prepare_previous_mismatch",
-      "alwaysOutputData": true
-    },
-    {
-      "parameters": {
-        "documentId": {
-          "__rl": true,
-          "value": "1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M",
-          "mode": "list",
-          "cachedResultName": "Soccer LST",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 1058945639,
-          "mode": "list",
-          "cachedResultName": "Previous Mismatch",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XptidH4Dt8b7DhTgpVDGjTs4fGxGHRFNJd0fqzaaR-M/edit#gid=1058945639"
-        },
-        "options": {
-          "dataLocationOnSheet": {
-            "values": {
-              "rangeDefinition": "specifyRange",
-              "headerRow": 2,
-              "firstDataRow": 3
-            }
-          }
+      "id": "d386ebdd-50f7-4202-953b-aeb829bbd1fa",
+      "name": "get_trader_list",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
         }
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        160,
-        272
-      ],
-      "id": "fecc8038-fe79-408d-9677-4f1e577b419e",
-      "name": "get_previous_mismatch",
-      "alwaysOutputData": true
+      }
     },
     {
       "parameters": {
@@ -211,10 +173,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        592,
-        432
+        1088,
+        672
       ],
-      "id": "e86fa286-73aa-4228-9b1a-9b1159b30202",
+      "id": "751b0cc0-2831-4e3a-ab8c-0d2be3a2f28c",
       "name": "prepare_data_to_format_mismatch"
     },
     {
@@ -235,7 +197,7 @@
                     "rightValue": "",
                     "operator": {
                       "type": "boolean",
-                      "operation": "true",
+                      "operation": "false",
                       "singleValue": true
                     },
                     "id": "b5442f92-7c09-4487-b66e-f9303211b883"
@@ -244,32 +206,7 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "Previous match"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "54e975ff-e941-49bd-8213-23fc9c19f326",
-                    "leftValue": "={{ $json.isPreviousMatch }}",
-                    "rightValue": "",
-                    "operator": {
-                      "type": "boolean",
-                      "operation": "false",
-                      "singleValue": true
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Current Match"
+              "outputKey": "Mismatch"
             }
           ]
         },
@@ -278,36 +215,36 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        960,
-        448
+        1488,
+        688
       ],
-      "id": "f83bbde3-a15b-4ccb-bd77-391f0a70fcf7",
+      "id": "93de27f5-dabf-4bbb-8dbd-35911bd5a6ed",
       "name": "seperate_current_and_previous_mismatch"
     },
     {
       "parameters": {
-        "jsCode": "function convertTimeToDate(currentDate, timeString) {\n  // Clean the time string - remove extra spaces\n  const cleanTime = timeString.trim().replace(/\\s+/g, ' ');\n\n  // Parse the time string\n  const timeMatch = cleanTime.match(/^(\\d{1,2}):(\\d{2})\\s*(AM|PM)$/i);\n\n  if (!timeMatch) {\n    throw new Error(`Invalid time format: ${timeString}. Expected format: \"12:00PM\", \"12:00 PM\", \"01:00 AM\", \"01:00AM\"`);\n  }\n\n  let hours = parseInt(timeMatch[1], 10);\n  const minutes = parseInt(timeMatch[2], 10);\n  const period = timeMatch[3].toUpperCase();\n\n  // Validate hours and minutes\n  if (hours < 1 || hours > 12) {\n    throw new Error(`Invalid hours: ${hours}. Hours must be between 1 and 12`);\n  }\n\n  if (minutes < 0 || minutes > 59) {\n    throw new Error(`Invalid minutes: ${minutes}. Minutes must be between 0 and 59`);\n  }\n\n  // Create a new date object based on currentDate\n  const resultDate = new Date(currentDate);\n\n  // Handle AM/PM logic\n  if (period === 'PM') {\n    // PM: Use currentDate with the specified time\n    if (hours === 12) {\n      // 12:xx PM = 12:xx (noon)\n      resultDate.setUTCHours(12, minutes, 0, 0);\n    } else {\n      // 1:xx PM to 11:xx PM = 13:xx to 23:xx\n      resultDate.setUTCHours(hours + 12, minutes, 0, 0);\n    }\n  } else { // AM\n    // AM: Add one day to currentDate with the specified time\n    resultDate.setUTCDate(resultDate.getUTCDate() + 1);\n\n    if (hours === 12) {\n      // 12:xx AM = 00:xx (midnight)\n      resultDate.setUTCHours(0, minutes, 0, 0);\n    } else {\n      // 1:xx AM to 11:xx AM = 01:xx to 11:xx\n      resultDate.setUTCHours(hours, minutes, 0, 0);\n    }\n  }\n\n  return resultDate;\n}\n\nfunction convertMaxBet(valueString) {\n  if (!valueString || typeof valueString !== 'string') {\n    return 0;\n  }\n  // Clean the string - remove extra spaces\n  const cleanString = valueString.trim();\n\n  // Find number followed by 'k' or 'K' anywhere in the string\n  // Examples: \"30K\", \"123Kxxx\", \"abc 30Kxxx\"\n  const kMatch = cleanString.match(/(\\d+(?:\\.\\d+)?)\\s*[kK]/i);\n\n  if (!kMatch) {\n    return 0;\n  }\n\n  // Extract the numeric part\n  const numericValue = parseFloat(kMatch[1]);\n\n  // Validate the numeric value\n  if (isNaN(numericValue)) {\n    return 0;\n  }\n\n  // Convert to number by multiplying by 1000\n  return numericValue * 1000;\n}\n\nfunction detectBetType(match) {\n  const league = (match.League || '').toUpperCase();\n  const no = (match.No || '').toString().toUpperCase();\n  const maxBet = convertMaxBet(match.Maxbet);\n\n  // 1. Check special bet types by No suffix (order matters!)\n  if (no.endsWith('TB1')) return 'TB1';  // Next Booking\n  if (no.endsWith('TB')) return 'TB';    // Booking\n  if (no.endsWith('C1')) return 'C1';    // Next Corner\n  if (no.endsWith('C')) return 'CR';     // Corner\n\n  // 2. Check for child product format: numbers followed by letters, optionally followed by numbers\n  // Examples: 12B, 13FS, 12B1, 13FS2 - This indicates OtherSport category\n  const childProductPattern = /^\\d+[A-Z]+\\d*$/;\n  if (childProductPattern.test(no)) return 'CP'; //child product\n\n  // 3. Check by League name\n  if (league.includes('FUTSAL')) return 'FS';\n\n  // 4. Check Virtual PES games\n  if (league.includes('SABA CLUB FRIENDLY') && league.includes('PES 21')) return 'PESCF';\n  if (league.includes('SABA INTERNATIONAL FRIENDLY') && league.includes('PES 21')) return 'PESIF';\n  if (league.includes('SABA VIETNAM V LEAGUE 1') && league.includes('PES 24')) return 'PES24';\n  if (league.includes('SABA ELITE FRIENDLY') && league.includes('PES 21')) return 'PES5MIN';\n  if (league.includes('PENALTY SHOOTOUTS') && league.includes('PES 23')) {\n    if (league.includes('INTERNATIONAL')) return 'PKIF';\n    if (league.includes('CLUB')) return 'PKCF';\n  }\n\n  // 5. Fall back to MaxBet-based classification\n  if (maxBet >= 70000) return 'MJ';   // Major\n  if (maxBet >= 40000 && maxBet < 70000) return 'M1';    // Minor 1\n  if (maxBet >= 20000 && maxBet < 40000) return 'M2';    // Minor 2\n  if (maxBet >= 8000 && maxBet < 20000) return 'M3';     // Minor 3\n  if (maxBet >= 1500 && maxBet < 8000) return 'M4';      // Minor 4\n\n  return 'Unknown';\n}\n\nfunction isRealGame(betType) {\n  const virtualBetTypes = ['PESCF', 'PESIF', 'PES24', 'PES5MIN', 'PKIF', 'PKCF'];\n  return !virtualBetTypes.includes(betType);\n}\n\n/**\n * Calculate end time for a real match\n * Rules:\n * - Both ET and PK: 3 hours\n * - Only PK: 2.5 hours\n * - Only ET: 3 hours\n * - Neither: 2 hours\n */\nfunction calculateRealMatchEndTime(matchDate, etpkValue) {\n  const endDate = new Date(matchDate);\n\n  if (!etpkValue) {\n    // No ET/PK: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  } else if (etpkValue.includes(\"ET\") && etpkValue.includes(\"PK\")) {\n    // Both ET and PK: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else if (etpkValue.includes(\"PK\")) {\n    // Only PK: 2.5 hours (2 hours 30 minutes)\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n    endDate.setUTCMinutes(endDate.getUTCMinutes() + 30);\n  } else if (etpkValue.includes(\"ET\")) {\n    // Only ET: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else {\n    // Default: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  }\n\n  return endDate;\n}\n\n/**\n * Calculate end time for a virtual match based on bet type\n */\nfunction calculateVirtualMatchEndTime(matchDate, betType) {\n  const endDate = new Date(matchDate);\n\n  const durationMap = {\n    'PES5MIN': 15,\n    'PESCF': 20,\n    'PESIF': 20,\n    'PKIF': 5,\n    'PKCF': 5,\n    'PES24': 15\n  };\n\n  const minutesToAdd = durationMap[betType] || 15; // default 15 minutes\n  endDate.setUTCMinutes(endDate.getUTCMinutes() + minutesToAdd);\n  return endDate;\n}\n\n/**\n * Calculate match end date\n */\nfunction calculateMatchEndDate(matchDate, isReal, etpkValue, betType) {\n  return isReal\n    ? calculateRealMatchEndTime(matchDate, etpkValue)\n    : calculateVirtualMatchEndTime(matchDate, betType);\n}\n\nconst allItems = $input.all();\n\n// Find config item with nodeType\nconst currentDateItem = allItems.find(_ => _.json.nodeType === 'config');\n// Find mismatch items with nodeType\nconst mismatchItems = allItems.filter(_ => _.json.nodeType === 'mismatch');\n// Find previous mismatch items with nodeType\nconst previousMismatchItems = allItems.filter(_ => _.json.nodeType === 'previousMismatch');\n\nconst currentDate = currentDateItem.json.currentDate;\nconst result = [];\n\n// Process current mismatch items\nfor (const item of mismatchItems) {\n  const value = item.json;\n  const betType = detectBetType(value);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n\n  result.push({\n    json: {\n      matchDate: matchDate,\n      endDate: endDate,\n      league: value.League,\n      isETPK: isETPK,\n      maxBet: convertMaxBet(value.Maxbet),\n      provider: value.Provider,\n      rowNumber: value.row_number,\n      no: value.No,\n      isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n      isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n      betType: betType,\n      isReal: isReal,\n      hdpTrader: value.HDP || null,\n      ouTrader: value.OU || null,\n      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n      isPreviousMatch: false,\n      nodeType: 'mismatch'\n    }\n  });\n}\n\n// Process previous mismatch items\nfor (const item of previousMismatchItems) {\n  const value = item.json;\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  // Subtract 1 day from matchDate\n  matchDate.setUTCDate(matchDate.getUTCDate() - 1);\n\n  const betType = detectBetType(value);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n\n  result.push({\n    json: {\n      matchDate: matchDate,\n      endDate: endDate,\n      league: value.League,\n      isETPK: isETPK,\n      maxBet: convertMaxBet(value.Maxbet),\n      provider: value.Provider,\n      rowNumber: value.row_number,\n      no: value.No,\n      isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n      isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n      betType: betType,\n      isReal: isReal,\n      hdpTrader: value.HDP,\n      ouTrader: value.OU,\n      isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n      isPreviousMatch: true,\n      nodeType: 'mismatch'\n    }\n  });\n}\n\nreturn result;\n"
+        "jsCode": "function convertTimeToDate(currentDate, timeString) {\n  // Clean the time string - remove extra spaces\n  const cleanTime = timeString.trim().replace(/\\s+/g, ' ');\n\n  // Parse the time string\n  const timeMatch = cleanTime.match(/^(\\d{1,2}):(\\d{2})\\s*(AM|PM)$/i);\n\n  if (!timeMatch) {\n    throw new Error(`Invalid time format: ${timeString}. Expected format: \"12:00PM\", \"12:00 PM\", \"01:00 AM\", \"01:00AM\"`);\n  }\n\n  let hours = parseInt(timeMatch[1], 10);\n  const minutes = parseInt(timeMatch[2], 10);\n  const period = timeMatch[3].toUpperCase();\n\n  // Validate hours and minutes\n  if (hours < 1 || hours > 12) {\n    throw new Error(`Invalid hours: ${hours}. Hours must be between 1 and 12`);\n  }\n\n  if (minutes < 0 || minutes > 59) {\n    throw new Error(`Invalid minutes: ${minutes}. Minutes must be between 0 and 59`);\n  }\n\n  // Create a new date object based on currentDate\n  const resultDate = new Date(currentDate);\n\n  // Handle AM/PM logic\n  if (period === 'PM') {\n    // PM: Use currentDate with the specified time\n    if (hours === 12) {\n      // 12:xx PM = 12:xx (noon)\n      resultDate.setUTCHours(12, minutes, 0, 0);\n    } else {\n      // 1:xx PM to 11:xx PM = 13:xx to 23:xx\n      resultDate.setUTCHours(hours + 12, minutes, 0, 0);\n    }\n  } else { // AM\n    // AM: Add one day to currentDate with the specified time\n    resultDate.setUTCDate(resultDate.getUTCDate() + 1);\n\n    if (hours === 12) {\n      // 12:xx AM = 00:xx (midnight)\n      resultDate.setUTCHours(0, minutes, 0, 0);\n    } else {\n      // 1:xx AM to 11:xx AM = 01:xx to 11:xx\n      resultDate.setUTCHours(hours, minutes, 0, 0);\n    }\n  }\n\n  return resultDate;\n}\n\nfunction convertMaxBet(valueString) {\n  if (!valueString || typeof valueString !== 'string') {\n    return 0;\n  }\n  // Clean the string - remove extra spaces\n  const cleanString = valueString.trim();\n\n  // Find number followed by 'k' or 'K' anywhere in the string\n  // Examples: \"30K\", \"123Kxxx\", \"abc 30Kxxx\"\n  const kMatch = cleanString.match(/(\\d+(?:\\.\\d+)?)\\s*[kK]/i);\n\n  if (!kMatch) {\n    return 0;\n  }\n\n  // Extract the numeric part\n  const numericValue = parseFloat(kMatch[1]);\n\n  // Validate the numeric value\n  if (isNaN(numericValue)) {\n    return 0;\n  }\n\n  // Convert to number by multiplying by 1000\n  return numericValue * 1000;\n}\n\nfunction detectBetType(match, mjLeagueInclude = []) {\n  const league = (match.League || '').toUpperCase();\n  const no = (match.No || '').toString().toUpperCase();\n  const maxBet = convertMaxBet(match.Maxbet);\n  const lGroup = (match['L.Group'] || '').toUpperCase().trim();\n\n  // 1. Check special bet types by No suffix (order matters!)\n  if (no.endsWith('TB1')) return 'TB1';  // Next Booking\n  if (no.endsWith('TB')) return 'TB';    // Booking\n  if (no.endsWith('C1')) return 'C1';    // Next Corner\n  if (no.endsWith('C')) return 'CR';     // Corner\n\n  // 2. Check for child product format: numbers followed by letters, optionally followed by numbers\n  // Examples: 12B, 13FS, 12B1, 13FS2 - This indicates OtherSport category\n  const childProductPattern = /^\\d+[A-Z]+\\d*$/;\n  if (childProductPattern.test(no)) return 'CP'; //child product\n\n  // 3. Check by League name\n  if (league.includes('FUTSAL')) return 'FS';\n\n  // 4. Check Virtual PES games\n  if (league.includes('SABA CLUB FRIENDLY') && league.includes('PES 21')) return 'PESCF';\n  if (league.includes('SABA INTERNATIONAL FRIENDLY') && league.includes('PES 21')) return 'PESIF';\n  if (league.includes('SABA VIETNAM V LEAGUE 1') && league.includes('PES 24')) return 'PES24';\n  if (league.includes('SABA ELITE FRIENDLY') && league.includes('PES 21')) return 'PES5MIN';\n  if (league.includes('PENALTY SHOOTOUTS') && league.includes('PES 23')) {\n    if (league.includes('INTERNATIONAL')) return 'PKIF';\n    if (league.includes('CLUB')) return 'PKCF';\n  }\n\n  // 5. Check MJLeagueInclude configuration - leagues explicitly marked as MJ (HIGHEST PRIORITY)\n  if (mjLeagueInclude && mjLeagueInclude.length > 0) {\n    const isInMJIncludeList = mjLeagueInclude.some(includedLeague => {\n      const normalizedIncluded = includedLeague.toUpperCase().trim();\n      return league.includes(normalizedIncluded) || normalizedIncluded.includes(league);\n    });\n    if (isInMJIncludeList) {\n      return 'MJ';\n    }\n  }\n\n  // 6. Priority: L.Group column for MJ/M1/M2/M3/M4 league groups\n  if (lGroup) {\n    const validGroups = ['MJ', 'M1', 'M2', 'M3', 'M4'];\n    if (validGroups.includes(lGroup)) {\n      return lGroup;\n    }\n  }\n\n  // 7. Fall back to MaxBet-based classification\n  if (maxBet >= 70000) return 'MJ';   // Major\n  if (maxBet >= 40000 && maxBet < 70000) return 'M1';    // Minor 1\n  if (maxBet >= 20000 && maxBet < 40000) return 'M2';    // Minor 2\n  if (maxBet >= 8000 && maxBet < 20000) return 'M3';     // Minor 3\n  if (maxBet >= 1500 && maxBet < 8000) return 'M4';      // Minor 4\n\n  return 'Unknown';\n}\n\nfunction isRealGame(betType) {\n  const virtualBetTypes = ['PESCF', 'PESIF', 'PES24', 'PES5MIN', 'PKIF', 'PKCF'];\n  return !virtualBetTypes.includes(betType);\n}\n\n/**\n * Calculate end time for a real match\n * Rules:\n * - Both ET and PK: 3 hours\n * - Only PK: 2.5 hours\n * - Only ET: 3 hours\n * - Neither: 2 hours\n */\nfunction calculateRealMatchEndTime(matchDate, etpkValue) {\n  const endDate = new Date(matchDate);\n\n  if (!etpkValue) {\n    // No ET/PK: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  } else if (etpkValue.includes(\"ET\") && etpkValue.includes(\"PK\")) {\n    // Both ET and PK: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else if (etpkValue.includes(\"PK\")) {\n    // Only PK: 2.5 hours (2 hours 30 minutes)\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n    endDate.setUTCMinutes(endDate.getUTCMinutes() + 30);\n  } else if (etpkValue.includes(\"ET\")) {\n    // Only ET: 3 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 3);\n  } else {\n    // Default: 2 hours\n    endDate.setUTCHours(endDate.getUTCHours() + 2);\n  }\n\n  return endDate;\n}\n\n/**\n * Calculate end time for a virtual match based on bet type\n */\nfunction calculateVirtualMatchEndTime(matchDate, betType) {\n  const endDate = new Date(matchDate);\n\n  const durationMap = {\n    'PES5MIN': 15,\n    'PESCF': 20,\n    'PESIF': 20,\n    'PKIF': 5,\n    'PKCF': 5,\n    'PES24': 15\n  };\n\n  const minutesToAdd = durationMap[betType] || 15; // default 15 minutes\n  endDate.setUTCMinutes(endDate.getUTCMinutes() + minutesToAdd);\n  return endDate;\n}\n\n/**\n * Calculate match end date\n */\nfunction calculateMatchEndDate(matchDate, isReal, etpkValue, betType) {\n  return isReal\n    ? calculateRealMatchEndTime(matchDate, etpkValue)\n    : calculateVirtualMatchEndTime(matchDate, betType);\n}\n\n/**\n * Check if a match is a solo match\n * A match is solo if there's no other match in the same league within 45 minutes from its start time\n *\n * Rules:\n * - Matches at the exact same time in same league are NOT solo\n * - Matches within 45 minutes in same league are NOT solo\n * - Matches > 45 minutes apart or in different leagues are solo\n *\n * @param {Date} matchDate - The start time of the match\n * @param {string} league - The league name\n * @param {number} currentIndex - The index of the current match in allMatches\n * @param {Array} allMatches - All matches to compare against\n * @returns {boolean} - True if the match is solo\n */\nfunction isSoloMatch(matchDate, league, currentIndex, allMatches) {\n  if (!league) return true; // If no league, consider it solo\n\n  const matchTime = matchDate.getTime();\n  const fortyFiveMinutes = 45 * 60 * 1000; // 45 minutes in milliseconds\n\n  // Check if any other match in the same league starts within 45 minutes (including same time)\n  const hasNearbyMatch = allMatches.some((otherMatch, idx) => {\n    // Skip self (same array index)\n    if (idx === currentIndex) return false;\n\n    // Skip if different league\n    if (otherMatch.league !== league) return false;\n\n    // Check if other match starts within 45 minutes (or at the same time)\n    const timeDiff = Math.abs(otherMatch.matchDate.getTime() - matchTime);\n    return timeDiff <= fortyFiveMinutes;\n  });\n\n  return !hasNearbyMatch;\n}\n\nconst allItems = $input.all();\n\n// Find config item with nodeType\nconst currentDateItem = allItems.find(_ => _.json.nodeType === 'config');\n// Find mismatch items with nodeType\nconst mismatchItems = allItems.filter(_ => _.json.nodeType === 'mismatch');\n// Find previous mismatch items with nodeType\nconst previousMismatchItems = allItems.filter(_ => _.json.nodeType === 'previousMismatch');\n\nconst currentDate = currentDateItem.json.currentDate;\nconst mjLeagueInclude = currentDateItem.json.mjLeagueInclude || [];\nconst mjLeagueAlternativeAssignRule = currentDateItem.json.mjLeagueAlternativeAssignRule || [];\nconst tempMatches = [];\n\n/**\n * Check if a league matches the alternative MJ rule list\n */\nfunction isLeagueInAlternativeRule(league, altRuleList) {\n  if (!league || !altRuleList || altRuleList.length === 0) return false;\n\n  const normalizedLeague = league.toUpperCase().trim();\n  return altRuleList.some(altLeague => {\n    const normalizedAlt = altLeague.toUpperCase().trim();\n    return normalizedLeague.includes(normalizedAlt) || normalizedAlt.includes(normalizedLeague);\n  });\n}\n\n// First pass: Process current mismatch items and collect basic match data\nfor (const item of mismatchItems) {\n  const value = item.json;\n  const betType = detectBetType(value, mjLeagueInclude);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n  const isUseAlternativeMJRule = isLeagueInAlternativeRule(value.League, mjLeagueAlternativeAssignRule);\n\n  tempMatches.push({\n    matchDate: matchDate,\n    endDate: endDate,\n    league: value.League,\n    isETPK: isETPK,\n    maxBet: convertMaxBet(value.Maxbet),\n    provider: value.Provider,\n    rowNumber: value.row_number,\n    no: value.No,\n    isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n    isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n    betType: betType,\n    isReal: isReal,\n    isUseAlternativeMJRule: isUseAlternativeMJRule,\n    hdpTrader: value.HDP || null,\n    ouTrader: value.OU || null,\n    isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n    isPreviousMatch: false\n  });\n}\n\n// Process previous mismatch items\nfor (const item of previousMismatchItems) {\n  const value = item.json;\n  const matchDate = convertTimeToDate(currentDate, value.Time);\n  // Subtract 1 day from matchDate\n  matchDate.setUTCDate(matchDate.getUTCDate() - 1);\n\n  const betType = detectBetType(value, mjLeagueInclude);\n  const etpkValue = value.ET_PK || \"\";\n  const isETPK = !!value.ET_PK && (value.ET_PK.includes(\"ET\") || value.ET_PK.includes(\"PK\"));\n  const isReal = isRealGame(betType);\n  const endDate = calculateMatchEndDate(matchDate, isReal, etpkValue, betType);\n  const isUseAlternativeMJRule = isLeagueInAlternativeRule(value.League, mjLeagueAlternativeAssignRule);\n\n  tempMatches.push({\n    matchDate: matchDate,\n    endDate: endDate,\n    league: value.League,\n    isETPK: isETPK,\n    maxBet: convertMaxBet(value.Maxbet),\n    provider: value.Provider,\n    rowNumber: value.row_number,\n    no: value.No,\n    isEAL: !!value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase().includes(\"EAL\"),\n    isEXPT: !(value[\"Link EAL\"] && value[\"Link EAL\"].toUpperCase() === \"NO EXPT\"),\n    betType: betType,\n    isReal: isReal,\n    isUseAlternativeMJRule: isUseAlternativeMJRule,\n    hdpTrader: value.HDP,\n    ouTrader: value.OU,\n    isUnchanged: !!value.Unchanged && value.Unchanged.toLowerCase() === \"x\",\n    isPreviousMatch: true\n  });\n}\n\n// Second pass: Calculate isSoloMatch for each match and build final result\nconst result = [];\nfor (let i = 0; i < tempMatches.length; i++) {\n  const match = tempMatches[i];\n  const soloMatch = isSoloMatch(match.matchDate, match.league, i, tempMatches);\n\n  result.push({\n    json: {\n      ...match,\n      isSoloMatch: soloMatch,\n      isUseAlternativeMJRule: match.isUseAlternativeMJRule,\n      nodeType: 'mismatch'\n    }\n  });\n}\n\nreturn result;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        768,
-        448
+        1280,
+        688
       ],
-      "id": "fc574b51-d220-497b-965b-d83d686e4ebc",
+      "id": "c7c43786-aac3-469a-80be-2f671eec0182",
       "name": "format_mismatch"
     },
     {
       "parameters": {
-        "jsCode": "// Add nodeType to each mismatch item\nconst items = $input.all();\n\nreturn items.map(item => ({\n  json: {\n    ...item.json,\n    nodeType: 'mismatch'\n  },\n  pairedItem: item.pairedItem\n}));\n"
+        "jsCode": "// Add nodeType to each mismatch item\n// Filter: only get matches that have a value in the \"No\" column (not empty)\nconst items = $input.all();\n\nreturn items\n  .filter(item => item.json.No) // Only keep items where \"No\" column has a value\n  .map(item => ({\n    json: {\n      ...item.json,\n      nodeType: 'mismatch'\n    },\n    pairedItem: item.pairedItem\n  }));\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        464
+        864,
+        608
       ],
-      "id": "0cc45d56-7fc2-4866-9469-b84dd05a519b",
+      "id": "f49ef41e-f6fd-4743-b8e6-b2725a55fad0",
       "name": "prepare_current_mismatch"
     },
     {
@@ -339,11 +276,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        160,
-        464
+        640,
+        608
       ],
-      "id": "b2f427de-dfb1-410c-b559-9618ab2362cd",
-      "name": "get_current_mismatch"
+      "id": "1c77ebcd-45f4-4dc5-9aef-e4d87f517406",
+      "name": "get_current_mismatch",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
     },
     {
       "parameters": {
@@ -352,23 +295,23 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1920,
-        416
+        2416,
+        720
       ],
-      "id": "20b89cd2-a09f-41b7-8493-496c46a731aa",
+      "id": "cf4e1476-fe4c-4b34-b597-a0e85961bb73",
       "name": "output_parse_soccer_lst"
     },
     {
       "parameters": {
-        "jsCode": "// Filter for CurrentDate type, take first, extract value\nconst allItems = $input.all();\n\n// Filter items where Type = \"CurrentDate\" (case insensitive)\nconst currentDateItems = allItems.filter(item => {\n  const type = item.json.Type;\n  return type && type.toString().toLowerCase() === 'currentdate';\n});\n\n// Take first item (Limit behavior)\nif (currentDateItems.length === 0) {\n  return [];\n}\n\nconst firstItem = currentDateItems[0];\n\n// Extract currentDate from Value field\nconst currentDate = firstItem.json.Value;\n\n// Return config item with nodeType\nreturn [{\n  json: {\n    currentDate: currentDate,\n    nodeType: 'config'\n  }\n}];\n"
+        "jsCode": "// Extract config values from Type-Value pairs\nconst allItems = $input.all();\n\n// Filter items where Type = \"CurrentDate\" (case insensitive)\nconst currentDateItems = allItems.filter(item => {\n  const type = item.json.Type;\n  return type && type.toString().toLowerCase() === 'currentdate';\n});\n\n// Filter items where Type = \"MJLeagueInclude\" (case insensitive)\nconst mjLeagueIncludeItems = allItems.filter(item => {\n  const type = item.json.Type;\n  return type && type.toString().toLowerCase() === 'mjleagueinclude';\n});\n\n// Filter items where Type = \"MJLeagueAlternativeAssignRule\" (case insensitive)\nconst mjLeagueAltRuleItems = allItems.filter(item => {\n  const type = item.json.Type;\n  return type && type.toString().toLowerCase() === 'mjleaguealternativeassignrule';\n});\n\n// Take first item (Limit behavior)\nif (currentDateItems.length === 0) {\n  return [];\n}\n\nconst currentDate = currentDateItems[0].json.Value;\n\n// Parse MJLeagueInclude - could be comma-separated string or array\nlet mjLeagueInclude = [];\nif (mjLeagueIncludeItems.length > 0) {\n  const value = mjLeagueIncludeItems[0].json.Value;\n  if (typeof value === 'string') {\n    // Split by comma and trim whitespace\n    mjLeagueInclude = value.split(',').map(league => league.trim()).filter(league => league);\n  } else if (Array.isArray(value)) {\n    mjLeagueInclude = value;\n  }\n}\n\n// Parse MJLeagueAlternativeAssignRule - could be comma-separated string or array\nlet mjLeagueAlternativeAssignRule = [];\nif (mjLeagueAltRuleItems.length > 0) {\n  const value = mjLeagueAltRuleItems[0].json.Value;\n  if (typeof value === 'string') {\n    // Split by comma and trim whitespace\n    mjLeagueAlternativeAssignRule = value.split(',').map(league => league.trim()).filter(league => league);\n  } else if (Array.isArray(value)) {\n    mjLeagueAlternativeAssignRule = value;\n  }\n}\n\n// Return config item with nodeType\nreturn [{\n  json: {\n    currentDate: currentDate,\n    mjLeagueInclude: mjLeagueInclude,\n    mjLeagueAlternativeAssignRule: mjLeagueAlternativeAssignRule,\n    nodeType: 'config'\n  }\n}];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        656
+        816,
+        880
       ],
-      "id": "9d1542d4-6c85-4d8d-a268-ced45f9eb28b",
+      "id": "b5ba214e-1933-4b89-96f4-156ce83e2f77",
       "name": "format_config",
       "alwaysOutputData": true
     },
@@ -401,11 +344,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        160,
-        656
+        640,
+        864
       ],
-      "id": "33cdc11f-c9ff-4a5c-8bf7-d267afab113a",
-      "name": "get_config"
+      "id": "6f785fa5-6464-4517-a0e3-a451bb49b3f7",
+      "name": "get_config",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
     },
     {
       "parameters": {
@@ -436,11 +385,17 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        160,
-        832
+        640,
+        1136
       ],
-      "id": "237416eb-cb4a-4539-bca3-f4ca2a402958",
-      "name": "get_pair_trader"
+      "id": "03f15b20-6b23-48cb-af25-612658d5681e",
+      "name": "get_pair_trader",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QCgq5y3ZDYYxhpmL",
+          "name": "Google Sheets account 3"
+        }
+      }
     },
     {
       "parameters": {
@@ -449,23 +404,23 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        832
+        848,
+        1136
       ],
-      "id": "7848d423-449f-48e7-99ad-4800949678b6",
+      "id": "d11843b0-aadf-41e6-819e-94b01379e593",
       "name": "format_pair_trader"
     },
     {
       "parameters": {
         "inputSource": "passthrough"
       },
-      "id": "d65bc105-4cc2-4190-a3e7-8972941b2a89",
+      "id": "fde1be83-3988-4931-9b28-069be9f06c69",
       "typeVersion": 1.1,
       "name": "Start",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        -240,
-        352
+        240,
+        656
       ]
     }
   ],
@@ -542,17 +497,6 @@
         ]
       ]
     },
-    "get_previous_mismatch": {
-      "main": [
-        [
-          {
-            "node": "filter_and_prepare_previous_mismatch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "get_current_mismatch": {
       "main": [
         [
@@ -608,26 +552,8 @@
         ]
       ]
     },
-    "filter_and_prepare_previous_mismatch": {
-      "main": [
-        [
-          {
-            "node": "prepare_data_to_format_mismatch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "seperate_current_and_previous_mismatch": {
       "main": [
-        [
-          {
-            "node": "merge_previous_mismatch_and_working_shift",
-            "type": "main",
-            "index": 1
-          }
-        ],
         [
           {
             "node": "output_parse_soccer_lst",
@@ -706,11 +632,6 @@
             "index": 0
           },
           {
-            "node": "get_previous_mismatch",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "get_current_mismatch",
             "type": "main",
             "index": 0
@@ -733,10 +654,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2df2a4c3-1994-4c58-b2ac-0289979be3e7",
+  "versionId": "7457e0dc-98b5-439d-ad2c-722cc9c13538",
   "meta": {
-    "instanceId": "98bfed1c0f22fa9e07d0e38dc58da94b0281d63095bd4ba14894d42a90a063e3"
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6dcc4053c897f1eebaaa4209b12d8b342c939eb2cb95d99c56792d7ff00ca87"
   },
-  "id": "E50RJmsG1GPE0WS1",
+  "id": "tQJXulRJf8KP1oFP",
   "tags": []
 }

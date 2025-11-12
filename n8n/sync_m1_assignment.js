@@ -8,7 +8,7 @@ const workflow = JSON.parse(fs.readFileSync(workflowPath, 'utf8'));
 // Map of node names to their code files
 const codeNodeMap = {
   'M1_enrich_assigned_jobs_for_working_shift': 'M1/M1_enrich_assigned_jobs_for_working_shift.js',
-  'build_m1_api_param1': 'M1/build_m1_api_param.js'
+  'build_m1_api_param': 'M1/build_m1_api_param.js'
 };
 
 // Update each code node

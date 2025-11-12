@@ -24,9 +24,12 @@ function parseAssignedJobs(shift) {
 /**
  * Create an assigned job object from a match
  */
-function createAssignedJob(match) {
+function createAssignedJob(match, traderName) {
+  // Check if this trader is assigned as first half trader
+  const isFirstHalfTrader = match['1st Half'] === traderName || match.firstHalf === traderName;
+
   return {
-    type: match.betType,
+    type: isFirstHalfTrader ? 'FirstHalf' : match.betType,
     start: match.matchDate,
     end: match.endDate
   };
@@ -63,7 +66,9 @@ function matchEndsWithinShiftExtension(shift, match) {
  */
 function findTraderMatchesInShift(matches, traderName, shift) {
   return matches.filter(match => {
-    const isTraderMatch = match.hdpTrader === traderName || match.ouTrader === traderName;
+    const isTraderMatch = match.hdpTrader === traderName ||
+      match.ouTrader === traderName ||
+      match['1st Half'] === traderName;
     const matchStartsInShift = matchStartsAfterShift(shift, match);
     const matchEndsInTime = matchEndsWithinShiftExtension(shift, match);
     return isTraderMatch && matchStartsInShift && matchEndsInTime;
@@ -113,7 +118,7 @@ const enrichedItems = allItems.map(item => {
 
     // Append matched jobs to assignedJobs
     for (const match of traderMatches) {
-      const job = createAssignedJob(match);
+      const job = createAssignedJob(match, shift.traderName);
       assignedJobs.push(job);
     }
 

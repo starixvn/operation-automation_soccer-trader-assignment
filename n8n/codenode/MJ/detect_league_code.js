@@ -117,6 +117,25 @@ const LEAGUE_MAPPINGS = {
     'FRENCH LIGUE 1',
     '*FRANCE LIGUE 1',
     'FRANCE LIGUE-1'
+  ],
+
+  // Japan J-League Division 1
+  'JPN': [
+    'JAPAN J-LEAGUE DIVISION 1',
+    'JAPAN J-LEAGUE',
+    'J-LEAGUE DIVISION 1',
+    'J-LEAGUE',
+    'JAPAN J1 LEAGUE',
+    '*JAPAN J-LEAGUE DIVISION 1'
+  ],
+
+  // Australia A-League
+  'AUS': [
+    'AUSTRALIA A-LEAGUE',
+    'A-LEAGUE',
+    'AUSTRALIAN A-LEAGUE',
+    '*AUSTRALIA A-LEAGUE',
+    'AUSTRALIA A LEAGUE'
   ]
 };
 

@@ -21,7 +21,7 @@ function mapStaffLevel(level) {
 
 /**
  * Parse M1 and M2 capacity from bettype string
- * Default capacity is 1 if not specified
+ * Default capacity is 1 for M1, 2 for M2 if not specified
  * Examples:
  * - "HDP/M1*2" → { m1Capacity: 2, m2Capacity: 1 }
  * - "OU/M2*3" → { m1Capacity: 1, m2Capacity: 3 }
@@ -33,9 +33,9 @@ function parseCapacity(bettype) {
         return { m1Capacity: 1, m2Capacity: 2 };
     }
 
-    // Default capacity is 1
+    // Default capacity
     let m1Capacity = 1;
-    let m2Capacity = 1;
+    let m2Capacity = 2;
 
     // Match M1*<number>
     const m1Match = bettype.match(/M1\*(\d+)/i);
@@ -72,6 +72,26 @@ function parseIgnoreLeague(ignoreLeagueStr) {
 }
 
 /**
+ * Parse non-solo league string into array
+ * Traders cannot trade solo matches in these leagues
+ * Examples:
+ * - "EPL, LaLiga" → ["EPL", "LaLiga"]
+ * - "JAPAN J-LEAGUE DIVISION 1, AUSTRALIA A-LEAGUE" → ["JAPAN J-LEAGUE DIVISION 1", "AUSTRALIA A-LEAGUE"]
+ * - "" or null → []
+ */
+function parseNonSoloLeague(nonSoloLeagueStr) {
+    if (!nonSoloLeagueStr || typeof nonSoloLeagueStr !== 'string') {
+        return [];
+    }
+
+    // Split by comma and trim whitespace
+    return nonSoloLeagueStr
+        .split(',')
+        .map(league => league.trim())
+        .filter(league => league.length > 0);
+}
+
+/**
  * Check if trader can be assigned to EXPT matches
  * Default is true, unless bettype contains "[No Expt]" (case-insensitive)
  * Examples:
@@ -89,6 +109,43 @@ function parseIsEXPTAssignable(bettype) {
     return !bettype.match(/\[no\s*expt\]/i);
 }
 
+/**
+ * Parse MaxBet from various formats and convert to integer
+ * Examples:
+ * - "14k" or "14K" → 14000
+ * - "14 k" or "14 K" → 14000
+ * - "14000" → 14000
+ * - 14000 → 14000
+ * - "" or null → 1000000 (default no limit)
+ */
+function parseMaxBet(maxBetValue) {
+    const DEFAULT_MAX_BET = 1000000; // Default: 1 million (no MaxBet limit)
+
+    if (!maxBetValue) {
+        return DEFAULT_MAX_BET;
+    }
+
+    // Convert to string and trim whitespace
+    const maxBetStr = String(maxBetValue).trim().toLowerCase();
+
+    // Match patterns like "14k", "14 k", or plain numbers
+    const match = maxBetStr.match(/^(\d+(?:\.\d+)?)\s*k?$/);
+
+    if (!match) {
+        return DEFAULT_MAX_BET; // Invalid format defaults to no limit
+    }
+
+    const numericValue = parseFloat(match[1]);
+
+    // If the original string contained 'k', multiply by 1000
+    if (maxBetStr.includes('k')) {
+        return Math.round(numericValue * 1000);
+    }
+
+    // Otherwise, just return the numeric value as integer
+    return Math.round(numericValue);
+}
+
 const result = [];
 
 for (const item of $input.all()) {
@@ -98,6 +155,8 @@ for (const item of $input.all()) {
     const bettype = item.json['MAIN BET TYPE'];
     const group = item.json.GROUP;
     const ignoreLeague = item.json['Ignore League'];
+    const nonSoloLeague = item.json['Non-Solo league'];
+    const prioritySkill = item.json['Priority skill'];
     const rowNumber = item.json.row_number;
 
     // Initialize level objects
@@ -132,8 +191,14 @@ for (const item of $input.all()) {
     // Parse ignore league into array
     const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);
 
+    // Parse non-solo league into array
+    const nonSoloLeagueArray = parseNonSoloLeague(nonSoloLeague);
+
     // Parse EXPT assignability from bettype
     const isEXPTAssignable = parseIsEXPTAssignable(bettype);
+
+    // Parse MaxBet from Excel (optional field, supports formats like "14k", "14K", "14 K", "14000")
+    const maxBet = parseMaxBet(item.json.MaxBet);
 
     // Add to result array in n8n format
     result.push({
@@ -147,9 +212,12 @@ for (const item of $input.all()) {
             isManager: isManager,
             bettype,
             ignoreLeague: ignoreLeagueArray,
+            nonSoloLeague: nonSoloLeagueArray,
             m1Capacity: m1Capacity,
             m2Capacity: m2Capacity,
             isEXPTAssignable: isEXPTAssignable,
+            maxBet: maxBet,
+            prioritySkill: prioritySkill || null,
             nodeType: 'trader'
         }
     });

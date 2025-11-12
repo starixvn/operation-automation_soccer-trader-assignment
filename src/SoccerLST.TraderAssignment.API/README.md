@@ -134,6 +134,7 @@ Health check endpoint.
   "m1Capacity": 1,
   "m2Capacity": 1,
   "isEXPTMatchAssignable": true,
+  "maxBet": 50000,
   "ignoreLeague": ["ENG2"],
   "assignedJobs": [
     {
@@ -156,6 +157,10 @@ Health check endpoint.
 - `m1Capacity`: Number of M1 matches trader can handle simultaneously (default: 1)
 - `m2Capacity`: Number of M2 matches trader can handle simultaneously (default: 1)
 - `isEXPTMatchAssignable`: Whether trader can be assigned to EXPT matches (default: true)
+- `maxBet`: (Optional) Maximum bet amount this trader can handle
+  - Supports formats: "14k", "14K", "14 K", "14000" (all resolve to 14000)
+  - Converted to integer in API requests
+  - Default: 1,000,000 (no limit) if not specified
 - `ignoreLeague`: (Optional) Array of league codes to exclude this trader from
 - `assignedJobs`: (Optional) Pre-existing job assignments that block trader availability
 
@@ -259,6 +264,9 @@ The optimization engine enforces these constraints:
 8. **EXPT Eligibility**: EXPT matches can only be assigned to traders with `isEXPTMatchAssignable: true`
 9. **League Exclusion**: Traders cannot be assigned to leagues in their `ignoreLeague` list
 10. **Capacity Limits**: M1/M2 traders are limited by `m1Capacity`/`m2Capacity` for simultaneous matches
+11. **MaxBet Constraint**: Traders can only be assigned to matches where `trader.MaxBet >= match.MaxBet`
+    - Example: Trader with MaxBet=50,000 cannot handle a match with MaxBet=120,000
+    - Traders with MaxBet=1,000,000 (default) can handle any match
 
 ## Testing
 

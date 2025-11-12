@@ -91,9 +91,12 @@ const nodeTypeHandlers = {
         maxBet: data.maxBet || 0,
         leagueCode: data.leagueCode || null,
         leagueName: data.league || null,
+        betType: data.betType || null,
+        isSoloMatch: data.isSoloMatch || false,
         isAlreadyHandled: data.isUnchanged || false,
         isEXPT: data.isEXPT !== undefined ? data.isEXPT : true,
-        isEAL: data.isEAL || false
+        isEAL: data.isEAL || false,
+        isUseAlternativeMJRule: data.isUseAlternativeMJRule || false
       });
     }
   },
@@ -109,6 +112,9 @@ const nodeTypeHandlers = {
       isManager: data.isManager || false,
       isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,
       ignoreLeague: data.ignoreLeague || [],
+      nonSoloLeagues: data.nonSoloLeague || [],
+      maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)
+      prioritySkill: data.prioritySkill || null,
       assignedJobs: data.assignedJobs?.map(job => ({
         type: job.type,
         start: job.start,

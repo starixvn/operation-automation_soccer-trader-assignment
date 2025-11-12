@@ -22,7 +22,10 @@ public static class TestHelpers
         int m2Capacity = 1,
         List<AssignedJob>? assignedJobs = null,
         List<string>? ignoreLeague = null,
-        bool isEXPTMatchAssignable = true)
+        List<string>? nonSoloLeagues = null,
+        bool isEXPTMatchAssignable = true,
+        int maxBet = 1000000,
+        string? prioritySkill = null)
     {
         return new TraderShift
         {
@@ -37,7 +40,10 @@ public static class TestHelpers
             M2Capacity = m2Capacity,
             AssignedJobs = assignedJobs ?? new List<AssignedJob>(),
             IgnoreLeague = ignoreLeague,
-            IsEXPTMatchAssignable = isEXPTMatchAssignable
+            NonSoloLeagues = nonSoloLeagues,
+            IsEXPTMatchAssignable = isEXPTMatchAssignable,
+            MaxBet = maxBet,
+            PrioritySkill = prioritySkill
         };
     }
 
@@ -54,7 +60,8 @@ public static class TestHelpers
         bool isAlreadyHandled = false,
         string? leagueName = null,
         bool isEXPT = false,
-        bool isEAL = false)
+        bool isEAL = false,
+        bool isSoloMatch = false)
     {
         return new Match
         {
@@ -67,7 +74,8 @@ public static class TestHelpers
             IsAlreadyHandled = isAlreadyHandled,
             LeagueName = leagueName,
             IsEXPT = isEXPT,
-            IsEAL = isEAL
+            IsEAL = isEAL,
+            IsSoloMatch = isSoloMatch
         };
     }
 

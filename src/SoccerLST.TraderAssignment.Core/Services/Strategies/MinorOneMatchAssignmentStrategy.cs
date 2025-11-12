@@ -29,10 +29,17 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
     public override (bool isValid, string? errorMessage) ValidateMatches(List<Match> matches)
     {
-        var invalidMatches = matches.Where(m => m.MaxBet < 40000 || m.MaxBet >= 70000).ToList();
+        // If all matches have BetType explicitly set to "M1", validation passes
+        if (matches.All(m => m.BetType == "M1"))
+        {
+            return (true, null);
+        }
+
+        // Otherwise, validate using MaxBet ranges as fallback
+        var invalidMatches = matches.Where(m => m.BetType != "M1" && (m.MaxBet < 40000 || m.MaxBet >= 70000)).ToList();
         if (invalidMatches.Any())
         {
-            return (false, $"Found {invalidMatches.Count} matches outside M1 range (40K-70K). All M1 matches must have MaxBet between 40,000 and 70,000.");
+            return (false, $"Found {invalidMatches.Count} matches outside M1 range (40K-70K) and BetType != 'M1'. All M1 matches must have BetType='M1' or MaxBet between 40,000 and 70,000.");
         }
         return (true, null);
     }
@@ -109,6 +116,10 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Check for conflicts with existing assignments
         if (HasAssignedJobConflict(trader, match))
+            return false;
+
+        // Check if trader's MaxBet is sufficient for this match
+        if (trader.MaxBet < match.MaxBet)
             return false;
 
         return true;

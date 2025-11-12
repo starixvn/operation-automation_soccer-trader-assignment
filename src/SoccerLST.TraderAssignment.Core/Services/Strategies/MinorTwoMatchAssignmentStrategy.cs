@@ -22,17 +22,24 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
     {
         { "Third", 1 },
         { "Second", 2 },
-        { "First", 4 },
-        { "Member", 16 },
-        { "Elite", 64 }
+        { "First", 3 },
+        { "Member", 4 },
+        { "Elite", 5 }
     };
 
     public override (bool isValid, string? errorMessage) ValidateMatches(List<Match> matches)
     {
-        var invalidMatches = matches.Where(m => m.MaxBet < 20000 || m.MaxBet >= 40000).ToList();
+        // If all matches have BetType explicitly set to "M2", validation passes
+        if (matches.All(m => m.BetType == "M2"))
+        {
+            return (true, null);
+        }
+
+        // Otherwise, validate using MaxBet ranges as fallback
+        var invalidMatches = matches.Where(m => m.BetType != "M2" && (m.MaxBet < 20000 || m.MaxBet >= 40000)).ToList();
         if (invalidMatches.Any())
         {
-            return (false, $"Found {invalidMatches.Count} matches outside M2 range (20K-40K). All M2 matches must have MaxBet between 20,000 and 40,000.");
+            return (false, $"Found {invalidMatches.Count} matches outside M2 range (20K-40K) and BetType != 'M2'. All M2 matches must have BetType='M2' or MaxBet between 20,000 and 40,000.");
         }
         return (true, null);
     }
@@ -111,6 +118,10 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
         if (HasAssignedJobConflict(trader, match))
             return false;
 
+        // Check if trader's MaxBet is sufficient for this match
+        if (trader.MaxBet < match.MaxBet)
+            return false;
+
         return true;
     }
 
@@ -166,78 +177,62 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             model.Add(LinearExpr.Sum(traderAssignments) <= 1);
         }
 
-        // Constraint 2: Respect M2Capacity - trader can handle up to M2Capacity overlapping matches
-        // This includes both new M2 matches AND existing M2/M3/M4 assigned jobs
+        // Constraint 2: Respect M2Capacity - trader can handle up to M2Capacity CONCURRENT matches
+        // IMPORTANT: M2Capacity only applies to matches with the SAME start time
+        // Overlapping matches with DIFFERENT start times are NOT allowed, regardless of capacity
         foreach (var trader in traderShifts)
         {
-            // Build overlapping groups: find all matches that overlap with each other
-            var processedMatches = new HashSet<string>();
-            var overlappingGroups = new List<List<Match>>();
+            // Group matches by start time (concurrent matches)
+            var concurrentGroups = matches
+                .GroupBy(m => m.Start)
+                .Where(g => g.Count() > 1)  // Only groups with 2+ matches need capacity constraint
+                .ToList();
 
-            for (int i = 0; i < matches.Count; i++)
+            // Apply M2Capacity constraint to each concurrent group (same start time)
+            foreach (var group in concurrentGroups)
             {
-                if (processedMatches.Contains(matches[i].Id))
-                    continue;
+                var groupMatches = group.ToList();
 
-                var group = new List<Match> { matches[i] };
-                processedMatches.Add(matches[i].Id);
-
-                // Find all other matches that overlap with any match in the current group
-                bool addedNewMatch;
-                do
-                {
-                    addedNewMatch = false;
-                    for (int j = 0; j < matches.Count; j++)
-                    {
-                        if (processedMatches.Contains(matches[j].Id))
-                            continue;
-
-                        // Check if matches[j] overlaps with any match in the current group
-                        bool overlapsWithGroup = group.Any(m =>
-                            matches[j].Start < m.End && m.Start < matches[j].End);
-
-                        if (overlapsWithGroup)
-                        {
-                            group.Add(matches[j]);
-                            processedMatches.Add(matches[j].Id);
-                            addedNewMatch = true;
-                        }
-                    }
-                } while (addedNewMatch);
-
-                // Only add groups with 2+ matches (single match groups don't need capacity constraint)
-                if (group.Count >= 2)
-                {
-                    overlappingGroups.Add(group);
-                }
-            }
-
-            // For each overlapping group, add capacity constraint
-            foreach (var group in overlappingGroups)
-            {
-                // Count existing M2/M3/M4 jobs that overlap with this match group
+                // Count existing M2/M3/M4 jobs at this exact start time
                 int existingJobsCount = 0;
                 if (trader.AssignedJobs != null)
                 {
                     existingJobsCount = trader.AssignedJobs.Count(job =>
-                    {
-                        // Only count M2, M3, M4 jobs (these count toward M2 capacity)
-                        if (job.Type != "M2" && job.Type != "M3" && job.Type != "M4")
-                            return false;
-
-                        // Check if job overlaps with any match in the group
-                        return group.Any(m =>
-                            job.Start < m.End && m.Start < job.End);
-                    });
+                        (job.Type == "M2" || job.Type == "M3" || job.Type == "M4") &&
+                        job.Start == group.Key);
                 }
 
-                // Trader can be assigned to at most (M2Capacity - existingJobsCount) matches in this overlapping group
-                var assignmentsInGroup = group
+                // Trader can be assigned to at most (M2Capacity - existingJobsCount) matches in this concurrent group
+                var assignmentsInGroup = groupMatches
                     .Select(m => x[(trader.Id, m.Id)])
                     .ToArray();
 
                 var availableCapacity = Math.Max(0, trader.M2Capacity - existingJobsCount);
                 model.Add(LinearExpr.Sum(assignmentsInGroup) <= availableCapacity);
+            }
+
+            // Constraint 3: Prevent assignment to overlapping matches with DIFFERENT start times
+            // These are NOT allowed even if trader has M2Capacity > 1
+            for (int i = 0; i < matches.Count; i++)
+            {
+                for (int j = i + 1; j < matches.Count; j++)
+                {
+                    var match1 = matches[i];
+                    var match2 = matches[j];
+
+                    // Skip if same start time (already handled by capacity constraint above)
+                    if (match1.Start == match2.Start)
+                        continue;
+
+                    // Check if matches overlap (different start times but overlapping duration)
+                    bool overlaps = match1.Start < match2.End && match2.Start < match1.End;
+
+                    if (overlaps)
+                    {
+                        // Trader cannot be assigned to both overlapping matches with different start times
+                        model.Add(x[(trader.Id, match1.Id)] + x[(trader.Id, match2.Id)] <= 1);
+                    }
+                }
             }
         }
     }
@@ -365,7 +360,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                 // Add penalty for excess workload
                 // Penalty should be significant to encourage distribution
                 // but not so large it overrides quality differences
-                var penaltyPerExcess = (long)(avgMatchWeight * 100000);
+                var penaltyPerExcess = (long)(avgMatchWeight * 1000);
                 objectiveTerms.Add(LinearExpr.Term(excess, -penaltyPerExcess));
             }
         }

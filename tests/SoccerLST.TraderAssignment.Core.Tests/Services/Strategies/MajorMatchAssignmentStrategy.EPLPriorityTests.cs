@@ -104,49 +104,6 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
     }
 
     [Test]
-    public void Assign_WithITAHigherMaxBetThanEPL_PrioritizesITA()
-    {
-        // Arrange - ITA has higher MaxBet than EPL
-        var request = new AssignmentRequest
-        {
-            TraderShifts = new List<TraderShift>
-            {
-                CreateTraderShift("1", "EliteHDP", new[] { "HDP" }, "Elite", false),
-                CreateTraderShift("2", "EliteOU", new[] { "OU" }, "Elite", false),
-                CreateTraderShift("3", "MemberHDP", new[] { "HDP" }, "Member", false),
-                CreateTraderShift("4", "MemberOU", new[] { "OU" }, "Member", false)
-            },
-            Matches = new List<Match>
-            {
-                CreateMatch("1", "100",
-                    DateTimeOffset.Parse("2025-09-28T10:00:00Z"),
-                    DateTimeOffset.Parse("2025-09-28T12:00:00Z"),
-                    100000, "EPL"),
-                CreateMatch("2", "101",
-                    DateTimeOffset.Parse("2025-09-28T10:00:00Z"),
-                    DateTimeOffset.Parse("2025-09-28T12:00:00Z"),
-                    120000, "ITA")
-            },
-            PreconfiguredPairs = new List<PreconfiguredPair>()
-        };
-
-        // Act
-        var result = _strategy.Assign(request);
-
-        // Assert
-        result.Success.Should().BeTrue();
-        result.AssignedMatches.Should().Be(2);
-
-        var eplAssignment = result.Assignments.First(a => a.League == "EPL");
-        var itaAssignment = result.Assignments.First(a => a.League == "ITA");
-
-        itaAssignment.HdpLevel.Should().Be("Elite", "ITA should get Elite traders when it has higher MaxBet");
-        itaAssignment.OuLevel.Should().Be("Elite", "ITA should get Elite traders when it has higher MaxBet");
-        eplAssignment.HdpLevel.Should().Be("Member", "EPL should get Member traders when ITA has higher MaxBet");
-        eplAssignment.OuLevel.Should().Be("Member", "EPL should get Member traders when ITA has higher MaxBet");
-    }
-
-    [Test]
     public void Assign_WithEPLVsPreconfiguredITASameMaxBet_PrioritizesEPL()
     {
         // Arrange - EPL vs ITA with preconfigured pair for ITA, same MaxBet
@@ -285,6 +242,73 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
         gerAssignment.OuLevel.Should().Be("Elite", "Higher MaxBet match should get Elite traders regardless of league");
     }
 
+    [Test]
+    public void Assign_TwoConcurrentMatches_EPLAndITA_EPLShouldGetEliteTrader()
+    {
+        // Arrange - Simplified scenario with 2 concurrent matches
+        // 1 EPL + 1 ITA match, both 120k MaxBet at same time
+        // 4 traders: 1 Elite HDP with EPL restriction, 1 Elite OU (normal), 2 Members
+        // Expected: Normal Elite OU + one of the other traders should go to EPL
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift>
+            {
+                // Elite HDP with EPL restriction - can only work ITA
+                CreateTraderShift("1", "EliteRestrictedHDP", new[] { "HDP" }, "Elite", false,
+                    start: DateTimeOffset.Parse("2025-10-26T20:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-10-27T04:00:00Z"),
+                    ignoreLeague: new List<string> { "English Premier League" }),
+
+                // Normal Elite OU - should be assigned to EPL
+                CreateTraderShift("2", "EliteNormalOU", new[] { "OU" }, "Elite", false,
+                    start: DateTimeOffset.Parse("2025-10-26T20:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-10-27T04:00:00Z")),
+
+                // Member traders - one should pair with EliteNormalOU for EPL
+                CreateTraderShift("3", "MemberHDP", new[] { "HDP" }, "Member", false,
+                    start: DateTimeOffset.Parse("2025-10-26T20:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-10-27T04:00:00Z")),
+                CreateTraderShift("4", "MemberOU", new[] { "OU" }, "Member", false,
+                    start: DateTimeOffset.Parse("2025-10-26T20:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-10-27T04:00:00Z"))
+            },
+            Matches = new List<Match>
+            {
+                // EPL match
+                CreateMatch("1", "1",
+                    DateTimeOffset.Parse("2025-10-26T22:00:00Z"),
+                    DateTimeOffset.Parse("2025-10-27T00:00:00Z"),
+                    120000, "EPL"),
+
+                // ITA match
+                CreateMatch("2", "2",
+                    DateTimeOffset.Parse("2025-10-26T22:00:00Z"),
+                    DateTimeOffset.Parse("2025-10-27T00:00:00Z"),
+                    120000, "ITA")
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue($"solver should succeed, but got status: {result.Status}");
+        result.AssignedMatches.Should().Be(2, "both matches should be assigned");
+
+        var eplAssignment = result.Assignments.First(a => a.League == "EPL");
+        var itaAssignment = result.Assignments.First(a => a.League == "ITA");
+
+        // EPL should get at least one Elite trader (EliteNormalOU)
+        // Expected: MemberHDP + EliteNormalOU (because EPL has Elite boost)
+        eplAssignment.OuLevel.Should().Be("Elite", "EPL match should have Elite OU trader");
+        eplAssignment.Ou.Should().Be("EliteNormalOU", "EPL should get non-restricted Elite OU");
+
+        // ITA should get the Elite HDP with EPL restriction + Member OU
+        itaAssignment.HdpLevel.Should().Be("Elite", "ITA match should have Elite HDP trader (restricted from EPL)");
+        itaAssignment.Hdp.Should().Be("EliteRestrictedHDP", "ITA should get EPL-restricted Elite HDP");
+    }
+
     // Helper methods
     private static TraderShift CreateTraderShift(
         string id,
@@ -293,7 +317,8 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
         string level,
         bool isManager,
         DateTimeOffset? start = null,
-        DateTimeOffset? end = null)
+        DateTimeOffset? end = null,
+        List<string>? ignoreLeague = null)
     {
         return new TraderShift
         {
@@ -304,7 +329,9 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
             Skills = skills.ToList(),
             Level = level,
             IsManager = isManager,
-            AssignedJobs = new List<AssignedJob>()
+            IgnoreLeague = ignoreLeague ?? new List<string>(),
+            AssignedJobs = new List<AssignedJob>(),
+            MaxBet = 1000000 // High enough to handle any test match
         };
     }
 
@@ -315,8 +342,19 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
         DateTimeOffset end,
         int maxBet,
         string? leagueCode = null,
-        bool isAlreadyHandled = false)
+        bool isAlreadyHandled = false,
+        string? leagueName = null)
     {
+        // If leagueName not provided, derive from leagueCode
+        var matchLeagueName = leagueName ?? leagueCode switch
+        {
+            "EPL" => "English Premier League",
+            "ITA" => "Italian Serie A",
+            "GER" => "German Bundesliga",
+            "FRA" => "French Ligue 1",
+            _ => leagueCode
+        };
+
         return new Match
         {
             Id = id,
@@ -325,6 +363,8 @@ public class MajorMatchAssignmentStrategyEPLPriorityTests
             End = end,
             MaxBet = maxBet,
             LeagueCode = leagueCode,
+            LeagueName = matchLeagueName,
+            BetType = "MJ",
             IsAlreadyHandled = isAlreadyHandled
         };
     }

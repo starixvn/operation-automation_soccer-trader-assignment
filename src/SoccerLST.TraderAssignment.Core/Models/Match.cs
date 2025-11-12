@@ -16,6 +16,12 @@ public class Match
 
     public string? LeagueName { get; set; }
 
+    public string? BetType { get; set; }
+
+    public bool IsSoloMatch { get; set; } = false;
+
+    public bool IsUseAlternativeMJRule { get; set; } = false;
+
     public bool IsAlreadyHandled { get; set; } = false;
 
     public bool IsEXPT { get; set; } = false;
