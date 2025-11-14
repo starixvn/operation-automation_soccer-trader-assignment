@@ -182,6 +182,11 @@ function parseBusyColumn(busyString, shiftStartTime, shiftEndTime) {
 const result = [];
 
 for (const item of $input.all()) {
+    // Only process shifts that have a trader name
+    if (!item.json.Trader || item.json.Trader.trim() === '') {
+        continue;
+    }
+
     const shiftDate = excelDateToJSDate(item.json.Date);
     const { startTime, endTime, isCrossingShift } = parseMYTTime(item.json.MYT, shiftDate, item.json['LST Note']);
 

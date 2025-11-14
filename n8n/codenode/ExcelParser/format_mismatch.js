@@ -78,7 +78,7 @@ function convertMaxBet(valueString) {
   return numericValue * 1000;
 }
 
-function detectBetType(match, mjLeagueInclude = []) {
+function detectBetType(match, mjLeagueInclude = [], m1LeagueInclude = []) {
   const league = (match.League || '').toUpperCase();
   const no = (match.No || '').toString().toUpperCase();
   const maxBet = convertMaxBet(match.Maxbet);
@@ -119,7 +119,18 @@ function detectBetType(match, mjLeagueInclude = []) {
     }
   }
 
-  // 6. Priority: L.Group column for MJ/M1/M2/M3/M4 league groups
+  // 6. Check M1LeagueInclude configuration - leagues explicitly marked as M1
+  if (m1LeagueInclude && m1LeagueInclude.length > 0) {
+    const isInM1IncludeList = m1LeagueInclude.some(includedLeague => {
+      const normalizedIncluded = includedLeague.toUpperCase().trim();
+      return league.includes(normalizedIncluded) || normalizedIncluded.includes(league);
+    });
+    if (isInM1IncludeList) {
+      return 'M1';
+    }
+  }
+
+  // 7. Priority: L.Group column for MJ/M1/M2/M3/M4 league groups
   if (lGroup) {
     const validGroups = ['MJ', 'M1', 'M2', 'M3', 'M4'];
     if (validGroups.includes(lGroup)) {
@@ -127,7 +138,7 @@ function detectBetType(match, mjLeagueInclude = []) {
     }
   }
 
-  // 7. Fall back to MaxBet-based classification
+  // 8. Fall back to MaxBet-based classification
   if (maxBet >= 70000) return 'MJ';   // Major
   if (maxBet >= 40000 && maxBet < 70000) return 'M1';    // Minor 1
   if (maxBet >= 20000 && maxBet < 40000) return 'M2';    // Minor 2
@@ -224,7 +235,7 @@ function isSoloMatch(matchDate, league, currentIndex, allMatches) {
   const matchTime = matchDate.getTime();
   const fortyFiveMinutes = 45 * 60 * 1000; // 45 minutes in milliseconds
 
-  // Check if any other match in the same league starts within 45 minutes (including same time)
+  // Check if any other match in the same league starts within 45 minutes AFTER this match
   const hasNearbyMatch = allMatches.some((otherMatch, idx) => {
     // Skip self (same array index)
     if (idx === currentIndex) return false;
@@ -232,9 +243,13 @@ function isSoloMatch(matchDate, league, currentIndex, allMatches) {
     // Skip if different league
     if (otherMatch.league !== league) return false;
 
-    // Check if other match starts within 45 minutes (or at the same time)
-    const timeDiff = Math.abs(otherMatch.matchDate.getTime() - matchTime);
-    return timeDiff <= fortyFiveMinutes;
+    // Calculate time difference (positive if otherMatch is after current match)
+    const timeDiff = otherMatch.matchDate.getTime() - matchTime;
+
+    // Check if other match starts within 45 minutes AFTER current match (forward direction only)
+    // timeDiff > 0 means otherMatch is after current match
+    // timeDiff <= 45 min means within 45 minute window
+    return timeDiff > 0 && timeDiff <= fortyFiveMinutes;
   });
 
   return !hasNearbyMatch;
@@ -251,6 +266,7 @@ const previousMismatchItems = allItems.filter(_ => _.json.nodeType === 'previous
 
 const currentDate = currentDateItem.json.currentDate;
 const mjLeagueInclude = currentDateItem.json.mjLeagueInclude || [];
+const m1LeagueInclude = currentDateItem.json.m1LeagueInclude || [];
 const mjLeagueAlternativeAssignRule = currentDateItem.json.mjLeagueAlternativeAssignRule || [];
 const tempMatches = [];
 
@@ -270,7 +286,7 @@ function isLeagueInAlternativeRule(league, altRuleList) {
 // First pass: Process current mismatch items and collect basic match data
 for (const item of mismatchItems) {
   const value = item.json;
-  const betType = detectBetType(value, mjLeagueInclude);
+  const betType = detectBetType(value, mjLeagueInclude, m1LeagueInclude);
   const etpkValue = value.ET_PK || "";
   const isETPK = !!value.ET_PK && (value.ET_PK.includes("ET") || value.ET_PK.includes("PK"));
   const isReal = isRealGame(betType);
@@ -306,7 +322,7 @@ for (const item of previousMismatchItems) {
   // Subtract 1 day from matchDate
   matchDate.setUTCDate(matchDate.getUTCDate() - 1);
 
-  const betType = detectBetType(value, mjLeagueInclude);
+  const betType = detectBetType(value, mjLeagueInclude, m1LeagueInclude);
   const etpkValue = value.ET_PK || "";
   const isETPK = !!value.ET_PK && (value.ET_PK.includes("ET") || value.ET_PK.includes("PK"));
   const isReal = isRealGame(betType);

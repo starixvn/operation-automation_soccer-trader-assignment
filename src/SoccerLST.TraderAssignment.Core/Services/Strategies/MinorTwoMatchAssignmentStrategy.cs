@@ -65,6 +65,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Solve
         var solver = new CpSolver();
+        solver.StringParameters = "max_time_in_seconds:105.0"; // 1 minute 45 seconds timeout
         var status = solver.Solve(model);
 
         // Build response
@@ -82,15 +83,11 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
         {
             foreach (var match in matches)
             {
-                var key = (trader.Id, match.Id);
-
+                // Only create variable if assignment is valid
                 if (CanTraderBeAssigned(trader, match))
                 {
+                    var key = (trader.Id, match.Id);
                     x[key] = model.NewBoolVar($"x_{trader.Id}_{match.Id}");
-                }
-                else
-                {
-                    x[key] = model.NewConstant(0);
                 }
             }
         }
@@ -172,9 +169,14 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
         foreach (var match in matches)
         {
             var traderAssignments = traderShifts
+                .Where(t => x.ContainsKey((t.Id, match.Id)))
                 .Select(t => x[(t.Id, match.Id)])
                 .ToArray();
-            model.Add(LinearExpr.Sum(traderAssignments) <= 1);
+
+            if (traderAssignments.Length > 0)
+            {
+                model.Add(LinearExpr.Sum(traderAssignments) <= 1);
+            }
         }
 
         // Constraint 2: Respect M2Capacity - trader can handle up to M2Capacity CONCURRENT matches
@@ -204,11 +206,15 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
                 // Trader can be assigned to at most (M2Capacity - existingJobsCount) matches in this concurrent group
                 var assignmentsInGroup = groupMatches
+                    .Where(m => x.ContainsKey((trader.Id, m.Id)))
                     .Select(m => x[(trader.Id, m.Id)])
                     .ToArray();
 
-                var availableCapacity = Math.Max(0, trader.M2Capacity - existingJobsCount);
-                model.Add(LinearExpr.Sum(assignmentsInGroup) <= availableCapacity);
+                if (assignmentsInGroup.Length > 0)
+                {
+                    var availableCapacity = Math.Max(0, trader.M2Capacity - existingJobsCount);
+                    model.Add(LinearExpr.Sum(assignmentsInGroup) <= availableCapacity);
+                }
             }
 
             // Constraint 3: Prevent assignment to overlapping matches with DIFFERENT start times
@@ -230,7 +236,11 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     if (overlaps)
                     {
                         // Trader cannot be assigned to both overlapping matches with different start times
-                        model.Add(x[(trader.Id, match1.Id)] + x[(trader.Id, match2.Id)] <= 1);
+                        // Only add constraint if both assignments are possible
+                        if (x.ContainsKey((trader.Id, match1.Id)) && x.ContainsKey((trader.Id, match2.Id)))
+                        {
+                            model.Add(x[(trader.Id, match1.Id)] + x[(trader.Id, match2.Id)] <= 1);
+                        }
                     }
                 }
             }
@@ -247,15 +257,22 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Base bonus to prioritize coverage - any assignment is better than no assignment
         const long coverageBonus = 1_000_000;
+        const long consecutiveMatchBonus = 50_000; // Bonus for consecutive matches (0-240 min gap)
 
+        // 1. Individual match assignment scores
         foreach (var match in matches)
         {
-            foreach (var trader in traderShifts)
+            // Pre-filter eligible traders for this match to avoid KeyNotFoundException
+            var eligibleTraders = traderShifts
+                .Where(t => x.ContainsKey((t.Id, match.Id)))
+                .ToList();
+
+            foreach (var trader in eligibleTraders)
             {
                 var traderPoints = LevelPoints.GetValueOrDefault(trader.Level, 1);
-                var traderPriority = GetTraderPriority(trader);
+                var priorityLeagueBonus = GetPriorityLeagueBonus(trader, match);
 
-                var traderScore = traderPoints * traderPriority;
+                var traderScore = traderPoints * priorityLeagueBonus;
                 var matchWeight = Math.Pow(match.MaxBet / 1000.0, 2);
                 var finalScore = coverageBonus + (traderScore * matchWeight);
 
@@ -264,11 +281,110 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             }
         }
 
-        // Add workload balancing penalty for concurrent matches
+        // 2. Consecutive bonus: ONLY assignedJob-to-match (no match-to-match)
+        // Removed match-to-match bonus to eliminate multiplication constraints for performance
+        // Only consider gaps between existing assigned jobs and new matches
+        // This requires NO multiplication since jobs are already assigned
+        foreach (var trader in traderShifts)
+        {
+            // Skip if trader has no assigned jobs
+            if (trader.AssignedJobs == null || trader.AssignedJobs.Count == 0)
+                continue;
+
+            // Pre-filter matches that are within this trader's shift
+            var traderMatches = matches.Where(m => IsMatchWithinShift(trader, m)).ToList();
+            if (traderMatches.Count == 0)
+                continue;
+
+            // Bonus for assignedJob-to-match assignments only
+            foreach (var job in trader.AssignedJobs)
+            {
+                foreach (var match in traderMatches)
+                {
+                    // Check both directions:
+                    // 1. Job → Match: match.Start == job.End (match starts right after job ends)
+                    // 2. Match → Job: match.End == job.Start (match ends right before job starts)
+                    bool isConsecutive = (match.Start == job.End) || (match.End == job.Start);
+
+                    if (isConsecutive)
+                    {
+                        // If trader is assigned to this match, add bonus
+                        // No multiplication needed - job is already assigned
+                        if (x.ContainsKey((trader.Id, match.Id)))
+                        {
+                            objectiveTerms.Add(LinearExpr.Term(x[(trader.Id, match.Id)], consecutiveMatchBonus));
+                        }
+                    }
+                }
+            }
+        }
+
+        // 3. Shift boundary bonus: Match aligns perfectly with shift boundaries
+        // Encourages efficient use of trader shifts
+        const long shiftBoundaryBonus = 30_000; // Bonus for matches that align with shift start/end
+
+        foreach (var trader in traderShifts)
+        {
+            // Pre-filter matches that are within this trader's shift
+            var traderMatches = matches.Where(m => IsMatchWithinShift(trader, m)).ToList();
+            if (traderMatches.Count == 0)
+                continue;
+
+            foreach (var match in traderMatches)
+            {
+                // Check if match aligns with shift boundaries:
+                // 1. Match starts exactly when shift starts
+                // 2. Match ends exactly when shift ends
+                bool alignsWithShiftStart = (match.Start == trader.Start);
+                bool alignsWithShiftEnd = (match.End == trader.End);
+
+                if (alignsWithShiftStart || alignsWithShiftEnd)
+                {
+                    // Add bonus for perfect shift boundary alignment
+                    if (x.ContainsKey((trader.Id, match.Id)))
+                    {
+                        objectiveTerms.Add(LinearExpr.Term(x[(trader.Id, match.Id)], shiftBoundaryBonus));
+                    }
+                }
+            }
+        }
+
+        // 4. Add workload balancing penalty for concurrent matches
         // This encourages even distribution when multiple traders have capacity
         AddWorkloadBalancingPenalty(model, x, traderShifts, matches, objectiveTerms);
 
         return objectiveTerms;
+    }
+
+
+    /// <summary>
+    /// Get priority league bonus for trader
+    /// Returns 1.05x multiplier if match's league is in trader's PriorityLeagues list
+    /// Otherwise returns 1.0 (no bonus)
+    /// Uses case-insensitive substring matching (similar to league include logic)
+    /// </summary>
+    private static double GetPriorityLeagueBonus(TraderShift trader, Match match)
+    {
+        if (trader.PriorityLeagues == null || trader.PriorityLeagues.Count == 0)
+            return 1.0;
+
+        if (string.IsNullOrEmpty(match.LeagueName))
+            return 1.0;
+
+        var matchLeague = match.LeagueName.ToUpperInvariant().Trim();
+
+        foreach (var priorityLeague in trader.PriorityLeagues)
+        {
+            var normalizedPriority = priorityLeague.ToUpperInvariant().Trim();
+
+            // Check if match league contains priority league or vice versa
+            if (matchLeague.Contains(normalizedPriority) || normalizedPriority.Contains(matchLeague))
+            {
+                return 1.05; // 1.05x bonus for priority league match
+            }
+        }
+
+        return 1.0;
     }
 
     /// <summary>
@@ -293,8 +409,9 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             var groupMatches = group.ToList();
             var avgMatchWeight = groupMatches.Average(m => Math.Pow(m.MaxBet / 1000.0, 2));
 
-            // Count traders with sufficient capacity for this concurrent group
-            var tradersWithCapacity = traderShifts.Where(t =>
+            // Count traders with capacity to handle ALL matches in this concurrent group
+            // This is used for the special case bonus when only one trader can handle everything
+            var tradersWithFullCapacity = traderShifts.Where(t =>
             {
                 // Check if trader is available for these matches
                 if (!IsMatchWithinShift(t, groupMatches[0]))
@@ -315,9 +432,9 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
             // Special case: If only one trader has sufficient capacity for all matches in group,
             // strongly prefer that trader over partial assignments
-            if (tradersWithCapacity.Count == 1)
+            if (tradersWithFullCapacity.Count == 1)
             {
-                var singleTrader = tradersWithCapacity[0];
+                var singleTrader = tradersWithFullCapacity[0];
 
                 // Give large bonus for this trader handling all matches in group
                 // This bonus should outweigh quality differences
@@ -325,83 +442,70 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
                 foreach (var match in groupMatches)
                 {
-                    var assignment = x[(singleTrader.Id, match.Id)];
-                    objectiveTerms.Add(LinearExpr.Term(assignment, bonusPerMatch));
+                    if (x.ContainsKey((singleTrader.Id, match.Id)))
+                    {
+                        var assignment = x[(singleTrader.Id, match.Id)];
+                        objectiveTerms.Add(LinearExpr.Term(assignment, bonusPerMatch));
+                    }
                 }
 
                 continue;
             }
 
-            // If no traders have capacity, skip balancing
+            // Count traders with ANY available capacity for workload balancing penalty
+            // (different from tradersWithFullCapacity - includes traders who can't handle all matches)
+            var tradersWithCapacity = traderShifts.Where(t =>
+            {
+                // Check if trader is available for these matches
+                if (!IsMatchWithinShift(t, groupMatches[0]))
+                    return false;
+
+                // Count existing M2/M3/M4 jobs at this start time
+                int existingJobs = 0;
+                if (t.AssignedJobs != null)
+                {
+                    existingJobs = t.AssignedJobs.Count(job =>
+                        (job.Type == "M2" || job.Type == "M3" || job.Type == "M4") &&
+                        job.Start == groupMatches[0].Start);
+                }
+
+                // Check if trader has any capacity available (not already at M2Capacity limit)
+                return t.M2Capacity > existingJobs;
+            }).ToList();
+
+            // If no traders have any capacity, skip balancing
             if (tradersWithCapacity.Count == 0)
                 continue;
 
-            // Calculate fair share: matches should be distributed evenly
-            var fairShare = (int)Math.Ceiling(groupMatches.Count / (double)tradersWithCapacity.Count);
-
-            // For each trader with capacity, penalize if they exceed fair share
+            // Penalize traders who get more than 1 match in this time group
+            // This encourages distribution across multiple traders
             foreach (var trader in tradersWithCapacity)
             {
                 // Count assignments in this concurrent group for this trader
                 var assignmentsInGroup = groupMatches
+                    .Where(m => x.ContainsKey((trader.Id, m.Id)))
                     .Select(m => x[(trader.Id, m.Id)])
                     .ToArray();
+
+                if (assignmentsInGroup.Length == 0)
+                    continue;
 
                 var groupWorkload = model.NewIntVar(0, groupMatches.Count,
                     $"workload_group_{group.Key.Ticks}_{trader.Id}");
                 model.Add(groupWorkload == LinearExpr.Sum(assignmentsInGroup));
 
-                // Calculate excess over fair share
+                // Calculate excess over 1 match
                 var excess = model.NewIntVar(0, groupMatches.Count,
                     $"excess_group_{group.Key.Ticks}_{trader.Id}");
-                model.Add(excess >= groupWorkload - fairShare);
+                model.Add(excess >= groupWorkload - 1);
                 model.Add(excess >= 0);
 
-                // Add penalty for excess workload
-                // Penalty should be significant to encourage distribution
-                // but not so large it overrides quality differences
-                var penaltyPerExcess = (long)(avgMatchWeight * 1000);
-                objectiveTerms.Add(LinearExpr.Term(excess, -penaltyPerExcess));
+                // Penalize 900,000 points for each match beyond the first
+                objectiveTerms.Add(LinearExpr.Term(excess, -900_000));
             }
         }
     }
 
-    /// <summary>
-    /// Override base implementation to add support for Second and Third trader levels
-    /// For M2 matches, all manager traders are prioritized behind Third level non-managers
-    ///
-    /// Priority calculation: finalScore = levelPoints × priority × matchWeight
-    /// To ensure Third non-manager (1 × 0.9) > Elite manager (64 × X), we need X < 0.014
-    /// </summary>
-    protected override double GetTraderPriority(TraderShift trader)
-    {
-        // For M2: Manager traders have very low priority (all below Third non-manager)
-        // Third non-manager: 1 × 0.9 = 0.9
-        // Elite manager: 64 × 0.01 = 0.64 (lower than Third)
-        if (trader.IsManager)
-        {
-            return trader.Level switch
-            {
-                "Elite" => 0.010,      // 64 × 0.010 = 0.64
-                "Member" => 0.009,     // 16 × 0.009 = 0.144
-                "First" => 0.008,      // 4 × 0.008 = 0.032
-                "Second" => 0.007,     // 2 × 0.007 = 0.014
-                "Third" => 0.006,      // 1 × 0.006 = 0.006
-                _ => 0
-            };
-        }
-
-        // Non-manager priorities (normal hierarchy)
-        return trader.Level switch
-        {
-            "Elite" => 2.0,
-            "Member" => 1.3,
-            "First" => 1.2,
-            "Second" => 1.0,
-            "Third" => 0.9,
-            _ => 0
-        };
-    }
 
     private AssignmentResponse BuildResponse(
         CpSolverStatus status,
@@ -412,18 +516,18 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
     {
         var response = new AssignmentResponse
         {
-            Success = status == CpSolverStatus.Optimal,
+            Success = status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible,
             Status = status.ToString(),
             TotalMatches = matches.Count,
             Assignments = new List<MatchAssignment>()
         };
 
-        if (status == CpSolverStatus.Optimal)
+        if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
         {
             foreach (var match in matches.OrderByDescending(m => m.MaxBet))
             {
                 var assignedTrader = traderShifts.FirstOrDefault(t =>
-                    solver.Value(x[(t.Id, match.Id)]) == 1);
+                    x.ContainsKey((t.Id, match.Id)) && solver.Value(x[(t.Id, match.Id)]) == 1);
 
                 var assignment = new MatchAssignment
                 {
@@ -453,9 +557,8 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     assignment.PairType = "Single Trader (M2)";
 
                     var traderPoints = LevelPoints.GetValueOrDefault(assignedTrader.Level, 1);
-                    var traderPriority = GetTraderPriority(assignedTrader);
                     var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
-                    assignment.Score = (long)(traderPoints * traderPriority * matchWeight);
+                    assignment.Score = (long)(traderPoints * matchWeight);
                 }
 
                 response.Assignments.Add(assignment);

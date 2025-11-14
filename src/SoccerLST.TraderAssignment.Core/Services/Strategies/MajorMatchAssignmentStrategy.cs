@@ -61,6 +61,7 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Solve
         var solver = new CpSolver();
+        solver.StringParameters = "max_time_in_seconds:105.0"; // 1 minute 45 seconds timeout
         var status = solver.Solve(model);
 
         // Build response
@@ -85,10 +86,6 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     if (CanTraderBeAssigned(trader, match, role))
                     {
                         x[key] = model.NewBoolVar($"x_{trader.Id}_{match.Id}_{role}");
-                    }
-                    else
-                    {
-                        x[key] = model.NewConstant(0);
                     }
                 }
             }
@@ -158,9 +155,14 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             foreach (var role in Roles)
             {
                 var roleAssignments = traderShifts
+                    .Where(t => x.ContainsKey((t.Id, match.Id, role)))
                     .Select(t => x[(t.Id, match.Id, role)])
                     .ToArray();
-                model.Add(LinearExpr.Sum(roleAssignments) <= 1);
+
+                if (roleAssignments.Length > 0)
+                {
+                    model.Add(LinearExpr.Sum(roleAssignments) <= 1);
+                }
             }
         }
 
@@ -184,12 +186,34 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                         var worksOnM2 = model.NewBoolVar($"{trader.Id}_works_on_{m2.Id}_{m1.Id}");
 
                         // worksOnM1 = 1 if trader has ANY role on m1
-                        var m1Assignments = Roles.Select(role => x[(trader.Id, m1.Id, role)]).ToArray();
-                        model.AddMaxEquality(worksOnM1, m1Assignments);
+                        var m1Assignments = Roles
+                            .Where(role => x.ContainsKey((trader.Id, m1.Id, role)))
+                            .Select(role => x[(trader.Id, m1.Id, role)])
+                            .ToArray();
+
+                        if (m1Assignments.Length > 0)
+                        {
+                            model.AddMaxEquality(worksOnM1, m1Assignments);
+                        }
+                        else
+                        {
+                            model.Add(worksOnM1 == 0);
+                        }
 
                         // worksOnM2 = 1 if trader has ANY role on m2
-                        var m2Assignments = Roles.Select(role => x[(trader.Id, m2.Id, role)]).ToArray();
-                        model.AddMaxEquality(worksOnM2, m2Assignments);
+                        var m2Assignments = Roles
+                            .Where(role => x.ContainsKey((trader.Id, m2.Id, role)))
+                            .Select(role => x[(trader.Id, m2.Id, role)])
+                            .ToArray();
+
+                        if (m2Assignments.Length > 0)
+                        {
+                            model.AddMaxEquality(worksOnM2, m2Assignments);
+                        }
+                        else
+                        {
+                            model.Add(worksOnM2 == 0);
+                        }
 
                         // Trader can work on at most ONE of the overlapping matches
                         model.Add(worksOnM1 + worksOnM2 <= 1);
@@ -208,17 +232,32 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                 if (match.IsUseAlternativeMJRule)
                     continue;
 
-                model.Add(x[(trader.Id, match.Id, "HDP")] + x[(trader.Id, match.Id, "OU")] <= 1);
+                // Only add constraint if both roles are possible for this trader
+                if (x.ContainsKey((trader.Id, match.Id, "HDP")) && x.ContainsKey((trader.Id, match.Id, "OU")))
+                {
+                    model.Add(x[(trader.Id, match.Id, "HDP")] + x[(trader.Id, match.Id, "OU")] <= 1);
+                }
             }
         }
 
         // Constraint 4: Match must have both HDP and OU or neither
         foreach (var match in matches)
         {
-            var hdpAssigned = traderShifts.Select(t => x[(t.Id, match.Id, "HDP")]).ToArray();
-            var ouAssigned = traderShifts.Select(t => x[(t.Id, match.Id, "OU")]).ToArray();
+            var hdpAssigned = traderShifts
+                .Where(t => x.ContainsKey((t.Id, match.Id, "HDP")))
+                .Select(t => x[(t.Id, match.Id, "HDP")])
+                .ToArray();
 
-            model.Add(LinearExpr.Sum(hdpAssigned) == LinearExpr.Sum(ouAssigned));
+            var ouAssigned = traderShifts
+                .Where(t => x.ContainsKey((t.Id, match.Id, "OU")))
+                .Select(t => x[(t.Id, match.Id, "OU")])
+                .ToArray();
+
+            // Only add constraint if there are eligible traders for both roles
+            if (hdpAssigned.Length > 0 && ouAssigned.Length > 0)
+            {
+                model.Add(LinearExpr.Sum(hdpAssigned) == LinearExpr.Sum(ouAssigned));
+            }
         }
     }
 
@@ -236,9 +275,18 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         foreach (var match in normalMatches)
         {
-            foreach (var hdpTrader in traderShifts)
+            // Pre-filter eligible traders by skill to reduce complexity
+            var eligibleHdpTraders = traderShifts
+                .Where(t => HasRequiredSkill(t, "HDP") && CanTraderBeAssigned(t, match, "HDP"))
+                .ToList();
+
+            var eligibleOuTraders = traderShifts
+                .Where(t => HasRequiredSkill(t, "OU") && CanTraderBeAssigned(t, match, "OU"))
+                .ToList();
+
+            foreach (var hdpTrader in eligibleHdpTraders)
             {
-                foreach (var ouTrader in traderShifts)
+                foreach (var ouTrader in eligibleOuTraders)
                 {
                     if (hdpTrader.Id == ouTrader.Id) continue;
 
@@ -297,8 +345,12 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var hdpPrioritySkillBonus = GetPrioritySkillBonus(hdpTrader, "HDP");
                     var ouPrioritySkillBonus = GetPrioritySkillBonus(ouTrader, "OU");
 
-                    var hdpScore = hdpPoints * hdpPrioritySkillBonus;
-                    var ouScore = ouPoints * ouPrioritySkillBonus;
+                    // Apply PriorityLeague bonus (1.2x multiplier if match's league is in trader's priority leagues)
+                    var hdpPriorityLeagueBonus = GetPriorityLeagueBonus(hdpTrader, match);
+                    var ouPriorityLeagueBonus = GetPriorityLeagueBonus(ouTrader, match);
+
+                    var hdpScore = hdpPoints * hdpPrioritySkillBonus * hdpPriorityLeagueBonus;
+                    var ouScore = ouPoints * ouPrioritySkillBonus * ouPriorityLeagueBonus;
 
                     var pairScore = hdpScore * ouScore * tierBonus * leagueBonus;
                     var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
@@ -321,16 +373,37 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
         foreach (var match in allAlternativeMatches)
         {
             long initScore = 1000000;
-            // Strategy 1: Score individual role assignments (base scoring with priority skill bonuses)
-            foreach (var trader in traderShifts)
+
+            // Pre-filter eligible traders by skill to reduce complexity
+            var eligibleHdpTraders = traderShifts
+                .Where(t => HasRequiredSkill(t, "HDP") && CanTraderBeAssigned(t, match, "HDP"))
+                .ToList();
+
+            var eligibleOuTraders = traderShifts
+                .Where(t => HasRequiredSkill(t, "OU") && CanTraderBeAssigned(t, match, "OU"))
+                .ToList();
+
+            // Strategy 1: Score individual role assignments (base scoring with priority skill and league bonuses)
+            // Combine eligible traders from both HDP and OU for individual scoring
+            var eligibleTraders = eligibleHdpTraders.Union(eligibleOuTraders).Distinct().ToList();
+
+            foreach (var trader in eligibleTraders)
             {
                 foreach (var role in Roles)
                 {
+                    // Skip if trader doesn't have this specific role
+                    if (!x.ContainsKey((trader.Id, match.Id, role)))
+                        continue;
+
                     var points = LevelPoints.GetValueOrDefault(trader.Level, 1);
 
                     // Apply priority skill bonus
                     var prioritySkillBonus = GetPrioritySkillBonus(trader, role);
-                    var skillScore = points * prioritySkillBonus;
+
+                    // Apply priority league bonus
+                    var priorityLeagueBonus = GetPriorityLeagueBonus(trader, match);
+
+                    var skillScore = points * prioritySkillBonus * priorityLeagueBonus;
 
                     var score = skillScore * skillScore;
                     var matchWeight = match.MaxBet / 1000.0;
@@ -346,10 +419,11 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
             // Strategy 2: Add coverage bonus for using 2 different traders (when redundant traders available)
             // This encourages the solver to use different traders when possible, maximizing trader utilization
-            // Also includes preconfigured pair bonuses and priority skill bonuses
-            foreach (var hdpTrader in traderShifts)
+            // Also includes preconfigured pair bonuses, priority skill bonuses, and priority league bonuses
+            // Use pre-filtered traders to reduce O(n²) complexity
+            foreach (var hdpTrader in eligibleHdpTraders)
             {
-                foreach (var ouTrader in traderShifts)
+                foreach (var ouTrader in eligibleOuTraders)
                 {
                     if (hdpTrader.Id == ouTrader.Id) continue; // Skip same trader pairs
 
@@ -364,6 +438,10 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var hdpPrioritySkillBonus = GetPrioritySkillBonus(hdpTrader, "HDP");
                     var ouPrioritySkillBonus = GetPrioritySkillBonus(ouTrader, "OU");
 
+                    // Apply PriorityLeague bonus (1.2x multiplier if match's league is in trader's priority leagues)
+                    var hdpPriorityLeagueBonus = GetPriorityLeagueBonus(hdpTrader, match);
+                    var ouPriorityLeagueBonus = GetPriorityLeagueBonus(ouTrader, match);
+
                     var hdpVar = x[(hdpTrader.Id, match.Id, "HDP")];
                     var ouVar = x[(ouTrader.Id, match.Id, "OU")];
 
@@ -372,8 +450,8 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     model.AddMinEquality(pairAssigned, new[] { hdpVar, ouVar });
 
                     // Calculate pair score with all bonuses
-                    var hdpScore = hdpPoints * hdpPrioritySkillBonus;
-                    var ouScore = ouPoints * ouPrioritySkillBonus;
+                    var hdpScore = hdpPoints * hdpPrioritySkillBonus * hdpPriorityLeagueBonus;
+                    var ouScore = ouPoints * ouPrioritySkillBonus * ouPriorityLeagueBonus;
                     var pairScore = 10000 * tierBonus * leagueBonus;
 
                     // Coverage bonus: significantly reward using 2 different traders
@@ -400,20 +478,20 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
     {
         var response = new AssignmentResponse
         {
-            Success = status == CpSolverStatus.Optimal,
+            Success = status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible,
             Status = status.ToString(),
             TotalMatches = matches.Count,
             Assignments = new List<MatchAssignment>()
         };
 
-        if (status == CpSolverStatus.Optimal)
+        if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
         {
             foreach (var match in matches.OrderBy(m => m.LeagueCode ?? "ZZZ").ThenByDescending(m => m.MaxBet))
             {
                 var hdpTrader = traderShifts.FirstOrDefault(t =>
-                    solver.Value(x[(t.Id, match.Id, "HDP")]) == 1);
+                    x.ContainsKey((t.Id, match.Id, "HDP")) && solver.Value(x[(t.Id, match.Id, "HDP")]) == 1);
                 var ouTrader = traderShifts.FirstOrDefault(t =>
-                    solver.Value(x[(t.Id, match.Id, "OU")]) == 1);
+                    x.ContainsKey((t.Id, match.Id, "OU")) && solver.Value(x[(t.Id, match.Id, "OU")]) == 1);
 
                 var assignment = new MatchAssignment
                 {
@@ -533,5 +611,35 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             return 1.0;
 
         return trader.PrioritySkill.Equals(role, StringComparison.OrdinalIgnoreCase) ? 1.1 : 1.0;
+    }
+
+    /// <summary>
+    /// Get priority league bonus for trader
+    /// Returns 1.2x multiplier if match's league is in trader's PriorityLeagues list
+    /// Otherwise returns 1.0 (no bonus)
+    /// Uses case-insensitive substring matching (similar to league include logic)
+    /// </summary>
+    private static double GetPriorityLeagueBonus(TraderShift trader, Match match)
+    {
+        if (trader.PriorityLeagues == null || trader.PriorityLeagues.Count == 0)
+            return 1.0;
+
+        if (string.IsNullOrEmpty(match.LeagueName))
+            return 1.0;
+
+        var matchLeague = match.LeagueName.ToUpperInvariant().Trim();
+
+        foreach (var priorityLeague in trader.PriorityLeagues)
+        {
+            var normalizedPriority = priorityLeague.ToUpperInvariant().Trim();
+
+            // Check if match league contains priority league or vice versa
+            if (matchLeague.Contains(normalizedPriority) || normalizedPriority.Contains(matchLeague))
+            {
+                return 1.05; // 1.05x bonus for priority league match
+            }
+        }
+
+        return 1.0;
     }
 }

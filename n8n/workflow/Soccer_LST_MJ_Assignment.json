@@ -23,11 +23,11 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.2,
       "position": [
-        -2848,
-        400
+        -1424,
+        112
       ],
       "name": "Call Soccer_LST_Parse_Excel_File",
-      "id": "6f41d3be-a950-4c0e-8387-237f82877d58"
+      "id": "c1aa8d86-50f1-40b8-829e-8f9fdc5ac2cf"
     },
     {
       "parameters": {
@@ -69,7 +69,7 @@
                   {
                     "id": "efceb071-e01c-4bbd-a327-4ea98a7613af",
                     "leftValue": "={{ $json.nodeType }}",
-                    "rightValue": "mismatch",
+                    "rightValue": "pairTrader",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -80,32 +80,7 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "mismatch"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "78f0f601-9f00-4f43-b1ea-48f1f89b89a9",
-                    "leftValue": "={{ $json.nodeType }}",
-                    "rightValue": "config",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "config"
+              "outputKey": "pairTrader"
             },
             {
               "conditions": {
@@ -119,7 +94,7 @@
                   {
                     "id": "69392a5c-f034-458a-822c-0dbc6d3b9468",
                     "leftValue": "={{ $json.nodeType }}",
-                    "rightValue": "pairTrader",
+                    "rightValue": "mismatch",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -130,7 +105,7 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "pairTrader"
+              "outputKey": "mismatch"
             }
           ]
         },
@@ -139,23 +114,23 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -2352,
-        240
+        -928,
+        -48
       ],
-      "id": "bd48ce00-77bc-420b-99ed-dadc70e6a0ac",
+      "id": "c63a8312-e169-45ac-b5d6-79185d8cc70c",
       "name": "Switch"
     },
     {
       "parameters": {
-        "jsCode": "/**\r\n * Parse existing assignedJobs from shift data\r\n */\r\nfunction parseAssignedJobs(shift) {\r\n  if (!shift.assignedJobs) {\r\n    return [];\r\n  }\r\n\r\n  if (typeof shift.assignedJobs === 'string') {\r\n    try {\r\n      return JSON.parse(shift.assignedJobs);\r\n    } catch (e) {\r\n      return [];\r\n    }\r\n  }\r\n\r\n  if (Array.isArray(shift.assignedJobs)) {\r\n    return [...shift.assignedJobs];\r\n  }\r\n\r\n  return [];\r\n}\r\n\r\n/**\r\n * Create an assigned job object from a match\r\n */\r\nfunction createAssignedJob(match, traderName) {\r\n  // Check if this trader is assigned as first half trader\r\n  const isFirstHalfTrader = match['1st Half'] === traderName || match.firstHalf === traderName;\r\n\r\n  return {\r\n    type: isFirstHalfTrader ? 'FirstHalf' : match.betType,\r\n    start: match.matchDate,\r\n    end: match.endDate\r\n  };\r\n}\r\n\r\n/**\r\n * Check if match starts during or after shift start\r\n */\r\nfunction matchStartsAfterShift(shift, match) {\r\n  const shiftStart = new Date(shift.startTime);\r\n  const matchStart = new Date(match.matchDate);\r\n\r\n  // Match must start at or after shift start\r\n  return shiftStart <= matchStart;\r\n}\r\n\r\n/**\r\n * Find matches for a trader that start at or after shift start\r\n */\r\nfunction findTraderMatchesInShift(matches, traderName, shift) {\r\n  return matches.filter(match => {\r\n    const isTraderMatch = match.hdpTrader === traderName ||\r\n      match.ouTrader === traderName ||\r\n      match['1st Half'] === traderName ||\r\n      match.firstHalf === traderName;\r\n    const matchStartsInShift = matchStartsAfterShift(shift, match);\r\n    return isTraderMatch && matchStartsInShift;\r\n  });\r\n}\r\n\r\n// Main execution\r\nconst allItems = $input.all();\r\n\r\n// Filter Major unchanged matches (for enrichment)\r\nconst mjUnchangedMatches = allItems\r\n  .filter(item =>\r\n    item.json.nodeType === 'mismatch' &&\r\n    item.json.betType === 'MJ' &&\r\n    item.json.isUnchanged === true\r\n  )\r\n  .sort((a, b) => {\r\n    const dateA = new Date(a.json.matchDate);\r\n    const dateB = new Date(b.json.matchDate);\r\n    return dateA - dateB; // ascending order\r\n  });\r\n\r\n// Process all items - enrich working shifts, pass through others\r\nconst enrichedItems = allItems.map(item => {\r\n  // Only enrich working shifts\r\n  if (item.json.nodeType === 'workingShift') {\r\n    const shift = item.json;\r\n    let assignedJobs = parseAssignedJobs(shift);\r\n\r\n    // Find all MJ unchanged matches for this trader that start at or after shift start\r\n    const traderMatches = findTraderMatchesInShift(\r\n      mjUnchangedMatches.map(m => m.json),\r\n      shift.traderName,\r\n      shift\r\n    );\r\n\r\n    // Append matched jobs to assignedJobs\r\n    for (const match of traderMatches) {\r\n      const job = createAssignedJob(match, shift.traderName);\r\n      assignedJobs.push(job);\r\n    }\r\n\r\n    // Return enriched working shift\r\n    return {\r\n      json: {\r\n        ...shift,\r\n        assignedJobs: assignedJobs,\r\n        nodeType: 'workingShift'\r\n      },\r\n      pairedItem: item.pairedItem\r\n    };\r\n  }\r\n\r\n  // Pass through all other items unchanged\r\n  return item;\r\n});\r\n\r\nreturn enrichedItems;\r\n"
+        "jsCode": "/**\r\n * Parse existing assignedJobs from shift data\r\n */\r\nfunction parseAssignedJobs(shift) {\r\n  if (!shift.assignedJobs) {\r\n    return [];\r\n  }\r\n\r\n  if (typeof shift.assignedJobs === 'string') {\r\n    try {\r\n      return JSON.parse(shift.assignedJobs);\r\n    } catch (e) {\r\n      return [];\r\n    }\r\n  }\r\n\r\n  if (Array.isArray(shift.assignedJobs)) {\r\n    return [...shift.assignedJobs];\r\n  }\r\n\r\n  return [];\r\n}\r\n\r\n/**\r\n * Create an assigned job object from a match\r\n */\r\nfunction createAssignedJob(match, traderName) {\r\n  // Check if this trader is assigned as first half trader\r\n  const isFirstHalfTrader = match['1st Half'] === traderName || match.firstHalf === traderName;\r\n\r\n  return {\r\n    type: isFirstHalfTrader ? 'FirstHalf' : match.betType,\r\n    start: match.matchDate,\r\n    end: match.endDate\r\n  };\r\n}\r\n\r\n/**\r\n * Check if match starts during or after shift start\r\n */\r\nfunction matchStartsAfterShift(shift, match) {\r\n  const shiftStart = new Date(shift.startTime);\r\n  const matchStart = new Date(match.matchDate);\r\n\r\n  // Match must start at or after shift start\r\n  return shiftStart <= matchStart;\r\n}\r\n\r\n/**\r\n * Find matches for a trader that start at or after shift start\r\n */\r\nfunction findTraderMatchesInShift(matches, traderName, shift) {\r\n  return matches.filter(match => {\r\n    const isTraderMatch = match.hdpTrader === traderName ||\r\n      match.ouTrader === traderName ||\r\n      match['1st Half'] === traderName ||\r\n      match.firstHalf === traderName;\r\n    const matchStartsInShift = matchStartsAfterShift(shift, match);\r\n    return isTraderMatch && matchStartsInShift;\r\n  });\r\n}\r\n\r\n// Main execution\r\nconst allItems = $input.all();\r\n\r\n// Get config\r\nconst configItem = allItems.find(item => item.json.nodeType === 'config');\r\nconst mjIncludeBettype = configItem?.json.mjIncludeBettype || [];\r\n\r\n// Filter Major unchanged matches (for enrichment)\r\nconst matchesToConsider = allItems\r\n  .filter(item => {\r\n    if (item.json.nodeType !== 'mismatch') {\r\n      return false;\r\n    }\r\n\r\n    // If mjIncludeBettype is configured, filter by betType\r\n    if (mjIncludeBettype.length > 0) {\r\n      const betType = (item.json.betType || '').toUpperCase();\r\n      return mjIncludeBettype.some(includedBettype => includedBettype.toUpperCase() === betType);\r\n    }\r\n\r\n    // If no config, default to MJ only\r\n    return item.json.betType === 'MJ' && item.json.isUnchanged;\r\n  })\r\n  .sort((a, b) => {\r\n    const dateA = new Date(a.json.matchDate);\r\n    const dateB = new Date(b.json.matchDate);\r\n    return dateA - dateB; // ascending order\r\n  });\r\n\r\n// Process all items - enrich working shifts, pass through others\r\nconst enrichedItems = allItems.map(item => {\r\n  // Only enrich working shifts\r\n  if (item.json.nodeType === 'workingShift') {\r\n    const shift = item.json;\r\n    let assignedJobs = parseAssignedJobs(shift);\r\n\r\n    // Find all MJ unchanged matches for this trader that start at or after shift start\r\n    const traderMatches = findTraderMatchesInShift(\r\n      matchesToConsider.map(m => m.json),\r\n      shift.traderName,\r\n      shift\r\n    );\r\n\r\n    // Append matched jobs to assignedJobs\r\n    for (const match of traderMatches) {\r\n      const job = createAssignedJob(match, shift.traderName);\r\n      assignedJobs.push(job);\r\n    }\r\n\r\n    // Return enriched working shift\r\n    return {\r\n      json: {\r\n        ...shift,\r\n        assignedJobs: assignedJobs,\r\n        nodeType: 'workingShift'\r\n      },\r\n      pairedItem: item.pairedItem\r\n    };\r\n  }\r\n\r\n  // Pass through all other items unchanged\r\n  return item;\r\n});\r\n\r\nreturn enrichedItems;\r\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2576,
-        400
+        -1152,
+        112
       ],
-      "id": "45e6fc3a-cea1-415a-945e-99e8e3419809",
+      "id": "d11be992-b462-4aba-81a2-f0adc62da321",
       "name": "enrich_assigned_jobs_with_pointed_trader"
     },
     {
@@ -208,10 +183,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -2112,
-        16
+        -688,
+        -272
       ],
-      "id": "f0faed4d-968f-4ad3-9c79-088bbeb2406a",
+      "id": "7a348198-ed1d-4516-8556-34e6b0598e1d",
       "name": "get_mj_trader"
     },
     {
@@ -244,23 +219,23 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -2112,
-        224
+        -496,
+        96
       ],
-      "id": "6e9f3cf4-6313-4a1e-aa4b-58ded179a802",
+      "id": "81bc12d9-e1a8-48e9-8afc-ea8ed2a7dc67",
       "name": "get_mj_league"
     },
     {
       "parameters": {
-        "jsCode": "/**\r\n * Transform n8n data to Trader Assignment API format\r\n *\r\n * This code node transforms the input data from three different node types:\r\n * - mismatch (matches to assign)\r\n * - workingShift (trader availability)\r\n * - pairTrader (preconfigured trader pairs)\r\n *\r\n * Into the API format with proper field mappings and skill parsing.\r\n */\r\n\r\nconst allItems = $input.all();\r\n\r\n/**\r\n * Parse bettype string into skills array (HDP and/or OU only)\r\n *\r\n * Rules:\r\n * - \"2\" means trader can handle BOTH HDP and OU\r\n * - \"2[OP]\" is ignored (not relevant for MJ assignment)\r\n * - \"R-FS\" is ignored (not relevant for MJ assignment)\r\n * - Only HDP and OU skills are extracted\r\n *\r\n * Examples:\r\n * - \"HDP/M1*2\" → [\"HDP\"]\r\n * - \"OU/M1*2\" → [\"OU\"]\r\n * - \"2/M1*2\" → [\"HDP\", \"OU\"]\r\n * - \"2[OP]\" → []\r\n * - \"OU/R-FS/M1*2\" → [\"OU\"]\r\n */\r\nfunction parseBetTypeToSkills(bettype) {\r\n  if (!bettype) return [];\r\n\r\n  const parts = bettype.split('/');\r\n  const skills = new Set();\r\n\r\n  for (const part of parts) {\r\n    const trimmed = part.trim();\r\n\r\n    // Skip multiplier patterns (M1*2, M2*1, etc.)\r\n    if (trimmed.match(/^M\\d+\\*\\d+/)) continue;\r\n\r\n    // Skip irrelevant skills\r\n    if (trimmed.startsWith('2[OP]') || trimmed.startsWith('R-FS')) continue;\r\n\r\n    // \"2\" means can handle both HDP and OU\r\n    if (trimmed === '2' || trimmed.startsWith('2 ')) {\r\n      skills.add('HDP');\r\n      skills.add('OU');\r\n    }\r\n    // Direct HDP or OU\r\n    else if (trimmed.startsWith('HDP')) {\r\n      skills.add('HDP');\r\n    }\r\n    else if (trimmed.startsWith('OU')) {\r\n      skills.add('OU');\r\n    }\r\n    // Handle patterns like \"Solo HDP\", \"Priority HDP\"\r\n    else if (trimmed.match(/^[A-Z]/)) {\r\n      if (trimmed.includes('HDP')) skills.add('HDP');\r\n      if (trimmed.includes('OU')) skills.add('OU');\r\n    }\r\n  }\r\n\r\n  return Array.from(skills);\r\n}\r\n\r\n/**\r\n * Capitalize first letter of a string\r\n * Used for level transformation: \"elite\" → \"Elite\", \"first\" → \"First\"\r\n */\r\nfunction capitalizeFirst(str) {\r\n  if (!str) return str;\r\n  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();\r\n}\r\n\r\n// Initialize result arrays\r\nconst matches = [];\r\nconst traderShifts = [];\r\nconst preconfiguredPairs = [];\r\n\r\n// Define transformation handlers for each nodeType\r\nconst nodeTypeHandlers = {\r\n  mismatch: (data) => {\r\n    // Only include MJ matches\r\n    if (data.betType === 'MJ') {\r\n      matches.push({\r\n        id: data.rowNumber?.toString() || '',\r\n        matchNo: data.no?.toString() || '',\r\n        start: data.matchDate,\r\n        end: data.endDate,\r\n        maxBet: data.maxBet || 0,\r\n        leagueCode: data.leagueCode || null,\r\n        leagueName: data.league || null,\r\n        betType: data.betType || null,\r\n        isSoloMatch: data.isSoloMatch || false,\r\n        isAlreadyHandled: data.isUnchanged || false,\r\n        isEXPT: data.isEXPT !== undefined ? data.isEXPT : true,\r\n        isEAL: data.isEAL || false,\r\n        isUseAlternativeMJRule: data.isUseAlternativeMJRule || false\r\n      });\r\n    }\r\n  },\r\n\r\n  workingShift: (data) => {\r\n    traderShifts.push({\r\n      id: data.rowNumber?.toString() || '',\r\n      name: data.traderName || '',\r\n      start: data.startTime,\r\n      end: data.endTime,\r\n      skills: parseBetTypeToSkills(data.bettype),\r\n      level: capitalizeFirst(data.staffLevel),\r\n      isManager: data.isManager || false,\r\n      isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,\r\n      ignoreLeague: data.ignoreLeague || [],\r\n      nonSoloLeagues: data.nonSoloLeague || [],\r\n      maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)\r\n      prioritySkill: data.prioritySkill || null,\r\n      assignedJobs: data.assignedJobs?.map(job => ({\r\n        type: job.type,\r\n        start: job.start,\r\n        end: job.end\r\n      })) || []\r\n    });\r\n  },\r\n\r\n  pairTrader: (data) => {\r\n    preconfiguredPairs.push({\r\n      hdp: data.hdp,\r\n      ou: data.ou,\r\n      tier: data.tier,\r\n      leaguePriority: data.league_priority || {}\r\n    });\r\n  }\r\n};\r\n\r\n// Process each item using the appropriate handler\r\nfor (const item of allItems) {\r\n  const data = item.json;\r\n  const handler = nodeTypeHandlers[data.nodeType];\r\n\r\n  if (handler) {\r\n    handler(data);\r\n  }\r\n}\r\n\r\n// Return transformed data in API format\r\nreturn [{\r\n  json: {\r\n    traderShifts: traderShifts,\r\n    matches: matches,\r\n    preconfiguredPairs: preconfiguredPairs\r\n  }\r\n}];\r\n"
+        "jsCode": "/**\r\n * Transform n8n data to Trader Assignment API format\r\n *\r\n * This code node transforms the input data from three different node types:\r\n * - mismatch (matches to assign)\r\n * - workingShift (trader availability)\r\n * - pairTrader (preconfigured trader pairs)\r\n *\r\n * Into the API format with proper field mappings and skill parsing.\r\n */\r\n\r\nconst allItems = $input.all();\r\n\r\n/**\r\n * Parse bettype string into skills array (HDP and/or OU only)\r\n *\r\n * Rules:\r\n * - \"2\" means trader can handle BOTH HDP and OU\r\n * - \"2[OP]\" is ignored (not relevant for MJ assignment)\r\n * - \"R-FS\" is ignored (not relevant for MJ assignment)\r\n * - Only HDP and OU skills are extracted\r\n *\r\n * Examples:\r\n * - \"HDP/M1*2\" → [\"HDP\"]\r\n * - \"OU/M1*2\" → [\"OU\"]\r\n * - \"2/M1*2\" → [\"HDP\", \"OU\"]\r\n * - \"2[OP]\" → []\r\n * - \"OU/R-FS/M1*2\" → [\"OU\"]\r\n */\r\nfunction parseBetTypeToSkills(bettype) {\r\n  if (!bettype) return [];\r\n\r\n  const parts = bettype.split('/');\r\n  const skills = new Set();\r\n\r\n  for (const part of parts) {\r\n    const trimmed = part.trim();\r\n\r\n    // Skip multiplier patterns (M1*2, M2*1, etc.)\r\n    if (trimmed.match(/^M\\d+\\*\\d+/)) continue;\r\n\r\n    // Skip irrelevant skills\r\n    if (trimmed.startsWith('2[OP]') || trimmed.startsWith('R-FS')) continue;\r\n\r\n    // \"2\" means can handle both HDP and OU\r\n    if (trimmed === '2' || trimmed.startsWith('2 ')) {\r\n      skills.add('HDP');\r\n      skills.add('OU');\r\n    }\r\n    // Direct HDP or OU\r\n    else if (trimmed.startsWith('HDP')) {\r\n      skills.add('HDP');\r\n    }\r\n    else if (trimmed.startsWith('OU')) {\r\n      skills.add('OU');\r\n    }\r\n    // Handle patterns like \"Solo HDP\", \"Priority HDP\"\r\n    else if (trimmed.match(/^[A-Z]/)) {\r\n      if (trimmed.includes('HDP')) skills.add('HDP');\r\n      if (trimmed.includes('OU')) skills.add('OU');\r\n    }\r\n  }\r\n\r\n  return Array.from(skills);\r\n}\r\n\r\n/**\r\n * Capitalize first letter of a string\r\n * Used for level transformation: \"elite\" → \"Elite\", \"first\" → \"First\"\r\n */\r\nfunction capitalizeFirst(str) {\r\n  if (!str) return str;\r\n  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();\r\n}\r\n\r\n// Initialize result arrays\r\nconst matches = [];\r\nconst traderShifts = [];\r\nconst preconfiguredPairs = [];\r\n\r\n// Define transformation handlers for each nodeType\r\nconst nodeTypeHandlers = {\r\n  mismatch: (data) => {\r\n    // Only include MJ matches\r\n    if (data.betType === 'MJ') {\r\n      matches.push({\r\n        id: data.rowNumber?.toString() || '',\r\n        matchNo: data.no?.toString() || '',\r\n        start: data.matchDate,\r\n        end: data.endDate,\r\n        maxBet: data.maxBet || 0,\r\n        leagueCode: data.leagueCode || null,\r\n        leagueName: data.league || null,\r\n        betType: data.betType || null,\r\n        isSoloMatch: data.isSoloMatch || false,\r\n        isAlreadyHandled: data.isUnchanged || false,\r\n        isEXPT: data.isEXPT !== undefined ? data.isEXPT : true,\r\n        isEAL: data.isEAL || false,\r\n        isUseAlternativeMJRule: data.isUseAlternativeMJRule || false\r\n      });\r\n    }\r\n  },\r\n\r\n  workingShift: (data) => {\r\n    traderShifts.push({\r\n      id: data.rowNumber?.toString() || '',\r\n      name: data.traderName || '',\r\n      start: data.startTime,\r\n      end: data.endTime,\r\n      skills: parseBetTypeToSkills(data.bettype),\r\n      level: capitalizeFirst(data.staffLevel),\r\n      isManager: data.isManager || false,\r\n      isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,\r\n      ignoreLeague: data.ignoreLeague || [],\r\n      nonSoloLeagues: data.nonSoloLeague || [],\r\n      priorityLeagues: data.priorityLeague || [],\r\n      maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)\r\n      prioritySkill: data.prioritySkill || null,\r\n      assignedJobs: data.assignedJobs?.map(job => ({\r\n        type: job.type,\r\n        start: job.start,\r\n        end: job.end\r\n      })) || []\r\n    });\r\n  },\r\n\r\n  pairTrader: (data) => {\r\n    preconfiguredPairs.push({\r\n      hdp: data.hdp,\r\n      ou: data.ou,\r\n      tier: data.tier,\r\n      leaguePriority: data.league_priority || {}\r\n    });\r\n  }\r\n};\r\n\r\n// Process each item using the appropriate handler\r\nfor (const item of allItems) {\r\n  const data = item.json;\r\n  const handler = nodeTypeHandlers[data.nodeType];\r\n\r\n  if (handler) {\r\n    handler(data);\r\n  }\r\n}\r\n\r\n// Return transformed data in API format\r\nreturn [{\r\n  json: {\r\n    traderShifts: traderShifts,\r\n    matches: matches,\r\n    preconfiguredPairs: preconfiguredPairs\r\n  }\r\n}];\r\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1024,
-        272
+        400,
+        -16
       ],
-      "id": "6c6ec9d3-d29e-4949-a2b1-f862a566d328",
+      "id": "cd3bb858-318e-418c-a396-128194d044bd",
       "name": "build_mj_api_param"
     },
     {
@@ -284,16 +259,19 @@
             }
           ]
         },
-        "options": {}
+        "options": {
+          "timeout": 120000
+        }
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -832,
-        272
+        592,
+        -16
       ],
-      "id": "55007ed6-62ca-4c56-b968-498bea10b87b",
-      "name": "HTTP Request"
+      "id": "029b5d43-e9b0-4f17-8e7c-134d38a4ec3a",
+      "name": "HTTP Request",
+      "retryOnFail": false
     },
     {
       "parameters": {
@@ -302,10 +280,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2176,
-        608
+        -752,
+        320
       ],
-      "id": "1f1641ce-6fbe-473e-aa24-53638ab25f27",
+      "id": "efdf228a-752e-4f32-885c-3e0ce62f3c20",
       "name": "detect_league_code"
     },
     {
@@ -316,10 +294,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -1616,
-        560
+        -192,
+        272
       ],
-      "id": "f1ca161d-10d8-40e1-af0d-470a4a4c18b0",
+      "id": "a69aa185-340c-4aa9-ae41-e909ff517520",
       "name": "split_league_code"
     },
     {
@@ -331,10 +309,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -1456,
-        448
+        -32,
+        160
       ],
-      "id": "b2083072-3f32-4c07-8d90-d8d806f28785",
+      "id": "4ba5c317-d0ea-4723-9731-cfa6921cb424",
       "name": "enrich_league_code"
     },
     {
@@ -344,10 +322,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -1232,
-        256
+        192,
+        -32
       ],
-      "id": "4126c4c6-9abf-4ad8-b422-ad95df86b2cb",
+      "id": "4f3e0c96-a2ca-4699-9442-96394173e07d",
       "name": "prepare_data_to_build_api_param"
     },
     {
@@ -535,10 +513,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -432,
-        272
+        992,
+        -16
       ],
-      "id": "a50f577f-ab08-4a65-8f43-397274021999",
+      "id": "a7bd3831-490d-4cdd-8f71-3fe142c101fa",
       "name": "Update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -555,10 +533,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -624,
-        272
+        800,
+        -16
       ],
-      "id": "6f3430d2-4a9a-47a2-ac8c-62bc1da52a24",
+      "id": "e7340141-7a49-4c3b-8e06-fb6d6a297161",
       "name": "Split Out"
     },
     {
@@ -598,10 +576,10 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -3136,
-        400
+        -1712,
+        112
       ],
-      "id": "51256b85-475d-4ba6-a852-cf30d14bafff",
+      "id": "a3b164b7-e99a-4a97-85f1-187dac7a7210",
       "name": "mj_update_trigger",
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
@@ -651,17 +629,16 @@
         ],
         [
           {
+            "node": "prepare_data_to_build_api_param",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
             "node": "get_mj_league",
             "type": "main",
             "index": 0
-          }
-        ],
-        [],
-        [
-          {
-            "node": "prepare_data_to_build_api_param",
-            "type": "main",
-            "index": 2
           }
         ]
       ]
@@ -716,7 +693,7 @@
           {
             "node": "prepare_data_to_build_api_param",
             "type": "main",
-            "index": 1
+            "index": 2
           }
         ]
       ]
@@ -781,7 +758,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "7b975ed5-7c23-4f67-9ed2-0a43d62f1184",
+  "versionId": "5c6bab93-4dfe-48da-a9f4-86e909c44732",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d6dcc4053c897f1eebaaa4209b12d8b342c939eb2cb95d99c56792d7ff00ca87"

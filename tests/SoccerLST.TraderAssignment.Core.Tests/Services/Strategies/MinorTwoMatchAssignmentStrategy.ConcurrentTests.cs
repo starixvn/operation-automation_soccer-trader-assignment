@@ -764,4 +764,161 @@ public partial class MinorTwoMatchAssignmentStrategyConcurrentTests
     }
 
     #endregion
+
+    #region Workload Balancing Tests
+
+    [Test]
+    public void Assign_EightConcurrentMatches_WithSixTraders_DistributesFairly()
+    {
+        // Arrange - 8 concurrent M2 matches at the same time, 6 traders with M2Capacity >= 2
+        // Workload balancing penalty (-900,000 per excess match) encourages fair distribution
+        // Expected distribution: 2+2+1+1+1+1 (all 6 traders get work, 5 traders minimum)
+
+        var traders = new List<TraderShift>
+        {
+            CreateTraderShift("1", "TraderA", new string[] { }, "Elite", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("2", "TraderB", new string[] { }, "Member", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("3", "TraderC", new string[] { }, "First", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("4", "TraderD", new string[] { }, "Second", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("5", "TraderE", new string[] { }, "Third", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("6", "TraderF", new string[] { }, "Third", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2)
+        };
+
+        // 8 matches all starting at the same time (10:00-12:00)
+        var matches = new List<Match>
+        {
+            CreateMatch("1", "100", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("2", "101", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("3", "102", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("4", "103", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("5", "104", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("6", "105", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("7", "106", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("8", "107", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000)
+        };
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = traders,
+            Matches = matches,
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().Be(8, "All 8 matches should be assigned");
+
+        // Group assignments by trader
+        var assignmentsByTrader = result.Assignments
+            .Where(a => a.Hdp != "N/A")
+            .GroupBy(a => a.Hdp)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        // Verify fair distribution - workload balancing should distribute to most/all traders
+        var tradersWithAssignments = assignmentsByTrader.Keys.Count;
+        tradersWithAssignments.Should().BeGreaterThanOrEqualTo(5,
+            "Workload balancing penalty (-900,000 per match beyond first) should distribute matches to most traders (5-6 expected)");
+
+        // No trader should have more than 2 matches (M2Capacity constraint)
+        assignmentsByTrader.Values.Should().AllSatisfy(count =>
+            count.Should().BeLessThanOrEqualTo(2, "Each trader has M2Capacity=2"));
+
+        // Expected distribution: 2+2+1+1+1+1 (all 6 traders working)
+        // This minimizes workload penalty while respecting M2Capacity limits
+
+        // Calculate total assigned
+        var totalAssignments = assignmentsByTrader.Values.Sum();
+        totalAssignments.Should().Be(8, "Total assignments should equal number of matches");
+    }
+
+    [Test]
+    public void Assign_FiveConcurrentMatches_WithThreeTraders_EachGetsAtLeastOne()
+    {
+        // Arrange - 5 concurrent M2 matches, 3 traders with M2Capacity=2
+        // Expected distribution: 2, 2, 1 (each trader gets at least 1)
+
+        var traders = new List<TraderShift>
+        {
+            CreateTraderShift("1", "TraderA", new string[] { }, "Elite", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("2", "TraderB", new string[] { }, "Member", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2),
+            CreateTraderShift("3", "TraderC", new string[] { }, "First", false,
+                start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                m2Capacity: 2)
+        };
+
+        var matches = new List<Match>
+        {
+            CreateMatch("1", "100", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("2", "101", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("3", "102", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("4", "103", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000),
+            CreateMatch("5", "104", DateTimeOffset.Parse("2025-09-28T10:00:00Z"), DateTimeOffset.Parse("2025-09-28T12:00:00Z"), 30000)
+        };
+
+        var request = new AssignmentRequest
+        {
+            TraderShifts = traders,
+            Matches = matches,
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().Be(5, "All 5 matches should be assigned");
+
+        // Group assignments by trader
+        var assignmentsByTrader = result.Assignments
+            .Where(a => a.Hdp != "N/A")
+            .GroupBy(a => a.Hdp)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        // All 3 traders should have at least 1 match
+        assignmentsByTrader.Keys.Should().HaveCount(3,
+            "All 3 traders should have matches assigned (workload balancing ensures distribution)");
+
+        // Each trader should have at least 1 match
+        assignmentsByTrader.Values.Should().AllSatisfy(count =>
+            count.Should().BeGreaterThanOrEqualTo(1, "Each trader should handle at least 1 match"));
+
+        // No trader should have more than 2 matches
+        assignmentsByTrader.Values.Should().AllSatisfy(count =>
+            count.Should().BeLessThanOrEqualTo(2, "No trader should exceed M2Capacity=2"));
+
+        // Verify expected distribution (2, 2, 1)
+        assignmentsByTrader.Values.Should().BeEquivalentTo(new[] { 2, 2, 1 },
+            "Expected fair distribution: 2 traders with 2 matches, 1 trader with 1 match");
+    }
+
+    #endregion
 }

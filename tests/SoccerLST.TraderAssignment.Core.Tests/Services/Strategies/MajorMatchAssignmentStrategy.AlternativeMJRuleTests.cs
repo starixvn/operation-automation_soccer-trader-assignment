@@ -417,6 +417,87 @@ public class MajorMatchAssignmentStrategyAlternativeMJRuleTests
     }
 
     [Test]
+    public void Assign_WithAlternativeMJRule_TwoHDPOnlyTraders_AssignsOnlyOneTrader()
+    {
+        // Arrange - Two traders with only HDP skill, match with AlternativeMJRule enabled
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift>
+            {
+                CreateTraderShift("1", "EliteHdpOnly", new[] { "HDP" }, "Elite", false),
+                CreateTraderShift("2", "MemberHdpOnly", new[] { "HDP" }, "Member", false)
+            },
+            Matches = new List<Match>
+            {
+                CreateMatch("1", "100",
+                    DateTimeOffset.Parse("2025-09-28T10:00:00Z"),
+                    DateTimeOffset.Parse("2025-09-28T12:00:00Z"),
+                    50000, "EPL", isUseAlternativeMJRule: true)
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue($"solver should succeed with alternative MJ rule, but got status: {result.Status}");
+        result.AssignedMatches.Should().Be(1, "the match should be assigned");
+
+        var assignment = result.Assignments.First();
+
+        // With AlternativeMJRule, one trader should handle both roles
+        assignment.Hdp.Should().Be(assignment.Ou, "same trader should handle both HDP and OU roles");
+
+        // Elite should be preferred over Member (Strategy 1 scoring)
+        assignment.Hdp.Should().Be("EliteHdpOnly", "Elite trader should be assigned for both roles");
+        assignment.Ou.Should().Be("EliteHdpOnly", "Elite trader should be assigned for both roles");
+        assignment.HdpLevel.Should().Be("Elite");
+        assignment.OuLevel.Should().Be("Elite");
+    }
+
+    [Test]
+    public void Assign_WithAlternativeMJRule_PriorityLeague_PreferredWhenPaired()
+    {
+        // Arrange - Two pairs of traders, one pair has priority league bonus
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift>
+            {
+                CreateTraderShift("1", "EPLExpertHdp", new[] { "HDP" }, "Elite", false,
+                    priorityLeagues: new List<string> { "EPL", "Premier League" }),
+                CreateTraderShift("2", "EPLExpertOu", new[] { "OU" }, "Elite", false,
+                    priorityLeagues: new List<string> { "EPL", "Premier League" }),
+                CreateTraderShift("3", "GenericHdp", new[] { "HDP" }, "Elite", false),
+                CreateTraderShift("4", "GenericOu", new[] { "OU" }, "Elite", false)
+            },
+            Matches = new List<Match>
+            {
+                CreateMatch("1", "100",
+                    DateTimeOffset.Parse("2025-09-28T10:00:00Z"),
+                    DateTimeOffset.Parse("2025-09-28T12:00:00Z"),
+                    50000, "EPL", isUseAlternativeMJRule: true, leagueName: "English Premier League")
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue($"solver should succeed, but got status: {result.Status}");
+        result.AssignedMatches.Should().Be(1, "the match should be assigned");
+
+        var assignment = result.Assignments.First();
+
+        // EPL experts should be preferred due to priority league bonus (1.05x for both)
+        assignment.Hdp.Should().Be("EPLExpertHdp", "trader with priority league should be preferred");
+        assignment.Ou.Should().Be("EPLExpertOu", "trader with priority league should be preferred");
+        assignment.HdpLevel.Should().Be("Elite");
+        assignment.OuLevel.Should().Be("Elite");
+    }
+
+    [Test]
     public void Assign_WithAlternativeMJRule_CombinedBonuses_PreconfiguredPairWithPrioritySkill()
     {
         // Arrange - Alternative MJ match testing all bonuses combined:
@@ -483,7 +564,8 @@ public class MajorMatchAssignmentStrategyAlternativeMJRuleTests
         string level,
         bool isManager,
         DateTimeOffset? start = null,
-        DateTimeOffset? end = null)
+        DateTimeOffset? end = null,
+        List<string>? priorityLeagues = null)
     {
         return new TraderShift
         {
@@ -496,7 +578,8 @@ public class MajorMatchAssignmentStrategyAlternativeMJRuleTests
             IsManager = isManager,
             IgnoreLeague = new List<string>(),
             AssignedJobs = new List<AssignedJob>(),
-            MaxBet = 1000000
+            MaxBet = 1000000,
+            PriorityLeagues = priorityLeagues
         };
     }
 

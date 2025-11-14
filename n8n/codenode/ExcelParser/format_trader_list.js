@@ -92,6 +92,46 @@ function parseNonSoloLeague(nonSoloLeagueStr) {
 }
 
 /**
+ * Parse priority league string into array
+ * Leagues that this trader prioritizes when redundant traders are available
+ * Examples:
+ * - "EPL, LaLiga" → ["EPL", "LaLiga"]
+ * - "JAPAN J-LEAGUE DIVISION 1, AUSTRALIA A-LEAGUE" → ["JAPAN J-LEAGUE DIVISION 1", "AUSTRALIA A-LEAGUE"]
+ * - "" or null → []
+ */
+function parsePriorityLeague(priorityLeagueStr) {
+    if (!priorityLeagueStr || typeof priorityLeagueStr !== 'string') {
+        return [];
+    }
+
+    // Split by comma and trim whitespace
+    return priorityLeagueStr
+        .split(',')
+        .map(league => league.trim())
+        .filter(league => league.length > 0);
+}
+
+/**
+ * Parse ignore league type string into array
+ * League types (bet types) that this trader should not be assigned to
+ * Examples:
+ * - "M1, M2" → ["M1", "M2"]
+ * - "MJ" → ["MJ"]
+ * - "" or null → []
+ */
+function parseIgnoreLeagueType(ignoreLeagueTypeStr) {
+    if (!ignoreLeagueTypeStr || typeof ignoreLeagueTypeStr !== 'string') {
+        return [];
+    }
+
+    // Split by comma and trim whitespace
+    return ignoreLeagueTypeStr
+        .split(',')
+        .map(type => type.trim())
+        .filter(type => type.length > 0);
+}
+
+/**
  * Check if trader can be assigned to EXPT matches
  * Default is true, unless bettype contains "[No Expt]" (case-insensitive)
  * Examples:
@@ -155,8 +195,10 @@ for (const item of $input.all()) {
     const bettype = item.json['MAIN BET TYPE'];
     const group = item.json.GROUP;
     const ignoreLeague = item.json['Ignore League'];
+    const ignoreLeagueType = item.json['Ignore League Type'];
     const nonSoloLeague = item.json['Non-Solo league'];
     const prioritySkill = item.json['Priority skill'];
+    const priorityLeague = item.json['Priority league'];
     const rowNumber = item.json.row_number;
 
     // Initialize level objects
@@ -191,8 +233,14 @@ for (const item of $input.all()) {
     // Parse ignore league into array
     const ignoreLeagueArray = parseIgnoreLeague(ignoreLeague);
 
+    // Parse ignore league type into array
+    const ignoreLeagueTypeArray = parseIgnoreLeagueType(ignoreLeagueType);
+
     // Parse non-solo league into array
     const nonSoloLeagueArray = parseNonSoloLeague(nonSoloLeague);
+
+    // Parse priority league into array
+    const priorityLeagueArray = parsePriorityLeague(priorityLeague);
 
     // Parse EXPT assignability from bettype
     const isEXPTAssignable = parseIsEXPTAssignable(bettype);
@@ -212,7 +260,9 @@ for (const item of $input.all()) {
             isManager: isManager,
             bettype,
             ignoreLeague: ignoreLeagueArray,
+            ignoreLeagueType: ignoreLeagueTypeArray,
             nonSoloLeague: nonSoloLeagueArray,
+            priorityLeague: priorityLeagueArray,
             m1Capacity: m1Capacity,
             m2Capacity: m2Capacity,
             isEXPTAssignable: isEXPTAssignable,

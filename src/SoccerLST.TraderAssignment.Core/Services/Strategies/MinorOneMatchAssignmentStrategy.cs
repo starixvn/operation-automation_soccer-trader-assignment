@@ -65,6 +65,7 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Solve
         var solver = new CpSolver();
+        solver.StringParameters = "max_time_in_seconds:105.0"; // 1 minute 45 seconds timeout
         var status = solver.Solve(model);
 
         // Build response
@@ -210,15 +211,17 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Base bonus to prioritize coverage - any assignment is better than no assignment
         const long coverageBonus = 1_000_000;
+        const long consecutiveMatchBonus = 50_000; // Bonus for consecutive matches (0-2 hour gap)
 
+        // 1. Individual match assignment scores
         foreach (var match in matches)
         {
             foreach (var trader in traderShifts)
             {
                 var traderPoints = LevelPoints.GetValueOrDefault(trader.Level, 1);
-                var traderPriority = GetTraderPriority(trader);
+                var priorityLeagueBonus = GetPriorityLeagueBonus(trader, match);
 
-                var traderScore = traderPoints * traderPriority;
+                var traderScore = traderPoints * priorityLeagueBonus;
                 var matchWeight = Math.Pow(match.MaxBet / 1000.0, 2);
                 var finalScore = coverageBonus + (traderScore * matchWeight);
 
@@ -227,45 +230,102 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
             }
         }
 
+        // 2. Consecutive bonus: ONLY assignedJob-to-match (no match-to-match)
+        // Removed match-to-match bonus to eliminate multiplication constraints for performance
+        // Only consider gaps between existing assigned jobs and new matches
+        // This requires NO multiplication since jobs are already assigned
+        foreach (var trader in traderShifts)
+        {
+            // Skip if trader has no assigned jobs
+            if (trader.AssignedJobs == null || trader.AssignedJobs.Count == 0)
+                continue;
+
+            // Pre-filter matches that are within this trader's shift
+            var traderMatches = matches.Where(m => IsMatchWithinShift(trader, m)).ToList();
+            if (traderMatches.Count == 0)
+                continue;
+
+            // Bonus for assignedJob-to-match assignments only
+            foreach (var job in trader.AssignedJobs)
+            {
+                foreach (var match in traderMatches)
+                {
+                    // Check both directions:
+                    // 1. Job → Match: match.Start == job.End (match starts right after job ends)
+                    // 2. Match → Job: match.End == job.Start (match ends right before job starts)
+                    bool isConsecutive = (match.Start == job.End) || (match.End == job.Start);
+
+                    if (isConsecutive)
+                    {
+                        // If trader is assigned to this match, add bonus
+                        // No multiplication needed - job is already assigned
+                        objectiveTerms.Add(LinearExpr.Term(x[(trader.Id, match.Id)], consecutiveMatchBonus));
+                    }
+                }
+            }
+        }
+
+        // 3. Shift boundary bonus: Match aligns perfectly with shift boundaries
+        // Encourages efficient use of trader shifts
+        const long shiftBoundaryBonus = 30_000; // Bonus for matches that align with shift start/end
+
+        foreach (var trader in traderShifts)
+        {
+            // Pre-filter matches that are within this trader's shift
+            var traderMatches = matches.Where(m => IsMatchWithinShift(trader, m)).ToList();
+            if (traderMatches.Count == 0)
+                continue;
+
+            foreach (var match in traderMatches)
+            {
+                // Check if match aligns with shift boundaries:
+                // 1. Match starts exactly when shift starts
+                // 2. Match ends exactly when shift ends
+                bool alignsWithShiftStart = (match.Start == trader.Start);
+                bool alignsWithShiftEnd = (match.End == trader.End);
+
+                if (alignsWithShiftStart || alignsWithShiftEnd)
+                {
+                    // Add bonus for perfect shift boundary alignment
+                    objectiveTerms.Add(LinearExpr.Term(x[(trader.Id, match.Id)], shiftBoundaryBonus));
+                }
+            }
+        }
+
         return objectiveTerms;
     }
 
+
     /// <summary>
-    /// Override base implementation to add support for Second and Third trader levels
-    /// For M1 matches, all manager traders are prioritized behind Third level non-managers
-    ///
-    /// Priority calculation: finalScore = levelPoints × priority × matchWeight
-    /// To ensure Third non-manager (1 × 0.9) > Elite manager (64 × X), we need X < 0.014
+    /// Get priority league bonus for trader
+    /// Returns 1.05x multiplier if match's league is in trader's PriorityLeagues list
+    /// Otherwise returns 1.0 (no bonus)
+    /// Uses case-insensitive substring matching (similar to league include logic)
     /// </summary>
-    protected override double GetTraderPriority(TraderShift trader)
+    private static double GetPriorityLeagueBonus(TraderShift trader, Match match)
     {
-        // For M1: Manager traders have very low priority (all below Third non-manager)
-        // Third non-manager: 1 × 0.9 = 0.9
-        // Elite manager: 64 × 0.01 = 0.64 (lower than Third)
-        if (trader.IsManager)
+        if (trader.PriorityLeagues == null || trader.PriorityLeagues.Count == 0)
+            return 1.0;
+
+        if (string.IsNullOrEmpty(match.LeagueName))
+            return 1.0;
+
+        var matchLeague = match.LeagueName.ToUpperInvariant().Trim();
+
+        foreach (var priorityLeague in trader.PriorityLeagues)
         {
-            return trader.Level switch
+            var normalizedPriority = priorityLeague.ToUpperInvariant().Trim();
+
+            // Check if match league contains priority league or vice versa
+            if (matchLeague.Contains(normalizedPriority) || normalizedPriority.Contains(matchLeague))
             {
-                "Elite" => 0.010,      // 64 × 0.010 = 0.64
-                "Member" => 0.009,     // 16 × 0.009 = 0.144
-                "First" => 0.008,      // 4 × 0.008 = 0.032
-                "Second" => 0.007,     // 2 × 0.007 = 0.014
-                "Third" => 0.006,      // 1 × 0.006 = 0.006
-                _ => 0.005
-            };
+                return 1.05; // 1.05x bonus for priority league match
+            }
         }
 
-        // Non-manager priorities (normal hierarchy)
-        return trader.Level switch
-        {
-            "Elite" => 2.0,
-            "Member" => 1.3,
-            "First" => 1.2,
-            "Second" => 1.0,
-            "Third" => 0.9,
-            _ => 0.8
-        };
+        return 1.0;
     }
+
 
     private AssignmentResponse BuildResponse(
         CpSolverStatus status,
@@ -276,13 +336,13 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
     {
         var response = new AssignmentResponse
         {
-            Success = status == CpSolverStatus.Optimal,
+            Success = status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible,
             Status = status.ToString(),
             TotalMatches = matches.Count,
             Assignments = new List<MatchAssignment>()
         };
 
-        if (status == CpSolverStatus.Optimal)
+        if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
         {
             foreach (var match in matches.OrderByDescending(m => m.MaxBet))
             {
@@ -317,9 +377,8 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     assignment.PairType = "Single Trader (M1)";
 
                     var traderPoints = LevelPoints.GetValueOrDefault(assignedTrader.Level, 1);
-                    var traderPriority = GetTraderPriority(assignedTrader);
                     var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
-                    assignment.Score = (long)(traderPoints * traderPriority * matchWeight);
+                    assignment.Score = (long)(traderPoints * matchWeight);
                 }
 
                 response.Assignments.Add(assignment);

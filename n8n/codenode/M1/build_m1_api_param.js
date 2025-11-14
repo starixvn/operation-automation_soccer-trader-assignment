@@ -35,7 +35,7 @@ const nodeTypeHandlers = {
         end: data.endDate,
         maxBet: data.maxBet || 0,
         leagueCode: data.leagueCode || null,
-        leagueName: data.leagueName || null,
+        leagueName: data.league || null,
         betType: data.betType || null,
         isSoloMatch: data.isSoloMatch || false,
         isAlreadyHandled: data.isUnchanged || false,
@@ -57,6 +57,7 @@ const nodeTypeHandlers = {
       m1Capacity: data.m1Capacity || 1,
       ignoreLeague: data.ignoreLeague || [],
       nonSoloLeagues: data.nonSoloLeague || [],
+      priorityLeagues: data.priorityLeague || [],
       maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)
       assignedJobs: data.assignedJobs?.map(job => ({
         type: job.type,

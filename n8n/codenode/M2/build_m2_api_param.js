@@ -46,6 +46,12 @@ const nodeTypeHandlers = {
   },
 
   workingShift: (data) => {
+    // Skip traders who have "M2" in their ignoreLeagueType array
+    const ignoreLeagueType = data.ignoreLeagueType || [];
+    if (ignoreLeagueType.includes('M2')) {
+      return; // Skip this trader
+    }
+
     traderShifts.push({
       id: data.rowNumber?.toString() || '',
       name: data.traderName || '',
@@ -57,6 +63,7 @@ const nodeTypeHandlers = {
       m2Capacity: data.m2Capacity || 1,
       ignoreLeague: data.ignoreLeague || [],
       nonSoloLeagues: data.nonSoloLeague || [],
+      priorityLeagues: data.priorityLeague || [],
       maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)
       assignedJobs: data.assignedJobs?.map(job => ({
         type: job.type,

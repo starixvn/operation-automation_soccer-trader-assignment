@@ -63,13 +63,26 @@ function findTraderMatchesInShift(matches, traderName, shift) {
 // Main execution
 const allItems = $input.all();
 
+// Get config
+const configItem = allItems.find(item => item.json.nodeType === 'config');
+const mjIncludeBettype = configItem?.json.mjIncludeBettype || [];
+
 // Filter Major unchanged matches (for enrichment)
-const mjUnchangedMatches = allItems
-  .filter(item =>
-    item.json.nodeType === 'mismatch' &&
-    item.json.betType === 'MJ' &&
-    item.json.isUnchanged === true
-  )
+const matchesToConsider = allItems
+  .filter(item => {
+    if (item.json.nodeType !== 'mismatch') {
+      return false;
+    }
+
+    // If mjIncludeBettype is configured, filter by betType
+    if (mjIncludeBettype.length > 0) {
+      const betType = (item.json.betType || '').toUpperCase();
+      return mjIncludeBettype.some(includedBettype => includedBettype.toUpperCase() === betType);
+    }
+
+    // If no config, default to MJ only
+    return item.json.betType === 'MJ' && item.json.isUnchanged;
+  })
   .sort((a, b) => {
     const dateA = new Date(a.json.matchDate);
     const dateB = new Date(b.json.matchDate);
@@ -85,7 +98,7 @@ const enrichedItems = allItems.map(item => {
 
     // Find all MJ unchanged matches for this trader that start at or after shift start
     const traderMatches = findTraderMatchesInShift(
-      mjUnchangedMatches.map(m => m.json),
+      matchesToConsider.map(m => m.json),
       shift.traderName,
       shift
     );

@@ -3,324 +3,339 @@
     "traderShifts": [
       {
         "id": "19",
-        "name": "CLGKelven",
-        "start": "2025-11-09T04:00:00.000Z",
-        "end": "2025-11-09T15:00:00.000Z",
+        "name": "CLGCandy",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "First",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
+            "type": "IC",
+            "start": "2025-10-18T05:00:00.000Z",
+            "end": "2025-10-18T16:00:00.000Z"
           }
         ]
       },
       {
         "id": "20",
-        "name": "CLGCandy",
-        "start": "2025-11-09T04:00:00.000Z",
-        "end": "2025-11-09T15:00:00.000Z",
+        "name": "CLGHendra",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "First",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
         "id": "21",
-        "name": "CLGHendra",
-        "start": "2025-11-09T03:00:00.000Z",
-        "end": "2025-11-09T14:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "22",
         "name": "CLGHoo",
-        "start": "2025-11-09T04:00:00.000Z",
-        "end": "2025-11-09T15:00:00.000Z",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "Elite",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
-        "id": "23",
-        "name": "CLGAIK",
-        "start": "2025-11-09T03:00:00.000Z",
-        "end": "2025-11-09T14:00:00.000Z",
-        "level": "First",
-        "isManager": true,
+        "id": "22",
+        "name": "SLGDickson",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T15:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "23",
+        "name": "SLGJeffrey",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
         "id": "24",
-        "name": "CLGKokchen",
-        "start": "2025-11-09T02:00:00.000Z",
-        "end": "2025-11-09T13:00:00.000Z",
+        "name": "CLGCkeen",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "25",
+        "name": "CLGParker",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "First",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "25",
-        "name": "CLGRobin",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "IC",
-            "start": "2025-11-09T11:00:00.000Z",
-            "end": "2025-11-09T12:15:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
         "id": "26",
-        "name": "CLGHonsang",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
+        "name": "CLGChee",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "Third",
         "isManager": false,
-        "isEXPTMatchAssignable": false,
+        "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "IC",
-            "start": "2025-11-09T11:00:00.000Z",
-            "end": "2025-11-09T12:15:00.000Z"
-          }
-        ]
+        "assignedJobs": []
       },
       {
         "id": "27",
-        "name": "CLGCkeen",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "28",
-        "name": "CLGChee",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
+        "name": "CLGCam",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "28",
+        "name": "CLGRobin",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
         "id": "29",
-        "name": "CLGCam",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
+        "name": "CLGWai",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "IC",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T13:00:00.000Z"
-          }
-        ]
+        "assignedJobs": []
       },
       {
         "id": "30",
-        "name": "SLGBoy",
-        "start": "2025-11-09T03:00:00.000Z",
-        "end": "2025-11-09T14:00:00.000Z",
+        "name": "SLGPlang",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "31",
+        "name": "SLGWanjie",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "32",
+        "name": "CLGTommy",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
         "level": "Member",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "31",
-        "name": "SLGDickson",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T15:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "IC",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T13:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "32",
-        "name": "SLGGoh",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "IC",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
         "id": "33",
-        "name": "SLGJeffrey",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
+        "name": "CLGKelven",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "First",
+        "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "IC",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T13:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "start": "2025-10-18T05:00:00.000Z",
+            "end": "2025-10-18T16:00:00.000Z"
           }
         ]
       },
       {
         "id": "34",
-        "name": "SLGWanjie",
-        "start": "2025-11-09T05:00:00.000Z",
-        "end": "2025-11-09T16:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
+        "name": "CLGAIK",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "First",
+        "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "IC",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
+            "start": "2025-10-18T05:00:00.000Z",
+            "end": "2025-10-18T16:00:00.000Z"
           }
         ]
       },
       {
         "id": "35",
-        "name": "CLGHan",
-        "start": "2025-11-09T10:00:00.000Z",
-        "end": "2025-11-09T21:00:00.000Z",
-        "level": "Elite",
-        "isManager": true,
+        "name": "CLGKokchen",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "First",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 1,
+        "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T12:00:00.000Z",
-            "end": "2025-11-09T14:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
+        "id": "36",
+        "name": "CLGHonsang",
+        "start": "2025-10-18T05:00:00.000Z",
+        "end": "2025-10-18T16:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": false,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
         "id": "37",
         "name": "CLGShootbird",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "Elite",
         "isManager": false,
         "isEXPTMatchAssignable": true,
@@ -328,1484 +343,1732 @@
         "ignoreLeague": [
           "China Football"
         ],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-09T19:15:00.000Z",
-            "end": "2025-11-09T21:15:00.000Z"
+            "start": "2025-10-18T14:00:00.000Z",
+            "end": "2025-10-18T16:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "start": "2025-10-18T16:35:00.000Z",
+            "end": "2025-10-18T18:35:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T18:45:00.000Z",
+            "end": "2025-10-18T20:45:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
-        "id": "39",
-        "name": "CLGKern",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "First",
-        "isManager": true,
+        "id": "38",
+        "name": "CLGBoon",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Elite",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "40",
-        "name": "CLGFai",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
+        "m2Capacity": 1,
+        "ignoreLeague": [
+          "China Football"
+        ],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [
+          "AUSTRALIA A-LEAGUE"
+        ],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
+            "start": "2025-10-18T14:00:00.000Z",
+            "end": "2025-10-18T16:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T16:35:00.000Z",
+            "end": "2025-10-18T18:35:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T18:45:00.000Z",
+            "end": "2025-10-18T20:45:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "40",
+        "name": "CLGKern",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
           }
         ]
       },
       {
         "id": "41",
-        "name": "CLGTeck",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": false,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "42",
-        "name": "CLGKentham",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "43",
-        "name": "CLGIndo",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Member",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "44",
-        "name": "CLGDexter",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "45",
-        "name": "CLGNhi",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "46",
-        "name": "CLGSandy",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "47",
-        "name": "SLGYen",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
+        "name": "CLGFai",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "First",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "42",
+        "name": "CLGKuik",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "43",
+        "name": "SLGYen",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "IC",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "48",
-        "name": "SLGWubai",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "First",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T21:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
           }
         ]
       },
       {
-        "id": "49",
-        "name": "SLGKenHong",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "50",
-        "name": "SLGLee",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
+        "id": "44",
+        "name": "CLGKentham",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "51",
+        "id": "45",
+        "name": "CLGIndo",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T19:00:00.000Z",
+            "end": "2025-10-18T21:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "46",
+        "name": "CLGDexter",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "47",
+        "name": "CLGNhi",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "48",
+        "name": "CLGSan",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "49",
+        "name": "CLGSandy",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "50",
         "name": "SLGLina",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-09T23:00:00.000Z",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
         "level": "First",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           },
           {
             "type": "M1",
-            "start": "2025-11-09T20:30:00.000Z",
-            "end": "2025-11-09T22:30:00.000Z"
+            "start": "2025-10-18T19:00:00.000Z",
+            "end": "2025-10-18T21:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T21:00:00.000Z",
+            "end": "2025-10-18T23:00:00.000Z"
           }
         ]
       },
       {
+        "id": "51",
+        "name": "SLGKris",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
         "id": "52",
-        "name": "SLGChris",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-09T23:00:00.000Z",
+        "name": "SLGTylen",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
         "level": "Second",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           }
         ]
       },
       {
         "id": "53",
-        "name": "SLGKris",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-09T23:00:00.000Z",
-        "level": "Third",
+        "name": "SLGKenHong",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Second",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "54",
-        "name": "SLGTylen",
-        "start": "2025-11-09T13:00:00.000Z",
-        "end": "2025-11-09T23:00:00.000Z",
-        "level": "Second",
+        "name": "SLGWubai",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "First",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T13:00:00.000Z",
-            "end": "2025-11-09T15:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
           },
           {
-            "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T21:00:00.000Z",
+            "end": "2025-10-18T23:00:00.000Z"
           }
         ]
       },
       {
         "id": "55",
-        "name": "CLGSiang",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "level": "Member",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "56",
-        "name": "CLGYew",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
+        "name": "SLGLee",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "57",
-        "name": "CLGHuat",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "58",
-        "name": "CLGBoonlay",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
+        "id": "56",
+        "name": "CLGAlikin",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "Member",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T14:00:00.000Z",
-            "end": "2025-11-09T16:00:00.000Z"
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T19:00:00.000Z",
+            "end": "2025-10-18T21:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "start": "2025-10-18T21:00:00.000Z",
+            "end": "2025-10-18T23:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "57",
+        "name": "CLGBoonlay",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T13:00:00.000Z",
+            "end": "2025-10-18T15:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T19:30:00.000Z",
+            "end": "2025-10-18T21:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "58",
+        "name": "CLGHuat",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T16:00:00.000Z",
+            "end": "2025-10-18T18:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "59",
         "name": "CLGTeckkeong",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "level": "Second",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "start": "2025-10-18T16:00:00.000Z",
+            "end": "2025-10-18T18:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "60",
-        "name": "CLGKarunia",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "level": "Third",
+        "name": "CLGTotti",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Second",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
+            "start": "2025-10-18T16:00:00.000Z",
+            "end": "2025-10-18T18:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T20:00:00.000Z",
+            "end": "2025-10-18T22:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "61",
-        "name": "CLGTotti",
-        "start": "2025-11-09T14:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "level": "Second",
+        "name": "CLGYew",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T20:30:00.000Z",
-            "end": "2025-11-09T22:30:00.000Z"
-          }
-        ]
+        "assignedJobs": []
       },
       {
         "id": "62",
-        "name": "CLGChian",
-        "start": "2025-11-09T16:00:00.000Z",
-        "end": "2025-11-10T03:00:00.000Z",
-        "level": "Elite",
+        "name": "CLGKarunia",
+        "start": "2025-10-18T13:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 1,
-        "ignoreLeague": [
-          "ENGLISH PREMIER LEAGUE"
-        ],
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T19:30:00.000Z",
-            "end": "2025-11-09T21:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T01:00:00.000Z",
-            "end": "2025-11-10T03:00:00.000Z"
-          }
-        ]
+        "assignedJobs": []
       },
       {
         "id": "63",
-        "name": "CLGChai",
-        "start": "2025-11-09T16:00:00.000Z",
-        "end": "2025-11-10T03:00:00.000Z",
-        "level": "Elite",
+        "name": "CLGSiang",
+        "start": "2025-10-18T14:30:00.000Z",
+        "end": "2025-10-19T01:30:00.000Z",
+        "level": "Member",
         "isManager": false,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 1,
-        "ignoreLeague": [
-          "ENGLISH PREMIER LEAGUE"
-        ],
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T20:30:00.000Z",
-            "end": "2025-11-09T22:30:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T21:00:00.000Z",
+            "end": "2025-10-18T23:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-09T22:30:00.000Z",
-            "end": "2025-11-10T00:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T00:30:00.000Z",
-            "end": "2025-11-10T02:30:00.000Z"
+            "start": "2025-10-18T23:00:00.000Z",
+            "end": "2025-10-19T01:00:00.000Z"
           }
         ]
       },
       {
         "id": "64",
-        "name": "SLGMelvin",
-        "start": "2025-11-09T17:00:00.000Z",
-        "end": "2025-11-10T04:00:00.000Z",
+        "name": "CLGNicckz",
+        "start": "2025-10-18T14:00:00.000Z",
+        "end": "2025-10-19T01:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T23:30:00.000Z",
-            "end": "2025-11-10T01:30:00.000Z"
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "65",
-        "name": "CLGGee",
-        "start": "2025-11-09T18:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
+        "name": "CLGHan",
+        "start": "2025-10-18T16:00:00.000Z",
+        "end": "2025-10-19T03:00:00.000Z",
         "level": "Elite",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "type": "IC",
+            "start": "2025-10-18T16:00:00.000Z",
+            "end": "2025-10-18T20:00:00.000Z"
+          },
+          {
+            "type": "IC",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T03:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-10T01:30:00.000Z",
-            "end": "2025-11-10T03:30:00.000Z"
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "66",
-        "name": "SLGAlbert",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
+        "name": "CLGXavi",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "67",
+        "name": "CLGGachun",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "68",
+        "name": "CLGTheeng",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "69",
+        "name": "CLGGee",
+        "start": "2025-10-18T18:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Elite",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 1,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "IC",
+            "start": "2025-10-18T18:00:00.000Z",
+            "end": "2025-10-18T20:00:00.000Z"
+          },
+          {
+            "type": "IC",
+            "start": "2025-10-18T23:30:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "70",
+        "name": "SLGPing",
+        "start": "2025-10-18T18:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
         "level": "First",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "IC",
-            "start": "2025-11-09T19:00:00.000Z",
-            "end": "2025-11-10T05:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "67",
-        "name": "SLGJenny",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T00:00:00.000Z",
-            "end": "2025-11-10T02:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T02:15:00.000Z",
-            "end": "2025-11-10T04:15:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "68",
-        "name": "SLGHanwei",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Elite",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T00:30:00.000Z",
-            "end": "2025-11-10T02:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T02:30:00.000Z",
-            "end": "2025-11-10T04:30:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "69",
-        "name": "SLGJanet",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "70",
-        "name": "SLGCory",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "71",
-        "name": "SLGNarsi",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-09T23:00:00.000Z",
-            "end": "2025-11-10T01:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T01:00:00.000Z",
-            "end": "2025-11-10T03:00:00.000Z"
+            "start": "2025-10-18T18:00:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
           }
         ]
       },
       {
         "id": "72",
-        "name": "SLGOscar",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
+        "name": "SLGJiaming",
+        "start": "2025-10-18T18:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Elite",
+        "isManager": true,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
+        "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
           },
           {
             "type": "M1",
-            "start": "2025-11-10T00:00:00.000Z",
-            "end": "2025-11-10T02:00:00.000Z"
+            "start": "2025-10-19T02:30:00.000Z",
+            "end": "2025-10-19T04:30:00.000Z"
           }
         ]
       },
       {
         "id": "73",
-        "name": "SLGLMax",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
+        "name": "CLGWen",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Elite",
+        "isManager": true,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
+        "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T19:30:00.000Z",
+            "end": "2025-10-18T21:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T03:05:00.000Z",
+            "end": "2025-10-19T05:05:00.000Z"
           }
         ]
       },
       {
         "id": "74",
-        "name": "SLGNeo",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
+        "name": "CLGSeang",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Elite",
+        "isManager": true,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
+        "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T21:30:00.000Z",
-            "end": "2025-11-09T23:30:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T21:30:00.000Z",
+            "end": "2025-10-18T23:30:00.000Z"
           },
           {
-            "type": "M1",
-            "start": "2025-11-09T23:45:00.000Z",
-            "end": "2025-11-10T01:45:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T02:00:00.000Z"
           }
         ]
       },
       {
         "id": "75",
-        "name": "SLGEven",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Third",
+        "name": "CLGKit",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Elite",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "76",
-        "name": "SLGBaron",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "78",
-        "name": "SLGRuby",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T19:30:00.000Z",
+            "end": "2025-10-18T21:30:00.000Z"
           },
           {
-            "type": "M1",
-            "start": "2025-11-10T00:00:00.000Z",
-            "end": "2025-11-10T02:00:00.000Z"
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T03:05:00.000Z",
+            "end": "2025-10-19T05:05:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "76",
+        "name": "CLGGary",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "79",
+        "name": "SLGHanwei",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Elite",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T20:00:00.000Z",
+            "end": "2025-10-18T22:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T02:45:00.000Z",
+            "end": "2025-10-19T04:45:00.000Z"
           }
         ]
       },
       {
         "id": "80",
-        "name": "SLGPing",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "First",
-        "isManager": true,
+        "name": "SLGJenny",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "MJ",
-            "start": "2025-11-10T00:15:00.000Z",
-            "end": "2025-11-10T02:15:00.000Z"
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T02:00:00.000Z"
           }
         ]
       },
       {
         "id": "81",
-        "name": "CLGWen",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Elite",
-        "isManager": true,
+        "name": "SLGNeo",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
-        "m2Capacity": 1,
+        "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "type": "M1",
+            "start": "2025-10-18T20:00:00.000Z",
+            "end": "2025-10-18T22:00:00.000Z"
           },
           {
-            "type": "MJ",
-            "start": "2025-11-10T00:30:00.000Z",
-            "end": "2025-11-10T02:30:00.000Z"
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           },
           {
-            "type": "MJ",
-            "start": "2025-11-10T03:45:00.000Z",
-            "end": "2025-11-10T05:45:00.000Z"
+            "type": "M1",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T02:00:00.000Z"
           }
         ]
       },
       {
         "id": "82",
-        "name": "CLGBay",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "First",
-        "isManager": true,
+        "name": "SLGRuby",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "83",
-        "name": "CLGYao",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "IC",
-            "start": "2025-11-09T19:00:00.000Z",
-            "end": "2025-11-10T06:00:00.000Z"
+            "type": "M1",
+            "start": "2025-10-18T19:30:00.000Z",
+            "end": "2025-10-18T21:30:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T23:30:00.000Z",
+            "end": "2025-10-19T01:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "83",
+        "name": "SLGNarsi",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           }
         ]
       },
       {
         "id": "84",
-        "name": "CLGShuan",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Elite",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T19:30:00.000Z",
-            "end": "2025-11-09T21:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:30:00.000Z",
-            "end": "2025-11-10T00:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T01:00:00.000Z",
-            "end": "2025-11-10T03:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T03:45:00.000Z",
-            "end": "2025-11-10T05:45:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "85",
-        "name": "CLGAaron",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Member",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T01:30:00.000Z",
-            "end": "2025-11-10T03:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T03:45:00.000Z",
-            "end": "2025-11-10T05:45:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "86",
-        "name": "CLGNikkol",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
+        "name": "SLGEven",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "85",
+        "name": "SLGLMax",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "86",
+        "name": "SLGCory",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
         "id": "87",
-        "name": "CLGKilos",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Elite",
+        "name": "SLGJanet",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "88",
+        "name": "SLGTom",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
-            "type": "MJ",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
           },
           {
-            "type": "MJ",
-            "start": "2025-11-09T23:15:00.000Z",
-            "end": "2025-11-10T01:15:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T01:30:00.000Z",
-            "end": "2025-11-10T03:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T04:00:00.000Z",
-            "end": "2025-11-10T06:00:00.000Z"
+            "type": "M1",
+            "start": "2025-10-19T00:45:00.000Z",
+            "end": "2025-10-19T02:45:00.000Z"
           }
         ]
       },
       {
         "id": "89",
-        "name": "CLGKit",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Elite",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-09T23:15:00.000Z",
-            "end": "2025-11-10T01:15:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T01:30:00.000Z",
-            "end": "2025-11-10T03:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T04:00:00.000Z",
-            "end": "2025-11-10T06:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "94",
-        "name": "CLGMichelle",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T21:00:00.000Z",
-            "end": "2025-11-09T23:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "95",
-        "name": "CLGXavi",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "96",
-        "name": "CLGGachun",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "97",
-        "name": "SLGJiaming",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Elite",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 1,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T00:30:00.000Z",
-            "end": "2025-11-10T02:30:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T02:30:00.000Z",
-            "end": "2025-11-10T04:30:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "98",
-        "name": "SLGBou",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Member",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T00:15:00.000Z",
-            "end": "2025-11-10T02:15:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T03:00:00.000Z",
-            "end": "2025-11-10T05:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "99",
-        "name": "SLGMing",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Member",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "MJ",
-            "start": "2025-11-10T00:15:00.000Z",
-            "end": "2025-11-10T02:15:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T03:00:00.000Z",
-            "end": "2025-11-10T05:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "100",
-        "name": "SLGChung",
-        "start": "2025-11-09T19:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "106",
-        "name": "SLGLuke",
-        "start": "2025-11-09T20:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "IC",
-            "start": "2025-11-09T20:00:00.000Z",
-            "end": "2025-11-10T06:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "107",
-        "name": "SLGTom",
-        "start": "2025-11-09T20:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
+        "name": "SLGOscar",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
         "level": "Second",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "M1",
-            "start": "2025-11-09T21:30:00.000Z",
-            "end": "2025-11-09T23:30:00.000Z"
+            "start": "2025-10-18T22:30:00.000Z",
+            "end": "2025-10-19T00:30:00.000Z"
           },
           {
             "type": "M1",
-            "start": "2025-11-09T23:30:00.000Z",
-            "end": "2025-11-10T01:30:00.000Z"
+            "start": "2025-10-19T00:45:00.000Z",
+            "end": "2025-10-19T02:45:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T02:45:00.000Z",
+            "end": "2025-10-19T04:45:00.000Z"
           }
         ]
       },
       {
-        "id": "108",
-        "name": "CLGChang",
-        "start": "2025-11-09T22:00:00.000Z",
-        "end": "2025-11-10T09:00:00.000Z",
+        "id": "90",
+        "name": "CLGAaron",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
         "level": "Member",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": [
           {
             "type": "MJ",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
+            "start": "2025-10-18T21:00:00.000Z",
+            "end": "2025-10-18T23:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-10T00:15:00.000Z",
-            "end": "2025-11-10T02:15:00.000Z"
+            "start": "2025-10-18T23:00:00.000Z",
+            "end": "2025-10-19T01:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T03:00:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "91",
+        "name": "CLGNikkol",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "92",
+        "name": "CLGGillian",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T19:30:00.000Z",
+            "end": "2025-10-18T21:30:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "96",
+        "name": "CLGJon",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Elite",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T20:00:00.000Z",
+            "end": "2025-10-18T22:00:00.000Z"
           },
           {
             "type": "MJ",
-            "start": "2025-11-10T03:45:00.000Z",
-            "end": "2025-11-10T05:45:00.000Z"
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T02:45:00.000Z",
+            "end": "2025-10-19T04:45:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "97",
+        "name": "CLGMichelle",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "98",
+        "name": "SLGChung",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "100",
+        "name": "SLGMing",
+        "start": "2025-10-18T19:30:00.000Z",
+        "end": "2025-10-19T06:30:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T19:35:00.000Z",
+            "end": "2025-10-18T21:35:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:30:00.000Z",
+            "end": "2025-10-19T02:30:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T02:30:00.000Z",
+            "end": "2025-10-19T04:30:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "101",
+        "name": "SLGAlbert",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-19T06:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "IC",
+            "start": "2025-10-18T20:00:00.000Z",
+            "end": "2025-10-19T06:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "102",
+        "name": "CLGSern",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T02:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "104",
+        "name": "CLGChang",
+        "start": "2025-10-18T21:30:00.000Z",
+        "end": "2025-10-19T08:30:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:15:00.000Z",
+            "end": "2025-10-19T00:15:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T01:00:00.000Z",
+            "end": "2025-10-19T03:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T03:00:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "105",
+        "name": "CLGJoseph",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T09:00:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:00:00.000Z",
+            "end": "2025-10-19T00:00:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T00:00:00.000Z",
+            "end": "2025-10-19T02:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "106",
+        "name": "CLGJacky",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T09:00:00.000Z",
+        "level": "Member",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-18T22:15:00.000Z",
+            "end": "2025-10-19T00:15:00.000Z"
+          },
+          {
+            "type": "MJ",
+            "start": "2025-10-19T01:00:00.000Z",
+            "end": "2025-10-19T03:00:00.000Z"
+          },
+          {
+            "type": "M1",
+            "start": "2025-10-19T03:00:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
           }
         ]
       },
       {
         "id": "109",
-        "name": "CLGSern",
-        "start": "2025-11-09T22:00:00.000Z",
-        "end": "2025-11-10T09:00:00.000Z",
-        "level": "Second",
+        "name": "CLGWai",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": [
-          {
-            "type": "M1",
-            "start": "2025-11-09T22:00:00.000Z",
-            "end": "2025-11-10T00:00:00.000Z"
-          },
-          {
-            "type": "M1",
-            "start": "2025-11-10T00:00:00.000Z",
-            "end": "2025-11-10T02:00:00.000Z"
-          }
-        ]
-      },
-      {
-        "id": "113",
-        "name": "CLGKelven",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "114",
-        "name": "CLGCandy",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "115",
-        "name": "CLGHendra",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "First",
-        "isManager": true,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "116",
+        "id": "110",
         "name": "CLGHoo",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
+        "start": "2025-10-19T03:00:00.000Z",
+        "end": "2025-10-19T14:00:00.000Z",
         "level": "Elite",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 1,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
-        "assignedJobs": []
+        "assignedJobs": [
+          {
+            "type": "MJ",
+            "start": "2025-10-19T03:00:00.000Z",
+            "end": "2025-10-19T05:00:00.000Z"
+          }
+        ]
       },
       {
-        "id": "117",
-        "name": "CLGAIK",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
+        "id": "111",
+        "name": "CLGHendra",
+        "start": "2025-10-19T03:00:00.000Z",
+        "end": "2025-10-19T14:00:00.000Z",
         "level": "First",
         "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "118",
-        "name": "CLGKokchen",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
+        "id": "112",
+        "name": "CLGKelven",
+        "start": "2025-10-19T03:00:00.000Z",
+        "end": "2025-10-19T14:00:00.000Z",
         "level": "First",
-        "isManager": false,
+        "isManager": true,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "119",
-        "name": "CLGRobin",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "120",
-        "name": "CLGHonsang",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": false,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "121",
-        "name": "CLGCkeen",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Second",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "122",
-        "name": "CLGChee",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "123",
-        "name": "CLGCam",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Third",
-        "isManager": false,
-        "isEXPTMatchAssignable": true,
-        "m2Capacity": 2,
-        "ignoreLeague": [],
-        "maxBet": 1000000,
-        "assignedJobs": []
-      },
-      {
-        "id": "124",
-        "name": "SLGBoy",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
+        "id": "113",
+        "name": "CLGTommy",
+        "start": "2025-10-19T03:00:00.000Z",
+        "end": "2025-10-19T14:00:00.000Z",
         "level": "Member",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "M1",
+            "start": "2025-10-19T11:55:00.000Z",
+            "end": "2025-10-19T13:55:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "114",
+        "name": "CLGCkeen",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "125",
-        "name": "SLGDickson",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T13:00:00.000Z",
+        "id": "115",
+        "name": "CLGChee",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "126",
-        "name": "SLGGoh",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Second",
+        "id": "116",
+        "name": "CLGCam",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "127",
-        "name": "SLGJeffrey",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
-        "level": "Second",
+        "id": "117",
+        "name": "SLGPlang",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       },
       {
-        "id": "128",
+        "id": "118",
         "name": "SLGWanjie",
-        "start": "2025-11-10T05:00:00.000Z",
-        "end": "2025-11-10T14:00:00.000Z",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
         "level": "Third",
         "isManager": false,
         "isEXPTMatchAssignable": true,
         "m2Capacity": 2,
         "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "119",
+        "name": "CLGCandy",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "IC",
+            "start": "2025-10-19T05:00:00.000Z",
+            "end": "2025-10-19T16:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "120",
+        "name": "CLGAIK",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "First",
+        "isManager": true,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": [
+          {
+            "type": "IC",
+            "start": "2025-10-19T05:00:00.000Z",
+            "end": "2025-10-19T16:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "121",
+        "name": "CLGKokchen",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "First",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "122",
+        "name": "CLGHonsang",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": false,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "123",
+        "name": "SLGDickson",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T15:00:00.000Z",
+        "level": "Third",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
+        "maxBet": 1000000,
+        "assignedJobs": []
+      },
+      {
+        "id": "124",
+        "name": "SLGJeffrey",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T16:00:00.000Z",
+        "level": "Second",
+        "isManager": false,
+        "isEXPTMatchAssignable": true,
+        "m2Capacity": 2,
+        "ignoreLeague": [],
+        "nonSoloLeagues": [],
+        "priorityLeagues": [],
         "maxBet": 1000000,
         "assignedJobs": []
       }
@@ -1814,11 +2077,39 @@
       {
         "id": "18",
         "matchNo": "16",
-        "start": "2025-11-09T18:00:00.000Z",
-        "end": "2025-11-09T20:00:00.000Z",
+        "start": "2025-10-18T18:00:00.000Z",
+        "end": "2025-10-18T20:00:00.000Z",
         "maxBet": 25000,
         "leagueCode": null,
         "leagueName": "RUSSIA PREMIER LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "19",
+        "matchNo": "17",
+        "start": "2025-10-18T18:00:00.000Z",
+        "end": "2025-10-18T20:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "RUSSIA PREMIER LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "24",
+        "matchNo": "22",
+        "start": "2025-10-18T19:00:00.000Z",
+        "end": "2025-10-18T21:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "SWEDEN SUPERETTAN",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
@@ -1826,11 +2117,11 @@
         "isEAL": false
       },
       {
-        "id": "21",
-        "matchNo": "19",
-        "start": "2025-11-09T19:30:00.000Z",
-        "end": "2025-11-09T21:30:00.000Z",
-        "maxBet": 25000,
+        "id": "29",
+        "matchNo": "27",
+        "start": "2025-10-18T19:30:00.000Z",
+        "end": "2025-10-18T21:30:00.000Z",
+        "maxBet": 30000,
         "leagueCode": null,
         "leagueName": "TURKEY SUPER LEAGUE",
         "betType": "M2",
@@ -1840,41 +2131,41 @@
         "isEAL": false
       },
       {
-        "id": "22",
-        "matchNo": "20",
-        "start": "2025-11-09T20:15:00.000Z",
-        "end": "2025-11-09T22:15:00.000Z",
+        "id": "33",
+        "matchNo": "31",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-18T22:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "FRANCE LIGUE 2",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "34",
+        "matchNo": "32",
+        "start": "2025-10-18T20:00:00.000Z",
+        "end": "2025-10-18T22:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "FRANCE LIGUE 2",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "36",
+        "matchNo": "34",
+        "start": "2025-10-18T20:15:00.000Z",
+        "end": "2025-10-18T22:15:00.000Z",
         "maxBet": 25000,
         "leagueCode": null,
         "leagueName": "RUSSIA PREMIER LEAGUE",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "26",
-        "matchNo": "24",
-        "start": "2025-11-09T20:30:00.000Z",
-        "end": "2025-11-09T22:30:00.000Z",
-        "maxBet": 20000,
-        "leagueCode": null,
-        "leagueName": "BELGIUM FIRST DIVISION A",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "33",
-        "matchNo": "31",
-        "start": "2025-11-09T21:00:00.000Z",
-        "end": "2025-11-09T23:00:00.000Z",
-        "maxBet": 30000,
-        "leagueCode": null,
-        "leagueName": "SPAIN SEGUNDA DIVISION",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
@@ -1884,181 +2175,125 @@
       {
         "id": "37",
         "matchNo": "35",
-        "start": "2025-11-09T21:30:00.000Z",
-        "end": "2025-11-09T23:30:00.000Z",
-        "maxBet": 20000,
-        "leagueCode": null,
-        "leagueName": "AUSTRIA BUNDESLIGA",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "38",
-        "matchNo": "36",
-        "start": "2025-11-09T21:30:00.000Z",
-        "end": "2025-11-09T23:30:00.000Z",
-        "maxBet": 20000,
-        "leagueCode": null,
-        "leagueName": "AUSTRIA BUNDESLIGA",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "39",
-        "matchNo": "37",
-        "start": "2025-11-09T21:45:00.000Z",
-        "end": "2025-11-09T23:45:00.000Z",
+        "start": "2025-10-18T20:45:00.000Z",
+        "end": "2025-10-18T22:45:00.000Z",
         "maxBet": 12000,
         "leagueCode": null,
         "leagueName": "POLAND EKSTRAKLASA",
         "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
-        "isEXPT": false,
+        "isEXPT": true,
         "isEAL": false
       },
       {
         "id": "40",
         "matchNo": "38",
-        "start": "2025-11-09T21:45:00.000Z",
-        "end": "2025-11-09T23:45:00.000Z",
-        "maxBet": 12000,
-        "leagueCode": null,
-        "leagueName": "POLAND EKSTRAKLASA",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": false,
-        "isEAL": false
-      },
-      {
-        "id": "56",
-        "matchNo": "54",
-        "start": "2025-11-09T22:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "TURKEY SUPER LEAGUE",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": false,
-        "isEAL": false
-      },
-      {
-        "id": "57",
-        "matchNo": "55",
-        "start": "2025-11-09T22:00:00.000Z",
-        "end": "2025-11-10T00:00:00.000Z",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
         "maxBet": 12000,
         "leagueCode": null,
         "leagueName": "ITALY SERIE B",
         "betType": "M2",
-        "isSoloMatch": true,
+        "isSoloMatch": false,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "59",
-        "matchNo": "57",
-        "start": "2025-11-09T22:30:00.000Z",
-        "end": "2025-11-10T00:30:00.000Z",
-        "maxBet": 25000,
+        "id": "41",
+        "matchNo": "39",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
         "leagueCode": null,
-        "leagueName": "RUSSIA PREMIER LEAGUE",
+        "leagueName": "ITALY SERIE B",
         "betType": "M2",
-        "isSoloMatch": true,
+        "isSoloMatch": false,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "61",
-        "matchNo": "59",
-        "start": "2025-11-09T23:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
+        "id": "42",
+        "matchNo": "40",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "ITALY SERIE B",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "43",
+        "matchNo": "41",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "ITALY SERIE B",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "45",
+        "matchNo": "43",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "SWEDEN SUPERETTAN",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "46",
+        "matchNo": "44",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "SWEDEN SUPERETTAN",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "47",
+        "matchNo": "45",
+        "start": "2025-10-18T21:00:00.000Z",
+        "end": "2025-10-18T23:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "SWEDEN SUPERETTAN",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "58",
+        "matchNo": "56",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
         "maxBet": 20000,
         "leagueCode": null,
         "leagueName": "BELGIUM FIRST DIVISION A",
         "betType": "M2",
         "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "62",
-        "matchNo": "60",
-        "start": "2025-11-09T23:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "maxBet": 10000,
-        "leagueCode": null,
-        "leagueName": "SCOTLAND PREMIERSHIP",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "63",
-        "matchNo": "61",
-        "start": "2025-11-09T23:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "maxBet": 10000,
-        "leagueCode": null,
-        "leagueName": "SCOTLAND PREMIERSHIP",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "64",
-        "matchNo": "62",
-        "start": "2025-11-09T23:00:00.000Z",
-        "end": "2025-11-10T01:00:00.000Z",
-        "maxBet": 10000,
-        "leagueCode": null,
-        "leagueName": "SCOTLAND PREMIERSHIP",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "66",
-        "matchNo": "64",
-        "start": "2025-11-09T23:15:00.000Z",
-        "end": "2025-11-10T01:15:00.000Z",
-        "maxBet": 30000,
-        "leagueCode": null,
-        "leagueName": "SPAIN SEGUNDA DIVISION",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "69",
-        "matchNo": "67",
-        "start": "2025-11-09T23:30:00.000Z",
-        "end": "2025-11-10T01:30:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "PORTUGAL PRIMEIRA LIGA",
-        "betType": "M2",
-        "isSoloMatch": false,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
@@ -2066,11 +2301,11 @@
       {
         "id": "70",
         "matchNo": "68",
-        "start": "2025-11-09T23:30:00.000Z",
-        "end": "2025-11-10T01:30:00.000Z",
-        "maxBet": 25000,
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 10000,
         "leagueCode": null,
-        "leagueName": "PORTUGAL PRIMEIRA LIGA",
+        "leagueName": "SCOTLAND PREMIERSHIP",
         "betType": "M2",
         "isSoloMatch": false,
         "isAlreadyHandled": false,
@@ -2078,108 +2313,80 @@
         "isEAL": false
       },
       {
-        "id": "76",
-        "matchNo": "74",
-        "start": "2025-11-10T00:00:00.000Z",
-        "end": "2025-11-10T02:00:00.000Z",
-        "maxBet": 20000,
+        "id": "71",
+        "matchNo": "69",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 10000,
         "leagueCode": null,
-        "leagueName": "AUSTRIA BUNDESLIGA",
+        "leagueName": "SCOTLAND PREMIERSHIP",
         "betType": "M2",
-        "isSoloMatch": true,
+        "isSoloMatch": false,
         "isAlreadyHandled": false,
         "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "72",
+        "matchNo": "70",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 10000,
+        "leagueCode": null,
+        "leagueName": "SCOTLAND PREMIERSHIP",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "73",
+        "matchNo": "71",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 10000,
+        "leagueCode": null,
+        "leagueName": "SCOTLAND PREMIERSHIP",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "74",
+        "matchNo": "72",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "TURKEY SUPER LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": false,
+        "isEAL": false
+      },
+      {
+        "id": "75",
+        "matchNo": "73",
+        "start": "2025-10-18T22:00:00.000Z",
+        "end": "2025-10-19T00:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "TURKEY SUPER LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": false,
         "isEAL": false
       },
       {
         "id": "77",
         "matchNo": "75",
-        "start": "2025-11-10T00:00:00.000Z",
-        "end": "2025-11-10T02:00:00.000Z",
-        "maxBet": 10000,
-        "leagueCode": null,
-        "leagueName": "SCOTLAND PREMIERSHIP",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "81",
-        "matchNo": "79",
-        "start": "2025-11-10T00:15:00.000Z",
-        "end": "2025-11-10T02:15:00.000Z",
-        "maxBet": 12000,
-        "leagueCode": null,
-        "leagueName": "ITALY SERIE B",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "84",
-        "matchNo": "82",
-        "start": "2025-11-10T00:30:00.000Z",
-        "end": "2025-11-10T02:30:00.000Z",
-        "maxBet": 12000,
-        "leagueCode": null,
-        "leagueName": "POLAND EKSTRAKLASA",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": false,
-        "isEAL": false
-      },
-      {
-        "id": "85",
-        "matchNo": "83",
-        "start": "2025-11-10T00:45:00.000Z",
-        "end": "2025-11-10T02:45:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "RUSSIA PREMIER LEAGUE",
-        "betType": "M2",
-        "isSoloMatch": true,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "88",
-        "matchNo": "86",
-        "start": "2025-11-10T01:00:00.000Z",
-        "end": "2025-11-10T03:00:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "TURKEY SUPER LEAGUE",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": false,
-        "isEAL": false
-      },
-      {
-        "id": "89",
-        "matchNo": "87",
-        "start": "2025-11-10T01:00:00.000Z",
-        "end": "2025-11-10T03:00:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "TURKEY SUPER LEAGUE",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": false,
-        "isEAL": false
-      },
-      {
-        "id": "92",
-        "matchNo": "90",
-        "start": "2025-11-10T01:30:00.000Z",
-        "end": "2025-11-10T03:30:00.000Z",
+        "start": "2025-10-18T22:15:00.000Z",
+        "end": "2025-10-19T00:15:00.000Z",
         "maxBet": 30000,
         "leagueCode": null,
         "leagueName": "SPAIN SEGUNDA DIVISION",
@@ -2190,15 +2397,127 @@
         "isEAL": false
       },
       {
-        "id": "93",
-        "matchNo": "91",
-        "start": "2025-11-10T01:30:00.000Z",
-        "end": "2025-11-10T03:30:00.000Z",
-        "maxBet": 20000,
+        "id": "79",
+        "matchNo": "77",
+        "start": "2025-10-18T22:30:00.000Z",
+        "end": "2025-10-19T00:30:00.000Z",
+        "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "BELGIUM FIRST DIVISION A",
+        "leagueName": "RUSSIA PREMIER LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "80",
+        "matchNo": "78",
+        "start": "2025-10-18T22:45:00.000Z",
+        "end": "2025-10-19T00:45:00.000Z",
+        "maxBet": 8000,
+        "leagueCode": null,
+        "leagueName": "SAUDI PRO LEAGUE",
         "betType": "M2",
         "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "81",
+        "matchNo": "79",
+        "start": "2025-10-18T23:00:00.000Z",
+        "end": "2025-10-19T01:00:00.000Z",
+        "maxBet": 20000,
+        "leagueCode": null,
+        "leagueName": "AUSTRIA BUNDESLIGA",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "82",
+        "matchNo": "80",
+        "start": "2025-10-18T23:00:00.000Z",
+        "end": "2025-10-19T01:00:00.000Z",
+        "maxBet": 20000,
+        "leagueCode": null,
+        "leagueName": "AUSTRIA BUNDESLIGA",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "83",
+        "matchNo": "81",
+        "start": "2025-10-18T23:00:00.000Z",
+        "end": "2025-10-19T01:00:00.000Z",
+        "maxBet": 20000,
+        "leagueCode": null,
+        "leagueName": "AUSTRIA BUNDESLIGA",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "85",
+        "matchNo": "83",
+        "start": "2025-10-18T23:00:00.000Z",
+        "end": "2025-10-19T01:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "SWEDEN SUPERETTAN",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "86",
+        "matchNo": "84",
+        "start": "2025-10-18T23:15:00.000Z",
+        "end": "2025-10-19T01:15:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "ITALY SERIE B",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "87",
+        "matchNo": "85",
+        "start": "2025-10-18T23:15:00.000Z",
+        "end": "2025-10-19T01:15:00.000Z",
+        "maxBet": 8000,
+        "leagueCode": null,
+        "leagueName": "SAUDI PRO LEAGUE",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "88",
+        "matchNo": "86",
+        "start": "2025-10-18T23:30:00.000Z",
+        "end": "2025-10-19T01:30:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "POLAND EKSTRAKLASA",
+        "betType": "M2",
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
@@ -2206,11 +2525,11 @@
       {
         "id": "94",
         "matchNo": "92",
-        "start": "2025-11-10T02:00:00.000Z",
-        "end": "2025-11-10T04:00:00.000Z",
-        "maxBet": 25000,
+        "start": "2025-10-19T00:15:00.000Z",
+        "end": "2025-10-19T02:15:00.000Z",
+        "maxBet": 20000,
         "leagueCode": null,
-        "leagueName": "PORTUGAL PRIMEIRA LIGA",
+        "leagueName": "BELGIUM FIRST DIVISION A",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
@@ -2218,29 +2537,15 @@
         "isEAL": false
       },
       {
-        "id": "96",
-        "matchNo": "94",
-        "start": "2025-11-10T02:15:00.000Z",
-        "end": "2025-11-10T04:15:00.000Z",
-        "maxBet": 20000,
+        "id": "98",
+        "matchNo": "96",
+        "start": "2025-10-19T00:30:00.000Z",
+        "end": "2025-10-19T02:30:00.000Z",
+        "maxBet": 30000,
         "leagueCode": null,
-        "leagueName": "BELGIUM FIRST DIVISION A",
+        "leagueName": "SPAIN SEGUNDA DIVISION",
         "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "100",
-        "matchNo": "98",
-        "start": "2025-11-10T03:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "maxBet": 20000,
-        "leagueCode": null,
-        "leagueName": "BRAZIL SERIE A",
-        "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
@@ -2248,13 +2553,13 @@
       {
         "id": "101",
         "matchNo": "99",
-        "start": "2025-11-10T03:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "maxBet": 20000,
+        "start": "2025-10-19T00:45:00.000Z",
+        "end": "2025-10-19T02:45:00.000Z",
+        "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "BRAZIL SERIE A",
+        "leagueName": "RUSSIA PREMIER LEAGUE",
         "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
@@ -2262,25 +2567,25 @@
       {
         "id": "102",
         "matchNo": "100",
-        "start": "2025-11-10T03:00:00.000Z",
-        "end": "2025-11-10T05:00:00.000Z",
-        "maxBet": 20000,
+        "start": "2025-10-19T00:45:00.000Z",
+        "end": "2025-10-19T02:45:00.000Z",
+        "maxBet": 10000,
         "leagueCode": null,
-        "leagueName": "BRAZIL SERIE A",
+        "leagueName": "SCOTLAND PREMIERSHIP",
         "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "103",
-        "matchNo": "101",
-        "start": "2025-11-10T03:15:00.000Z",
-        "end": "2025-11-10T05:15:00.000Z",
-        "maxBet": 12000,
+        "id": "104",
+        "matchNo": "102",
+        "start": "2025-10-19T01:00:00.000Z",
+        "end": "2025-10-19T03:00:00.000Z",
+        "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "POLAND EKSTRAKLASA",
+        "leagueName": "TURKEY SUPER LEAGUE",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
@@ -2288,13 +2593,41 @@
         "isEAL": false
       },
       {
-        "id": "104",
-        "matchNo": "102",
-        "start": "2025-11-10T03:30:00.000Z",
-        "end": "2025-11-10T05:30:00.000Z",
-        "maxBet": 25000,
+        "id": "105",
+        "matchNo": "103",
+        "start": "2025-10-19T01:30:00.000Z",
+        "end": "2025-10-19T03:30:00.000Z",
+        "maxBet": 12000,
         "leagueCode": null,
-        "leagueName": "ARGENTINA LIGA PROFESIONAL",
+        "leagueName": "ITALY SERIE B",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "106",
+        "matchNo": "104",
+        "start": "2025-10-19T02:00:00.000Z",
+        "end": "2025-10-19T04:00:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "FRANCE LIGUE 2",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "107",
+        "matchNo": "105",
+        "start": "2025-10-19T02:00:00.000Z",
+        "end": "2025-10-19T04:00:00.000Z",
+        "maxBet": 8000,
+        "leagueCode": null,
+        "leagueName": "SAUDI PRO LEAGUE",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
@@ -2304,8 +2637,50 @@
       {
         "id": "108",
         "matchNo": "106",
-        "start": "2025-11-10T04:00:00.000Z",
-        "end": "2025-11-10T06:00:00.000Z",
+        "start": "2025-10-19T02:15:00.000Z",
+        "end": "2025-10-19T04:15:00.000Z",
+        "maxBet": 12000,
+        "leagueCode": null,
+        "leagueName": "POLAND EKSTRAKLASA",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "112",
+        "matchNo": "110",
+        "start": "2025-10-19T02:45:00.000Z",
+        "end": "2025-10-19T04:45:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "ARGENTINA LIGA PROFESIONAL",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "113",
+        "matchNo": "111",
+        "start": "2025-10-19T02:45:00.000Z",
+        "end": "2025-10-19T04:45:00.000Z",
+        "maxBet": 20000,
+        "leagueCode": null,
+        "leagueName": "BELGIUM FIRST DIVISION A",
+        "betType": "M2",
+        "isSoloMatch": true,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "118",
+        "matchNo": "116",
+        "start": "2025-10-19T03:00:00.000Z",
+        "end": "2025-10-19T05:00:00.000Z",
         "maxBet": 30000,
         "leagueCode": null,
         "leagueName": "SPAIN SEGUNDA DIVISION",
@@ -2316,38 +2691,24 @@
         "isEAL": false
       },
       {
-        "id": "109",
-        "matchNo": "107",
-        "start": "2025-11-10T04:30:00.000Z",
-        "end": "2025-11-10T06:30:00.000Z",
-        "maxBet": 30000,
+        "id": "120",
+        "matchNo": "118",
+        "start": "2025-10-19T05:00:00.000Z",
+        "end": "2025-10-19T07:00:00.000Z",
+        "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "PORTUGAL PRIMEIRA LIGA",
+        "leagueName": "ARGENTINA LIGA PROFESIONAL",
         "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "110",
-        "matchNo": "108",
-        "start": "2025-11-10T04:30:00.000Z",
-        "end": "2025-11-10T06:30:00.000Z",
-        "maxBet": 30000,
-        "leagueCode": null,
-        "leagueName": "PORTUGAL PRIMEIRA LIGA",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "111",
-        "matchNo": "109",
-        "start": "2025-11-10T05:30:00.000Z",
-        "end": "2025-11-10T07:30:00.000Z",
+        "id": "121",
+        "matchNo": "119",
+        "start": "2025-10-19T05:30:00.000Z",
+        "end": "2025-10-19T07:30:00.000Z",
         "maxBet": 20000,
         "leagueCode": null,
         "leagueName": "BRAZIL SERIE A",
@@ -2358,13 +2719,13 @@
         "isEAL": false
       },
       {
-        "id": "112",
-        "matchNo": "110",
-        "start": "2025-11-10T06:20:00.000Z",
-        "end": "2025-11-10T08:20:00.000Z",
+        "id": "122",
+        "matchNo": "120",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
         "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "ARGENTINA LIGA PROFESIONAL",
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
         "betType": "M2",
         "isSoloMatch": false,
         "isAlreadyHandled": false,
@@ -2372,13 +2733,13 @@
         "isEAL": false
       },
       {
-        "id": "113",
-        "matchNo": "111",
-        "start": "2025-11-10T06:20:00.000Z",
-        "end": "2025-11-10T08:20:00.000Z",
+        "id": "123",
+        "matchNo": "121",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
         "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "ARGENTINA LIGA PROFESIONAL",
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
         "betType": "M2",
         "isSoloMatch": false,
         "isAlreadyHandled": false,
@@ -2386,27 +2747,153 @@
         "isEAL": false
       },
       {
-        "id": "114",
-        "matchNo": "112",
-        "start": "2025-11-10T07:00:00.000Z",
-        "end": "2025-11-10T09:00:00.000Z",
+        "id": "124",
+        "matchNo": "122",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "125",
+        "matchNo": "123",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "126",
+        "matchNo": "124",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "127",
+        "matchNo": "125",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "128",
+        "matchNo": "126",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "129",
+        "matchNo": "127",
+        "start": "2025-10-19T06:00:00.000Z",
+        "end": "2025-10-19T08:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "130",
+        "matchNo": "128",
+        "start": "2025-10-19T07:00:00.000Z",
+        "end": "2025-10-19T09:00:00.000Z",
         "maxBet": 15000,
         "leagueCode": null,
         "leagueName": "MEXICO PRIMERA DIVISION",
         "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "131",
+        "matchNo": "129",
+        "start": "2025-10-19T07:00:00.000Z",
+        "end": "2025-10-19T09:00:00.000Z",
+        "maxBet": 15000,
+        "leagueCode": null,
+        "leagueName": "MEXICO PRIMERA DIVISION",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "132",
+        "matchNo": "130",
+        "start": "2025-10-19T07:00:00.000Z",
+        "end": "2025-10-19T09:00:00.000Z",
+        "maxBet": 15000,
+        "leagueCode": null,
+        "leagueName": "MEXICO PRIMERA DIVISION",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "133",
+        "matchNo": "131",
+        "start": "2025-10-19T08:00:00.000Z",
+        "end": "2025-10-19T10:00:00.000Z",
+        "maxBet": 20000,
+        "leagueCode": null,
+        "leagueName": "BRAZIL SERIE A",
+        "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "115",
-        "matchNo": "113",
-        "start": "2025-11-10T07:30:00.000Z",
-        "end": "2025-11-10T09:30:00.000Z",
-        "maxBet": 20000,
+        "id": "134",
+        "matchNo": "132",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 15000,
         "leagueCode": null,
-        "leagueName": "BRAZIL SERIE A",
+        "leagueName": "MEXICO PRIMERA DIVISION",
         "betType": "M2",
         "isSoloMatch": false,
         "isAlreadyHandled": false,
@@ -2414,13 +2901,13 @@
         "isEAL": false
       },
       {
-        "id": "116",
-        "matchNo": "114",
-        "start": "2025-11-10T07:30:00.000Z",
-        "end": "2025-11-10T09:30:00.000Z",
-        "maxBet": 20000,
+        "id": "135",
+        "matchNo": "133",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
         "leagueCode": null,
-        "leagueName": "BRAZIL SERIE A",
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
         "betType": "M2",
         "isSoloMatch": false,
         "isAlreadyHandled": false,
@@ -2428,41 +2915,125 @@
         "isEAL": false
       },
       {
-        "id": "117",
-        "matchNo": "115",
-        "start": "2025-11-10T08:30:00.000Z",
-        "end": "2025-11-10T10:30:00.000Z",
+        "id": "136",
+        "matchNo": "134",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "137",
+        "matchNo": "135",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "138",
+        "matchNo": "136",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "139",
+        "matchNo": "137",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "140",
+        "matchNo": "138",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "141",
+        "matchNo": "139",
+        "start": "2025-10-19T09:00:00.000Z",
+        "end": "2025-10-19T11:00:00.000Z",
+        "maxBet": 25000,
+        "leagueCode": null,
+        "leagueName": "USA MAJOR LEAGUE SOCCER",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "142",
+        "matchNo": "140",
+        "start": "2025-10-19T09:05:00.000Z",
+        "end": "2025-10-19T11:05:00.000Z",
+        "maxBet": 15000,
+        "leagueCode": null,
+        "leagueName": "MEXICO PRIMERA DIVISION",
+        "betType": "M2",
+        "isSoloMatch": false,
+        "isAlreadyHandled": false,
+        "isEXPT": true,
+        "isEAL": false
+      },
+      {
+        "id": "143",
+        "matchNo": "141",
+        "start": "2025-10-19T09:15:00.000Z",
+        "end": "2025-10-19T11:15:00.000Z",
         "maxBet": 25000,
         "leagueCode": null,
         "leagueName": "ARGENTINA LIGA PROFESIONAL",
         "betType": "M2",
-        "isSoloMatch": false,
+        "isSoloMatch": true,
         "isAlreadyHandled": false,
         "isEXPT": true,
         "isEAL": false
       },
       {
-        "id": "118",
-        "matchNo": "116",
-        "start": "2025-11-10T08:30:00.000Z",
-        "end": "2025-11-10T10:30:00.000Z",
-        "maxBet": 25000,
+        "id": "144",
+        "matchNo": "142",
+        "start": "2025-10-19T11:05:00.000Z",
+        "end": "2025-10-19T13:05:00.000Z",
+        "maxBet": 15000,
         "leagueCode": null,
-        "leagueName": "ARGENTINA LIGA PROFESIONAL",
-        "betType": "M2",
-        "isSoloMatch": false,
-        "isAlreadyHandled": false,
-        "isEXPT": true,
-        "isEAL": false
-      },
-      {
-        "id": "119",
-        "matchNo": "117",
-        "start": "2025-11-10T10:00:00.000Z",
-        "end": "2025-11-10T12:30:00.000Z",
-        "maxBet": 25000,
-        "leagueCode": null,
-        "leagueName": "USA MAJOR LEAGUE SOCCER (PLAY OFF)",
+        "leagueName": "MEXICO PRIMERA DIVISION",
         "betType": "M2",
         "isSoloMatch": true,
         "isAlreadyHandled": false,

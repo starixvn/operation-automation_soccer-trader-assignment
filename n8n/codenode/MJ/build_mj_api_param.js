@@ -113,6 +113,7 @@ const nodeTypeHandlers = {
       isEXPTMatchAssignable: data.isEXPTAssignable !== undefined ? data.isEXPTAssignable : true,
       ignoreLeague: data.ignoreLeague || [],
       nonSoloLeagues: data.nonSoloLeague || [],
+      priorityLeagues: data.priorityLeague || [],
       maxBet: data.maxBet !== undefined ? data.maxBet : 1000000, // Default: 1 million (no limit)
       prioritySkill: data.prioritySkill || null,
       assignedJobs: data.assignedJobs?.map(job => ({

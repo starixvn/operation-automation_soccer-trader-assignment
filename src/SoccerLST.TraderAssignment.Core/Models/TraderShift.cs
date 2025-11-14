@@ -35,4 +35,11 @@ public class TraderShift
     /// When assigned, this trader gets a 1.1x bonus multiplier for Major match assignments in their priority skill
     /// </summary>
     public string? PrioritySkill { get; set; }
+
+    /// <summary>
+    /// Priority leagues for trader (e.g., ["EPL", "LaLiga"], null)
+    /// When a match's league matches one of these priority leagues, this trader gets a bonus multiplier
+    /// Used to prefer traders with league expertise when multiple traders are available
+    /// </summary>
+    public List<string>? PriorityLeagues { get; set; }
 }

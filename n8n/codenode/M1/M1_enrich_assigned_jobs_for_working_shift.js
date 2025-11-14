@@ -78,22 +78,25 @@ function findTraderMatchesInShift(matches, traderName, shift) {
 // Main execution
 const allItems = $input.all();
 
-// Filter and sort matches by priority
-// MJ (all), M1 (unchanged only)
+// Get config
+const configItem = allItems.find(item => item.json.nodeType === 'config');
+const m1IncludeBettype = configItem?.json.m1IncludeBettype || [];
+
+// Filter matches for enrichment
 const matchesToConsider = allItems
   .filter(item => {
-    if (item.json.nodeType !== 'mismatch') return false;
+    if (item.json.nodeType !== 'mismatch') {
+      return false;
+    }
 
-    const betType = item.json.betType;
-    const isUnchanged = item.json.isUnchanged === true;
+    // If m1IncludeBettype is configured, filter by betType
+    if (m1IncludeBettype.length > 0) {
+      const betType = (item.json.betType || '').toUpperCase();
+      return m1IncludeBettype.some(includedBettype => includedBettype.toUpperCase() === betType);
+    }
 
-    // Include all MJ matches
-    if (betType === 'MJ') return true;
-
-    // Include only unchanged M1 matches
-    if (betType === 'M1' && isUnchanged) return true;
-
-    return false;
+    // If no config, default to M1 only
+    return item.json.betType === 'M1' && item.json.isUnchanged;
   })
   .sort((a, b) => {
     const dateA = new Date(a.json.matchDate);
