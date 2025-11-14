@@ -31,11 +31,11 @@ RUN apt-get update && apt-get install -y \
 COPY --from=publish /app/publish .
 
 # Expose port
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5000
+EXPOSE 5001
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_URLS=http://+:5000
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Run the application
