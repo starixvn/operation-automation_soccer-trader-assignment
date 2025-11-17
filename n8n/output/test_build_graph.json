@@ -19,9 +19,9 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 19,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T05:00:00.000Z",
+    "endTime": "2025-08-17T16:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
@@ -45,11 +45,17 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 20,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T05:00:00.000Z",
+        "end": "2025-08-17T16:00:00.000Z"
+      }
+    ]
   },
   {
     "id": 21,
@@ -71,9 +77,9 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 21,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
@@ -97,11 +103,17 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 22,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T05:00:00.000Z",
+    "endTime": "2025-08-17T16:00:00.000Z",
     "isCrossingShift": true,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T05:00:00.000Z",
+        "end": "2025-08-17T16:00:00.000Z"
+      }
+    ]
   },
   {
     "id": 23,
@@ -123,9 +135,9 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 23,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T02:00:00.000Z",
+    "endTime": "2025-08-17T13:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
@@ -149,9 +161,9 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 24,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
@@ -175,40 +187,14 @@
     "prioritySkill": null,
     "nodeType": "workingShift",
     "rowNumber": 25,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T02:00:00.000Z",
+    "endTime": "2025-08-17T13:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
     "id": 26,
-    "group": "CLG",
-    "traderName": "CLGWai",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 26,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": []
-  },
-  {
-    "id": 27,
     "group": "CLG",
     "traderName": "CLGChee",
     "originalLevel": "(3rd)",
@@ -226,15 +212,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 27,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "rowNumber": 26,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T02:00:00.000Z",
+    "endTime": "2025-08-17T13:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
-    "id": 28,
+    "id": 27,
     "group": "SLG",
     "traderName": "SLGBoy",
     "originalLevel": "Member",
@@ -252,21 +238,15 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 28,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T03:00:00.000Z",
-    "endTime": "2025-08-16T14:00:00.000Z",
+    "rowNumber": 27,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T11:15:00.000Z",
-        "end": "2025-08-16T12:15:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 29,
+    "id": 28,
     "group": "SLG",
     "traderName": "SLGPlang",
     "originalLevel": "(3rd)",
@@ -284,15 +264,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 29,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "rowNumber": 28,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
-    "id": 30,
+    "id": 29,
     "group": "SLG",
     "traderName": "SLGGoh",
     "originalLevel": "(2nd)",
@@ -310,15 +290,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 30,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "rowNumber": 29,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
-    "id": 31,
+    "id": 30,
     "group": "SLG",
     "traderName": "SLGJeffrey",
     "originalLevel": "(2nd)",
@@ -336,15 +316,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 31,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "rowNumber": 30,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T03:00:00.000Z",
+    "endTime": "2025-08-17T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
-    "id": 32,
+    "id": 31,
     "group": "SLG",
     "traderName": "SLGWanjie",
     "originalLevel": "(3rd)",
@@ -362,15 +342,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 32,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T02:00:00.000Z",
-    "endTime": "2025-08-16T13:00:00.000Z",
+    "rowNumber": 31,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T02:00:00.000Z",
+    "endTime": "2025-08-17T13:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": []
   },
   {
-    "id": 34,
+    "id": 33,
     "group": "CLG",
     "traderName": "CLGShootbird",
     "originalLevel": "Elite",
@@ -394,68 +374,26 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 34,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 33,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "start": "2025-08-17T17:00:00.000Z",
+        "end": "2025-08-17T20:00:00.000Z"
       },
       {
         "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 35,
-    "group": "CLG",
-    "traderName": "CLGHan",
-    "originalLevel": "[PIC]/Elite",
-    "managementLevel": "[PIC]",
-    "staffLevel": "elite",
-    "isManager": true,
-    "bettype": "OU/M1*1, M2*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 1,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 35,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T20:00:00.000Z",
-        "end": "2025-08-16T22:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 36,
+    "id": 34,
     "group": "CLG",
     "traderName": "CLGBoon",
     "originalLevel": "Elite",
@@ -481,26 +419,26 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 36,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 34,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "start": "2025-08-17T17:00:00.000Z",
+        "end": "2025-08-17T20:00:00.000Z"
       },
       {
         "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 37,
+    "id": 35,
     "group": "CLG",
     "traderName": "CLGTeoh",
     "originalLevel": "[PIC]",
@@ -518,21 +456,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 37,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 35,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "IC",
-        "start": "2025-08-16T13:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T13:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 38,
+    "id": 36,
     "group": "CLG",
     "traderName": "CLGKern",
     "originalLevel": "[PIC]/(1st)",
@@ -550,26 +488,52 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 38,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 36,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 37,
+    "group": "CLG",
+    "traderName": "CLGHan",
+    "originalLevel": "[PIC]/Elite",
+    "managementLevel": "[PIC]",
+    "staffLevel": "elite",
+    "isManager": true,
+    "bettype": "OU/M1*1, M2*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 1,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 37,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T17:00:00.000Z",
-        "end": "2025-08-16T19:00:00.000Z"
+        "type": "M1",
+        "start": "2025-08-17T18:00:00.000Z",
+        "end": "2025-08-17T20:00:00.000Z"
       },
       {
-        "type": "M2",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-16T21:00:00.000Z"
+        "type": "MJ",
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 39,
+    "id": 38,
     "group": "CLG",
     "traderName": "CLGFai",
     "originalLevel": "[PIC]/(1st)",
@@ -587,21 +551,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 39,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 38,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T13:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 40,
+    "id": 39,
     "group": "CLG",
     "traderName": "CLGKuik",
     "originalLevel": "[PIC]/(1st)",
@@ -619,21 +577,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 40,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 39,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "type": "IC",
+        "start": "2025-08-17T13:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 41,
+    "id": 40,
     "group": "CLG",
     "traderName": "CLGHendra",
     "originalLevel": "[PIC]/(1st)",
@@ -651,53 +609,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 41,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 40,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 42,
-    "group": "SLG",
-    "traderName": "SLGYen",
-    "originalLevel": "[PIC]/(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "first",
-    "isManager": true,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 42,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T13:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 43,
+    "id": 41,
     "group": "CLG",
     "traderName": "CLGGary",
     "originalLevel": "(3rd)",
@@ -715,15 +635,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 43,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 41,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 44,
+    "id": 42,
     "group": "CLG",
     "traderName": "CLGAlikin",
     "originalLevel": "Member",
@@ -741,31 +661,21 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 44,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 42,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T20:00:00.000Z",
-        "end": "2025-08-16T22:00:00.000Z"
-      },
-      {
         "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T22:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 45,
+    "id": 43,
     "group": "CLG",
     "traderName": "CLGTeck",
     "originalLevel": "(3rd)",
@@ -783,15 +693,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 45,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 43,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 46,
+    "id": 44,
     "group": "CLG",
     "traderName": "CLGKentham",
     "originalLevel": "(3rd)",
@@ -809,15 +719,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 46,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 44,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 47,
+    "id": 45,
     "group": "CLG",
     "traderName": "CLGIndo",
     "originalLevel": "Member",
@@ -835,31 +745,21 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 47,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 45,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T17:00:00.000Z",
-        "end": "2025-08-16T19:00:00.000Z"
-      },
-      {
         "type": "M1",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-16T21:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T22:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 48,
+    "id": 46,
     "group": "CLG",
     "traderName": "CLGDexter",
     "originalLevel": "(3rd)",
@@ -877,15 +777,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 48,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 46,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 49,
+    "id": 47,
     "group": "CLG",
     "traderName": "CLGHonsang",
     "originalLevel": "(3rd)",
@@ -903,15 +803,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 49,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 47,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 50,
+    "id": 48,
     "group": "CLG",
     "traderName": "CLGTonykho",
     "originalLevel": "OP(2nd)",
@@ -929,15 +829,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 50,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 48,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 51,
+    "id": 49,
     "group": "CLG",
     "traderName": "CLGNhi",
     "originalLevel": "(3rd)",
@@ -955,15 +855,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 51,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 49,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 52,
+    "id": 50,
     "group": "CLG",
     "traderName": "CLGJon",
     "originalLevel": "Elite",
@@ -981,36 +881,26 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 52,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 50,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M1",
-        "start": "2025-08-16T13:00:00.000Z",
-        "end": "2025-08-16T15:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T17:30:00.000Z",
-        "end": "2025-08-16T19:30:00.000Z"
+        "start": "2025-08-17T20:00:00.000Z",
+        "end": "2025-08-17T22:00:00.000Z"
       },
       {
         "type": "M1",
-        "start": "2025-08-16T19:30:00.000Z",
-        "end": "2025-08-16T21:30:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "start": "2025-08-17T22:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       }
     ]
   },
   {
-    "id": 53,
+    "id": 51,
     "group": "CLG",
     "traderName": "CLGSan",
     "originalLevel": "(3rd)",
@@ -1028,15 +918,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 53,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 51,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 54,
+    "id": 52,
     "group": "CLG",
     "traderName": "CLGSandy",
     "originalLevel": "(3rd)",
@@ -1054,15 +944,47 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 54,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 52,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 55,
+    "id": 53,
+    "group": "SLG",
+    "traderName": "SLGYen",
+    "originalLevel": "[PIC]/(1st)",
+    "managementLevel": "[PIC]",
+    "staffLevel": "first",
+    "isManager": true,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 53,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T13:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 54,
     "group": "SLG",
     "traderName": "SLGWubai",
     "originalLevel": "(1st)",
@@ -1080,21 +1002,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 55,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 54,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 56,
+    "id": 55,
     "group": "SLG",
     "traderName": "SLGLina",
     "originalLevel": "(1st)",
@@ -1112,26 +1028,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 56,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-16T23:00:00.000Z",
+    "rowNumber": 55,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-17T23:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T21:00:00.000Z",
-        "end": "2025-08-16T23:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 57,
+    "id": 56,
     "group": "SLG",
     "traderName": "SLGChris",
     "originalLevel": "(2nd)",
@@ -1149,21 +1054,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 57,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-16T23:00:00.000Z",
+    "rowNumber": 56,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-17T23:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 58,
+    "id": 57,
     "group": "SLG",
     "traderName": "SLGKris",
     "originalLevel": "(3rd)",
@@ -1181,21 +1080,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 58,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-16T23:00:00.000Z",
+    "rowNumber": 57,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-17T23:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 59,
+    "id": 58,
     "group": "SLG",
     "traderName": "SLGTylen",
     "originalLevel": "(2nd)",
@@ -1213,26 +1106,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 59,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-16T23:00:00.000Z",
+    "rowNumber": 58,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-17T23:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T21:00:00.000Z",
-        "end": "2025-08-16T23:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 60,
+    "id": 59,
     "group": "SLG",
     "traderName": "SLGKenHong",
     "originalLevel": "(2nd)",
@@ -1250,21 +1132,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 60,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 59,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T18:30:00.000Z",
-        "end": "2025-08-16T20:30:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 61,
+    "id": 60,
     "group": "SLG",
     "traderName": "SLGLee",
     "originalLevel": "(3rd)",
@@ -1282,15 +1158,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 61,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T13:00:00.000Z",
-    "endTime": "2025-08-17T00:00:00.000Z",
+    "rowNumber": 60,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T13:00:00.000Z",
+    "endTime": "2025-08-18T00:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 62,
+    "id": 61,
     "group": "CLG",
     "traderName": "CLGNicckz",
     "originalLevel": "(3rd)",
@@ -1308,15 +1184,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 62,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 61,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      }
+    ]
   },
   {
-    "id": 63,
+    "id": 62,
     "group": "CLG",
     "traderName": "CLGYew",
     "originalLevel": "(3rd)",
@@ -1334,15 +1216,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 63,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 62,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      }
+    ]
   },
   {
-    "id": 64,
+    "id": 63,
     "group": "CLG",
     "traderName": "CLGHuat",
     "originalLevel": "(2nd)",
@@ -1360,21 +1248,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 64,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 63,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M1",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
       }
     ]
   },
   {
-    "id": 65,
+    "id": 64,
     "group": "CLG",
     "traderName": "CLGBoonlay",
     "originalLevel": "Member",
@@ -1392,31 +1280,31 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 65,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 64,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T17:30:00.000Z",
-        "end": "2025-08-16T19:30:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T19:30:00.000Z",
-        "end": "2025-08-16T21:30:00.000Z"
+        "type": "M2",
+        "start": "2025-08-17T18:30:00.000Z",
+        "end": "2025-08-17T20:30:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-16T23:00:00.000Z",
-        "end": "2025-08-17T01:00:00.000Z"
+        "start": "2025-08-17T20:45:00.000Z",
+        "end": "2025-08-17T22:45:00.000Z"
+      },
+      {
+        "type": "M1",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
       }
     ]
   },
   {
-    "id": 66,
+    "id": 65,
     "group": "CLG",
     "traderName": "CLGTeckkeong",
     "originalLevel": "(2nd)",
@@ -1434,26 +1322,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 66,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 65,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M1",
-        "start": "2025-08-16T17:00:00.000Z",
-        "end": "2025-08-16T19:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T23:00:00.000Z",
-        "end": "2025-08-17T01:00:00.000Z"
+        "start": "2025-08-17T22:30:00.000Z",
+        "end": "2025-08-18T00:30:00.000Z"
       }
     ]
   },
   {
-    "id": 67,
+    "id": 66,
     "group": "CLG",
     "traderName": "CLGTotti",
     "originalLevel": "(2nd)",
@@ -1471,26 +1354,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 67,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T14:00:00.000Z",
-    "endTime": "2025-08-17T01:00:00.000Z",
+    "rowNumber": 66,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T14:00:00.000Z",
+    "endTime": "2025-08-18T01:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M1",
-        "start": "2025-08-16T17:00:00.000Z",
-        "end": "2025-08-16T19:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T23:00:00.000Z",
-        "end": "2025-08-17T01:00:00.000Z"
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
       }
     ]
   },
   {
-    "id": 68,
+    "id": 67,
     "group": "CLG",
     "traderName": "CLGChian",
     "originalLevel": "Elite",
@@ -1514,36 +1392,31 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 68,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T16:00:00.000Z",
-    "endTime": "2025-08-17T03:00:00.000Z",
+    "rowNumber": 67,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T16:00:00.000Z",
+    "endTime": "2025-08-18T03:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
+        "type": "M1",
+        "start": "2025-08-17T17:30:00.000Z",
+        "end": "2025-08-17T19:30:00.000Z"
+      },
+      {
         "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-18T00:00:00.000Z"
       },
       {
         "type": "M1",
-        "start": "2025-08-16T20:00:00.000Z",
-        "end": "2025-08-16T22:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-17T00:00:00.000Z",
-        "end": "2025-08-17T02:00:00.000Z"
+        "start": "2025-08-18T00:00:00.000Z",
+        "end": "2025-08-18T02:00:00.000Z"
       }
     ]
   },
   {
-    "id": 69,
+    "id": 68,
     "group": "CLG",
     "traderName": "CLGChai",
     "originalLevel": "Elite",
@@ -1567,63 +1440,31 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 69,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T16:00:00.000Z",
-    "endTime": "2025-08-17T03:00:00.000Z",
+    "rowNumber": 68,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T16:00:00.000Z",
+    "endTime": "2025-08-18T03:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T20:45:00.000Z",
-        "end": "2025-08-16T22:45:00.000Z"
+        "type": "M1",
+        "start": "2025-08-17T18:15:00.000Z",
+        "end": "2025-08-17T20:15:00.000Z"
       },
       {
         "type": "M1",
-        "start": "2025-08-16T23:30:00.000Z",
-        "end": "2025-08-17T01:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 70,
-    "group": "CLG",
-    "traderName": "CLGGee",
-    "originalLevel": "[PIC]/Elite",
-    "managementLevel": "[PIC]",
-    "staffLevel": "elite",
-    "isManager": true,
-    "bettype": "HDP/M1*1, M2*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 1,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 70,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
+        "start": "2025-08-17T20:30:00.000Z",
+        "end": "2025-08-17T22:30:00.000Z"
+      },
       {
-        "type": "IC",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
+        "type": "MJ",
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
       }
     ]
   },
   {
-    "id": 71,
+    "id": 69,
     "group": "SLG",
     "traderName": "SLGPing",
     "originalLevel": "[PIC]/(1st)",
@@ -1641,31 +1482,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 71,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
+    "rowNumber": 69,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-16T23:30:00.000Z",
-        "end": "2025-08-17T01:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T02:30:00.000Z",
-        "end": "2025-08-17T04:30:00.000Z"
+        "type": "IC",
+        "start": "2025-08-17T18:00:00.000Z",
+        "end": "2025-08-18T05:00:00.000Z"
       }
     ]
   },
   {
-    "id": 72,
+    "id": 70,
     "group": "SLG",
     "traderName": "SLGJiaming",
     "originalLevel": "[PIC]/Elite",
@@ -1683,1096 +1514,36 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 72,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T18:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
+    "rowNumber": 70,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
+        "type": "M1",
+        "start": "2025-08-17T18:00:00.000Z",
+        "end": "2025-08-17T20:00:00.000Z"
+      },
+      {
+        "type": "M1",
+        "start": "2025-08-17T20:00:00.000Z",
+        "end": "2025-08-17T22:00:00.000Z"
+      },
+      {
         "type": "MJ",
-        "start": "2025-08-16T18:00:00.000Z",
-        "end": "2025-08-16T20:00:00.000Z"
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-16T20:00:00.000Z",
-        "end": "2025-08-16T22:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-17T00:45:00.000Z",
-        "end": "2025-08-17T02:45:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-17T03:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
+        "start": "2025-08-18T02:30:00.000Z",
+        "end": "2025-08-18T04:30:00.000Z"
       }
     ]
   },
   {
-    "id": 73,
-    "group": "CLG",
-    "traderName": "CLGRaymond",
-    "originalLevel": "[PIC]",
-    "managementLevel": "[PIC]",
-    "staffLevel": null,
-    "isManager": true,
-    "bettype": "HDP/(No Real)",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 73,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-17T06:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 74,
-    "group": "CLG",
-    "traderName": "CLGWen",
-    "originalLevel": "[PIC]/Elite",
-    "managementLevel": "[PIC]",
-    "staffLevel": "elite",
-    "isManager": true,
-    "bettype": "HDP/M1*1, M2*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 1,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 74,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T19:30:00.000Z",
-        "end": "2025-08-16T21:30:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T00:30:00.000Z",
-        "end": "2025-08-17T02:30:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 75,
-    "group": "CLG",
-    "traderName": "CLGSeang",
-    "originalLevel": "[PIC]/Elite",
-    "managementLevel": "[PIC]",
-    "staffLevel": "elite",
-    "isManager": true,
-    "bettype": "OU/M1*1, M2*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 1,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 75,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T19:35:00.000Z",
-        "end": "2025-08-16T21:35:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T01:00:00.000Z",
-        "end": "2025-08-17T03:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 76,
-    "group": "CLG",
-    "traderName": "CLGBay",
-    "originalLevel": "[PIC]/OP(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "op_first",
-    "isManager": true,
-    "bettype": "2[OP]",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 76,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 77,
-    "group": "CLG",
-    "traderName": "CLGYao",
-    "originalLevel": "[PIC]/OP(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "op_first",
-    "isManager": true,
-    "bettype": "2[OP]",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 77,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-17T06:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 78,
-    "group": "CLG",
-    "traderName": "CLGShuan",
-    "originalLevel": "Elite",
-    "managementLevel": null,
-    "staffLevel": "elite",
-    "isManager": false,
-    "bettype": "OU/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 78,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T19:30:00.000Z",
-        "end": "2025-08-16T21:30:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T00:00:00.000Z",
-        "end": "2025-08-17T02:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:05:00.000Z",
-        "end": "2025-08-17T05:05:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 79,
-    "group": "CLG",
-    "traderName": "CLGAaron",
-    "originalLevel": "Member",
-    "managementLevel": null,
-    "staffLevel": "member",
-    "isManager": false,
-    "bettype": "OU/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 79,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-16T22:30:00.000Z",
-        "end": "2025-08-17T00:30:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-17T02:00:00.000Z",
-        "end": "2025-08-17T04:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 80,
-    "group": "CLG",
-    "traderName": "CLGNikkol",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "OU/R-FS/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 80,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 81,
-    "group": "CLG",
-    "traderName": "CLGGillian",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "OU/R-FS/M1*2/[BK CR]",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 81,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T02:45:00.000Z",
-        "end": "2025-08-17T04:45:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 82,
-    "group": "CLG",
-    "traderName": "CLGKilos",
-    "originalLevel": "Elite",
-    "managementLevel": null,
-    "staffLevel": "elite",
-    "isManager": false,
-    "bettype": "HDP/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 82,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T19:35:00.000Z",
-        "end": "2025-08-16T21:35:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T01:00:00.000Z",
-        "end": "2025-08-17T03:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 83,
-    "group": "CLG",
-    "traderName": "CLGTommylim",
-    "originalLevel": "OP(1st)",
-    "managementLevel": null,
-    "staffLevel": "op_first",
-    "isManager": false,
-    "bettype": "2[OP]/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 83,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 84,
-    "group": "CLG",
-    "traderName": "CLGKit",
-    "originalLevel": "Elite",
-    "managementLevel": null,
-    "staffLevel": "elite",
-    "isManager": false,
-    "bettype": "OU/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": "OU",
-    "nodeType": "workingShift",
-    "rowNumber": 84,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "MJ",
-        "start": "2025-08-16T19:30:00.000Z",
-        "end": "2025-08-16T21:30:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T00:30:00.000Z",
-        "end": "2025-08-17T02:30:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 85,
-    "group": "SLG",
-    "traderName": "SLGManzai",
-    "originalLevel": "OP(1st)",
-    "managementLevel": null,
-    "staffLevel": "op_first",
-    "isManager": false,
-    "bettype": "2[OP]/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 85,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 86,
-    "group": "CLG",
-    "traderName": "CLGMan88",
-    "originalLevel": "OP(1st)",
-    "managementLevel": null,
-    "staffLevel": "op_first",
-    "isManager": false,
-    "bettype": "2[OP]/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 86,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 87,
-    "group": "CLG",
-    "traderName": "CLGGreen",
-    "originalLevel": "OP(2nd)",
-    "managementLevel": null,
-    "staffLevel": "op_second",
-    "isManager": false,
-    "bettype": "2[OP]/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 87,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 88,
-    "group": "CLG",
-    "traderName": "CLGMichelle",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "OU/R-FS/M1*2/[BK CR]",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 88,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 89,
-    "group": "CLG",
-    "traderName": "CLGXavi",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 89,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 90,
-    "group": "CLG",
-    "traderName": "CLGGachun",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 90,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 91,
-    "group": "CLG",
-    "traderName": "CLGTheeng",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 91,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 92,
-    "group": "SLG",
-    "traderName": "SLGRandy",
-    "originalLevel": "[PIC]",
-    "managementLevel": "[PIC]",
-    "staffLevel": null,
-    "isManager": true,
-    "bettype": "2/(No Real)",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 92,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 93,
-    "group": "SLG",
-    "traderName": "SLGAlbert",
-    "originalLevel": "[PIC]/(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "first",
-    "isManager": true,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 93,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "IC",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 94,
-    "group": "SLG",
-    "traderName": "SLGJenny",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "OU/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 94,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T02:15:00.000Z",
-        "end": "2025-08-17T04:15:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 95,
-    "group": "SLG",
-    "traderName": "SLGTom",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "HDP/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 95,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T01:30:00.000Z",
-        "end": "2025-08-17T03:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 96,
-    "group": "SLG",
-    "traderName": "SLGHanwei",
-    "originalLevel": "Elite",
-    "managementLevel": null,
-    "staffLevel": "elite",
-    "isManager": false,
-    "bettype": "HDP/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": "HDP",
-    "nodeType": "workingShift",
-    "rowNumber": 96,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M1",
-        "start": "2025-08-16T19:00:00.000Z",
-        "end": "2025-08-16T21:00:00.000Z"
-      },
-      {
-        "type": "M1",
-        "start": "2025-08-16T21:00:00.000Z",
-        "end": "2025-08-16T23:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-16T23:00:00.000Z",
-        "end": "2025-08-17T01:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T01:30:00.000Z",
-        "end": "2025-08-17T03:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 97,
-    "group": "SLG",
-    "traderName": "SLGJanet",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 97,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 98,
-    "group": "SLG",
-    "traderName": "SLGCory",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 98,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 99,
-    "group": "SLG",
-    "traderName": "SLGNarsi",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 99,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T03:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 100,
-    "group": "SLG",
-    "traderName": "SLGOscar",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "2/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 100,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T01:30:00.000Z",
-        "end": "2025-08-17T03:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 101,
-    "group": "SLG",
-    "traderName": "SLGLMax",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*2/[No CR]",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 101,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 102,
-    "group": "SLG",
-    "traderName": "SLGNeo",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 102,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T03:00:00.000Z",
-        "end": "2025-08-17T05:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 103,
-    "group": "SLG",
-    "traderName": "SLGEven",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 103,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 104,
-    "group": "SLG",
-    "traderName": "SLGBaron",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 104,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 105,
-    "group": "SLG",
-    "traderName": "SLGDickson",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 105,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T05:00:00.000Z",
-    "isCrossingShift": false,
-    "assignedJobs": []
-  },
-  {
-    "id": 106,
+    "id": 71,
     "group": "SLG",
     "traderName": "SLGKarson",
     "originalLevel": "OP(1st)",
@@ -2790,17 +1561,678 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 106,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T04:00:00.000Z",
+    "rowNumber": 71,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T18:00:00.000Z",
+    "endTime": "2025-08-18T03:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 107,
+    "id": 72,
+    "group": "CLG",
+    "traderName": "CLGRaymond",
+    "originalLevel": "[PIC]",
+    "managementLevel": "[PIC]",
+    "staffLevel": null,
+    "isManager": true,
+    "bettype": "HDP/(No Real)",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 72,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T19:00:00.000Z",
+        "end": "2025-08-18T06:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "group": "CLG",
+    "traderName": "CLGWen",
+    "originalLevel": "[PIC]/Elite",
+    "managementLevel": "[PIC]",
+    "staffLevel": "elite",
+    "isManager": true,
+    "bettype": "HDP/M1*1, M2*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 1,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 73,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M1",
+        "start": "2025-08-17T19:00:00.000Z",
+        "end": "2025-08-17T21:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-17T23:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:30:00.000Z",
+        "end": "2025-08-18T01:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-18T01:30:00.000Z",
+        "end": "2025-08-18T03:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-18T03:30:00.000Z",
+        "end": "2025-08-18T05:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "group": "CLG",
+    "traderName": "CLGSeang",
+    "originalLevel": "[PIC]/Elite",
+    "managementLevel": "[PIC]",
+    "staffLevel": "elite",
+    "isManager": true,
+    "bettype": "OU/M1*1, M2*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 1,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 74,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M1",
+        "start": "2025-08-17T20:00:00.000Z",
+        "end": "2025-08-17T22:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T03:30:00.000Z",
+        "end": "2025-08-18T05:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "group": "CLG",
+    "traderName": "CLGBay",
+    "originalLevel": "[PIC]/OP(1st)",
+    "managementLevel": "[PIC]",
+    "staffLevel": "op_first",
+    "isManager": true,
+    "bettype": "2[OP]",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 75,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 76,
+    "group": "CLG",
+    "traderName": "CLGYao",
+    "originalLevel": "[PIC]/OP(1st)",
+    "managementLevel": "[PIC]",
+    "staffLevel": "op_first",
+    "isManager": true,
+    "bettype": "2[OP]",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 76,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 77,
+    "group": "CLG",
+    "traderName": "CLGShuan",
+    "originalLevel": "Elite",
+    "managementLevel": null,
+    "staffLevel": "elite",
+    "isManager": false,
+    "bettype": "OU/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 77,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M1",
+        "start": "2025-08-17T20:30:00.000Z",
+        "end": "2025-08-17T22:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T02:15:00.000Z",
+        "end": "2025-08-18T04:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "group": "CLG",
+    "traderName": "CLGNikkol",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "OU/R-FS/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 78,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 79,
+    "group": "CLG",
+    "traderName": "CLGGillian",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "OU/R-FS/M1*2/[BK CR]",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 79,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:30:00.000Z",
+        "end": "2025-08-18T03:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "group": "CLG",
+    "traderName": "CLGKilos",
+    "originalLevel": "Elite",
+    "managementLevel": null,
+    "staffLevel": "elite",
+    "isManager": false,
+    "bettype": "HDP/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 80,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M1",
+        "start": "2025-08-17T20:30:00.000Z",
+        "end": "2025-08-17T22:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T02:30:00.000Z",
+        "end": "2025-08-18T04:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "group": "CLG",
+    "traderName": "CLGTommylim",
+    "originalLevel": "OP(1st)",
+    "managementLevel": null,
+    "staffLevel": "op_first",
+    "isManager": false,
+    "bettype": "2[OP]/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 81,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 82,
+    "group": "CLG",
+    "traderName": "CLGKit",
+    "originalLevel": "Elite",
+    "managementLevel": null,
+    "staffLevel": "elite",
+    "isManager": false,
+    "bettype": "OU/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": "OU",
+    "nodeType": "workingShift",
+    "rowNumber": 82,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "MJ",
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-17T23:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:30:00.000Z",
+        "end": "2025-08-18T01:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-18T01:30:00.000Z",
+        "end": "2025-08-18T03:30:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-18T03:30:00.000Z",
+        "end": "2025-08-18T05:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 83,
     "group": "SLG",
-    "traderName": "SLGRuby",
+    "traderName": "SLGManzai",
+    "originalLevel": "OP(1st)",
+    "managementLevel": null,
+    "staffLevel": "op_first",
+    "isManager": false,
+    "bettype": "2[OP]/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 83,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 84,
+    "group": "CLG",
+    "traderName": "CLGMan88",
+    "originalLevel": "OP(1st)",
+    "managementLevel": null,
+    "staffLevel": "op_first",
+    "isManager": false,
+    "bettype": "2[OP]/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 84,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 85,
+    "group": "CLG",
+    "traderName": "CLGGreen",
+    "originalLevel": "OP(2nd)",
+    "managementLevel": null,
+    "staffLevel": "op_second",
+    "isManager": false,
+    "bettype": "2[OP]/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 85,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 86,
+    "group": "CLG",
+    "traderName": "CLGMichelle",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "OU/R-FS/M1*2/[BK CR]",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 86,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 87,
+    "group": "CLG",
+    "traderName": "CLGXavi",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 87,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "group": "CLG",
+    "traderName": "CLGGachun",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 88,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:15:00.000Z",
+        "end": "2025-08-18T03:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "group": "CLG",
+    "traderName": "CLGTheeng",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 89,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 90,
+    "group": "SLG",
+    "traderName": "SLGRandy",
+    "originalLevel": "[PIC]",
+    "managementLevel": "[PIC]",
+    "staffLevel": null,
+    "isManager": true,
+    "bettype": "2/(No Real)",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 90,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T19:00:00.000Z",
+        "end": "2025-08-18T05:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "group": "SLG",
+    "traderName": "SLGAlbert",
+    "originalLevel": "[PIC]/(1st)",
+    "managementLevel": "[PIC]",
+    "staffLevel": "first",
+    "isManager": true,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 91,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "IC",
+        "start": "2025-08-17T19:00:00.000Z",
+        "end": "2025-08-18T05:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "group": "SLG",
+    "traderName": "SLGJenny",
     "originalLevel": "(2nd)",
     "managementLevel": null,
     "staffLevel": "second",
@@ -2816,21 +2248,358 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 107,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T04:00:00.000Z",
+    "rowNumber": 92,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
+        "type": "M1",
+        "start": "2025-08-17T22:30:00.000Z",
+        "end": "2025-08-18T00:30:00.000Z"
+      },
+      {
         "type": "M2",
-        "start": "2025-08-17T02:00:00.000Z",
-        "end": "2025-08-17T04:00:00.000Z"
+        "start": "2025-08-18T00:30:00.000Z",
+        "end": "2025-08-18T02:30:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T03:00:00.000Z",
+        "end": "2025-08-18T05:00:00.000Z"
       }
     ]
   },
   {
-    "id": 108,
+    "id": 93,
+    "group": "SLG",
+    "traderName": "SLGHanwei",
+    "originalLevel": "Elite",
+    "managementLevel": null,
+    "staffLevel": "elite",
+    "isManager": false,
+    "bettype": "HDP/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": "HDP",
+    "nodeType": "workingShift",
+    "rowNumber": 93,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M1",
+        "start": "2025-08-17T20:00:00.000Z",
+        "end": "2025-08-17T23:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      },
+      {
+        "type": "MJ",
+        "start": "2025-08-18T02:45:00.000Z",
+        "end": "2025-08-18T04:45:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "group": "SLG",
+    "traderName": "SLGJanet",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/R-FS/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 94,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 95,
+    "group": "SLG",
+    "traderName": "SLGCory",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/R-FS/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 95,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 96,
+    "group": "SLG",
+    "traderName": "SLGNarsi",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "2/R-FS/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 96,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:30:00.000Z",
+        "end": "2025-08-18T04:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "group": "SLG",
+    "traderName": "SLGOscar",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "2/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 97,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T22:30:00.000Z",
+        "end": "2025-08-18T00:30:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:30:00.000Z",
+        "end": "2025-08-18T04:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "group": "SLG",
+    "traderName": "SLGLMax",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*2/[No CR]",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 98,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:30:00.000Z",
+        "end": "2025-08-18T01:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "group": "SLG",
+    "traderName": "SLGNeo",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "2/R-FS/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 99,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T00:00:00.000Z",
+        "end": "2025-08-18T02:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T03:00:00.000Z",
+        "end": "2025-08-18T05:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "group": "SLG",
+    "traderName": "SLGEven",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 100,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": []
+  },
+  {
+    "id": 101,
+    "group": "SLG",
+    "traderName": "SLGBaron",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 101,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:00:00.000Z",
+        "end": "2025-08-18T03:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "group": "SLG",
+    "traderName": "SLGDickson",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 102,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T05:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-17T23:30:00.000Z",
+        "end": "2025-08-18T01:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 103,
     "group": "SLG",
     "traderName": "SLGBou",
     "originalLevel": "Member",
@@ -2848,36 +2617,31 @@
     "maxBet": 1000000,
     "prioritySkill": "OU",
     "nodeType": "workingShift",
-    "rowNumber": 108,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "rowNumber": 103,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M2",
-        "start": "2025-08-16T21:00:00.000Z",
-        "end": "2025-08-16T23:00:00.000Z"
+        "start": "2025-08-17T21:00:00.000Z",
+        "end": "2025-08-17T23:00:00.000Z"
       },
       {
         "type": "MJ",
-        "start": "2025-08-16T23:00:00.000Z",
-        "end": "2025-08-17T01:00:00.000Z"
+        "start": "2025-08-17T23:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
       },
       {
         "type": "MJ",
-        "start": "2025-08-17T01:30:00.000Z",
-        "end": "2025-08-17T03:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
+        "start": "2025-08-18T02:45:00.000Z",
+        "end": "2025-08-18T04:45:00.000Z"
       }
     ]
   },
   {
-    "id": 109,
+    "id": 104,
     "group": "SLG",
     "traderName": "SLGMing",
     "originalLevel": "Member",
@@ -2895,31 +2659,36 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 109,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "rowNumber": 104,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M2",
-        "start": "2025-08-16T22:30:00.000Z",
-        "end": "2025-08-17T00:30:00.000Z"
+        "start": "2025-08-17T19:30:00.000Z",
+        "end": "2025-08-17T21:30:00.000Z"
+      },
+      {
+        "type": "M1",
+        "start": "2025-08-17T22:30:00.000Z",
+        "end": "2025-08-18T00:30:00.000Z"
+      },
+      {
+        "type": "M1",
+        "start": "2025-08-18T01:15:00.000Z",
+        "end": "2025-08-18T03:15:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-17T01:00:00.000Z",
-        "end": "2025-08-17T03:00:00.000Z"
-      },
-      {
-        "type": "MJ",
-        "start": "2025-08-17T03:05:00.000Z",
-        "end": "2025-08-17T05:05:00.000Z"
+        "start": "2025-08-18T03:15:00.000Z",
+        "end": "2025-08-18T05:15:00.000Z"
       }
     ]
   },
   {
-    "id": 110,
+    "id": 105,
     "group": "SLG",
     "traderName": "SLGChung",
     "originalLevel": "(3rd)",
@@ -2937,15 +2706,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 110,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "rowNumber": 105,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:00:00.000Z",
+        "end": "2025-08-18T03:00:00.000Z"
+      }
+    ]
   },
   {
-    "id": 111,
+    "id": 106,
     "group": "SLG",
     "traderName": "SLGMelvin",
     "originalLevel": "(3rd)",
@@ -2963,15 +2738,58 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 111,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "rowNumber": 106,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "isCrossingShift": false,
-    "assignedJobs": []
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T01:00:00.000Z",
+        "end": "2025-08-18T03:00:00.000Z"
+      }
+    ]
   },
   {
-    "id": 116,
+    "id": 111,
+    "group": "SLG",
+    "traderName": "SLGTom",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "HDP/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 111,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T21:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
+    "isCrossingShift": false,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T00:00:00.000Z",
+        "end": "2025-08-18T02:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T03:15:00.000Z",
+        "end": "2025-08-18T05:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 112,
     "group": "CLG",
     "traderName": "CLGJoseph",
     "originalLevel": "Member",
@@ -2989,31 +2807,31 @@
     "maxBet": 1000000,
     "prioritySkill": "HDP",
     "nodeType": "workingShift",
-    "rowNumber": 116,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T22:00:00.000Z",
-    "endTime": "2025-08-17T09:00:00.000Z",
+    "rowNumber": 112,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T22:00:00.000Z",
+    "endTime": "2025-08-18T09:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "M1",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "type": "MJ",
+        "start": "2025-08-17T23:15:00.000Z",
+        "end": "2025-08-18T02:15:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-17T01:30:00.000Z",
-        "end": "2025-08-17T03:30:00.000Z"
+        "start": "2025-08-18T02:15:00.000Z",
+        "end": "2025-08-18T04:15:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-17T03:30:00.000Z",
-        "end": "2025-08-17T05:30:00.000Z"
+        "start": "2025-08-18T05:30:00.000Z",
+        "end": "2025-08-18T07:30:00.000Z"
       }
     ]
   },
   {
-    "id": 117,
+    "id": 113,
     "group": "CLG",
     "traderName": "CLGJacky",
     "originalLevel": "Member",
@@ -3031,36 +2849,31 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 117,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T22:00:00.000Z",
-    "endTime": "2025-08-17T09:00:00.000Z",
+    "rowNumber": 113,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T22:00:00.000Z",
+    "endTime": "2025-08-18T09:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
-        "type": "M2",
-        "start": "2025-08-16T22:00:00.000Z",
-        "end": "2025-08-17T00:00:00.000Z"
+        "type": "M1",
+        "start": "2025-08-17T22:45:00.000Z",
+        "end": "2025-08-18T00:45:00.000Z"
+      },
+      {
+        "type": "M1",
+        "start": "2025-08-18T02:00:00.000Z",
+        "end": "2025-08-18T04:00:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-17T00:15:00.000Z",
-        "end": "2025-08-17T02:15:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T02:30:00.000Z",
-        "end": "2025-08-17T04:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T05:30:00.000Z",
-        "end": "2025-08-17T07:30:00.000Z"
+        "start": "2025-08-18T07:00:00.000Z",
+        "end": "2025-08-18T09:00:00.000Z"
       }
     ]
   },
   {
-    "id": 118,
+    "id": 114,
     "group": "CLG",
     "traderName": "CLGSern",
     "originalLevel": "(2nd)",
@@ -3078,26 +2891,36 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 118,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T22:00:00.000Z",
-    "endTime": "2025-08-17T09:00:00.000Z",
+    "rowNumber": 114,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T22:00:00.000Z",
+    "endTime": "2025-08-18T09:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": [
       {
         "type": "M2",
-        "start": "2025-08-17T01:15:00.000Z",
-        "end": "2025-08-17T03:15:00.000Z"
+        "start": "2025-08-17T22:00:00.000Z",
+        "end": "2025-08-18T01:00:00.000Z"
       },
       {
         "type": "M2",
-        "start": "2025-08-17T03:15:00.000Z",
-        "end": "2025-08-17T05:15:00.000Z"
+        "start": "2025-08-18T01:00:00.000Z",
+        "end": "2025-08-18T03:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T03:30:00.000Z",
+        "end": "2025-08-18T05:30:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T06:00:00.000Z",
+        "end": "2025-08-18T08:00:00.000Z"
       }
     ]
   },
   {
-    "id": 119,
+    "id": 115,
     "group": "CLG",
     "traderName": "CLGIvan",
     "originalLevel": "OP(2nd)",
@@ -3115,15 +2938,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 119,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T22:00:00.000Z",
-    "endTime": "2025-08-17T09:00:00.000Z",
+    "rowNumber": 115,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T22:00:00.000Z",
+    "endTime": "2025-08-18T09:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 120,
+    "id": 116,
     "group": "CLG",
     "traderName": "CLGPiew",
     "originalLevel": "OP(2nd)",
@@ -3141,15 +2964,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 120,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T22:00:00.000Z",
-    "endTime": "2025-08-17T09:00:00.000Z",
+    "rowNumber": 116,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T22:00:00.000Z",
+    "endTime": "2025-08-18T09:00:00.000Z",
     "isCrossingShift": false,
     "assignedJobs": []
   },
   {
-    "id": 121,
+    "id": 117,
     "group": "CLG",
     "traderName": "CLGKelven",
     "originalLevel": "[PIC]/(1st)",
@@ -3167,206 +2990,21 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 121,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
+    "rowNumber": 117,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T04:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": [
       {
-        "type": "M2",
-        "start": "2025-08-17T08:30:00.000Z",
-        "end": "2025-08-17T10:30:00.000Z"
+        "type": "IC",
+        "start": "2025-08-18T04:00:00.000Z",
+        "end": "2025-08-18T14:00:00.000Z"
       }
     ]
   },
   {
-    "id": 122,
-    "group": "CLG",
-    "traderName": "CLGCandy",
-    "originalLevel": "[PIC]/(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "first",
-    "isManager": true,
-    "bettype": "HDP/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 122,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 123,
-    "group": "CLG",
-    "traderName": "CLGHoo",
-    "originalLevel": "[PIC]/Elite",
-    "managementLevel": "[PIC]",
-    "staffLevel": "elite",
-    "isManager": true,
-    "bettype": "OU/M1*1, M2*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 1,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 123,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T05:30:00.000Z",
-        "end": "2025-08-17T07:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T10:30:00.000Z",
-        "end": "2025-08-17T12:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 124,
-    "group": "CLG",
-    "traderName": "CLGAIK",
-    "originalLevel": "[PIC]/(1st)",
-    "managementLevel": "[PIC]",
-    "staffLevel": "first",
-    "isManager": true,
-    "bettype": "OU/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 124,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T08:30:00.000Z",
-        "end": "2025-08-17T10:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 125,
-    "group": "CLG",
-    "traderName": "CLGKokchen",
-    "originalLevel": "(1st)",
-    "managementLevel": null,
-    "staffLevel": "first",
-    "isManager": false,
-    "bettype": "OU/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 125,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T08:30:00.000Z",
-        "end": "2025-08-17T10:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 126,
-    "group": "CLG",
-    "traderName": "CLGTommy",
-    "originalLevel": "Member",
-    "managementLevel": null,
-    "staffLevel": "member",
-    "isManager": false,
-    "bettype": "HDP/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 126,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T11:00:00.000Z",
-        "end": "2025-08-17T13:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 127,
+    "id": 118,
     "group": "CLG",
     "traderName": "CLGRobin",
     "originalLevel": "(3rd)",
@@ -3384,100 +3022,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 127,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
+    "rowNumber": 118,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T04:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
     "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T09:00:00.000Z",
-        "end": "2025-08-17T11:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 128,
-    "group": "CLG",
-    "traderName": "CLGChee",
-    "originalLevel": "(3rd)",
-    "managementLevel": null,
-    "staffLevel": "third",
-    "isManager": false,
-    "bettype": "2/R-FS/M1*1",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 1,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 128,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:07:00.000Z",
-        "end": "2025-08-17T09:07:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 129,
-    "group": "SLG",
-    "traderName": "SLGBoy",
-    "originalLevel": "Member",
-    "managementLevel": null,
-    "staffLevel": "member",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": "HDP",
-    "nodeType": "workingShift",
-    "rowNumber": 129,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T05:30:00.000Z",
-        "end": "2025-08-17T07:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      },
-      {
-        "type": "M2",
-        "start": "2025-08-17T09:30:00.000Z",
-        "end": "2025-08-17T11:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 130,
+    "id": 119,
     "group": "SLG",
     "traderName": "SLGPlang",
     "originalLevel": "(3rd)",
@@ -3495,85 +3048,15 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 130,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
+    "rowNumber": 119,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T04:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
     "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T09:00:00.000Z",
-        "end": "2025-08-17T11:00:00.000Z"
-      }
-    ]
+    "assignedJobs": []
   },
   {
-    "id": 131,
-    "group": "SLG",
-    "traderName": "SLGGoh",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 131,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T07:30:00.000Z",
-        "end": "2025-08-17T09:30:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 132,
-    "group": "SLG",
-    "traderName": "SLGJeffrey",
-    "originalLevel": "(2nd)",
-    "managementLevel": null,
-    "staffLevel": "second",
-    "isManager": false,
-    "bettype": "2/M1*2",
-    "ignoreLeague": [],
-    "ignoreLeagueType": [],
-    "nonSoloLeague": [],
-    "priorityLeague": [],
-    "m1Capacity": 2,
-    "m2Capacity": 2,
-    "isEXPTAssignable": true,
-    "maxBet": 1000000,
-    "prioritySkill": null,
-    "nodeType": "workingShift",
-    "rowNumber": 132,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
-    "isCrossingShift": true,
-    "assignedJobs": [
-      {
-        "type": "M2",
-        "start": "2025-08-17T08:00:00.000Z",
-        "end": "2025-08-17T10:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 133,
+    "id": 120,
     "group": "SLG",
     "traderName": "SLGWanjie",
     "originalLevel": "(3rd)",
@@ -3591,69 +3074,233 @@
     "maxBet": 1000000,
     "prioritySkill": null,
     "nodeType": "workingShift",
-    "rowNumber": 133,
-    "shiftDate": "2025-08-17T00:00:00.000Z",
-    "startTime": "2025-08-17T05:00:00.000Z",
-    "endTime": "2025-08-17T16:00:00.000Z",
+    "rowNumber": 120,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T04:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
+    "isCrossingShift": true,
+    "assignedJobs": []
+  },
+  {
+    "id": 121,
+    "group": "CLG",
+    "traderName": "CLGCandy",
+    "originalLevel": "[PIC]/(1st)",
+    "managementLevel": "[PIC]",
+    "staffLevel": "first",
+    "isManager": true,
+    "bettype": "HDP/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 121,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T05:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
     "isCrossingShift": true,
     "assignedJobs": [
       {
-        "type": "M2",
-        "start": "2025-08-17T09:00:00.000Z",
-        "end": "2025-08-17T11:00:00.000Z"
+        "type": "IC",
+        "start": "2025-08-18T05:00:00.000Z",
+        "end": "2025-08-18T14:00:00.000Z"
       }
     ]
   },
   {
-    "id": 33,
-    "rowNumber": 33,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T12:00:00.000Z",
-    "endTime": "2025-08-16T21:00:00.000Z",
+    "id": 122,
+    "group": "CLG",
+    "traderName": "CLGKokchen",
+    "originalLevel": "(1st)",
+    "managementLevel": null,
+    "staffLevel": "first",
+    "isManager": false,
+    "bettype": "OU/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 122,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T05:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
+    "isCrossingShift": true,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T05:30:00.000Z",
+        "end": "2025-08-18T07:30:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T07:30:00.000Z",
+        "end": "2025-08-18T09:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "group": "CLG",
+    "traderName": "CLGChee",
+    "originalLevel": "(3rd)",
+    "managementLevel": null,
+    "staffLevel": "third",
+    "isManager": false,
+    "bettype": "2/R-FS/M1*1",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 1,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 123,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T05:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
+    "isCrossingShift": true,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T08:00:00.000Z",
+        "end": "2025-08-18T10:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "group": "SLG",
+    "traderName": "SLGBoy",
+    "originalLevel": "Member",
+    "managementLevel": null,
+    "staffLevel": "member",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": "HDP",
+    "nodeType": "workingShift",
+    "rowNumber": 124,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T05:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
+    "isCrossingShift": true,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T05:00:00.000Z",
+        "end": "2025-08-18T07:00:00.000Z"
+      },
+      {
+        "type": "M2",
+        "start": "2025-08-18T09:00:00.000Z",
+        "end": "2025-08-18T11:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "group": "SLG",
+    "traderName": "SLGGoh",
+    "originalLevel": "(2nd)",
+    "managementLevel": null,
+    "staffLevel": "second",
+    "isManager": false,
+    "bettype": "2/M1*2",
+    "ignoreLeague": [],
+    "ignoreLeagueType": [],
+    "nonSoloLeague": [],
+    "priorityLeague": [],
+    "m1Capacity": 2,
+    "m2Capacity": 2,
+    "isEXPTAssignable": true,
+    "maxBet": 1000000,
+    "prioritySkill": null,
+    "nodeType": "workingShift",
+    "rowNumber": 125,
+    "shiftDate": "2025-08-18T00:00:00.000Z",
+    "startTime": "2025-08-18T05:00:00.000Z",
+    "endTime": "2025-08-18T14:00:00.000Z",
+    "isCrossingShift": true,
+    "assignedJobs": [
+      {
+        "type": "M2",
+        "start": "2025-08-18T07:30:00.000Z",
+        "end": "2025-08-18T09:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "rowNumber": 32,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T12:00:00.000Z",
+    "endTime": "2025-08-17T21:00:00.000Z",
     "traderName": "CLGSoon",
     "isCrossingShift": false,
     "assignedJobs": [],
     "nodeType": "workingShift"
   },
   {
-    "id": 112,
-    "rowNumber": 112,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "id": 107,
+    "rowNumber": 107,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "traderName": "SLGYung",
     "isCrossingShift": false,
     "assignedJobs": [],
     "nodeType": "workingShift"
   },
   {
-    "id": 113,
-    "rowNumber": 113,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "id": 108,
+    "rowNumber": 108,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "traderName": "SLGLoon",
     "isCrossingShift": false,
     "assignedJobs": [],
     "nodeType": "workingShift"
   },
   {
-    "id": 114,
-    "rowNumber": 114,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "id": 109,
+    "rowNumber": 109,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "traderName": "SLGOnn",
     "isCrossingShift": false,
     "assignedJobs": [],
     "nodeType": "workingShift"
   },
   {
-    "id": 115,
-    "rowNumber": 115,
-    "shiftDate": "2025-08-16T00:00:00.000Z",
-    "startTime": "2025-08-16T19:00:00.000Z",
-    "endTime": "2025-08-17T06:00:00.000Z",
+    "id": 110,
+    "rowNumber": 110,
+    "shiftDate": "2025-08-17T00:00:00.000Z",
+    "startTime": "2025-08-17T19:00:00.000Z",
+    "endTime": "2025-08-18T06:00:00.000Z",
     "traderName": "SLGYap",
     "isCrossingShift": false,
     "assignedJobs": [],
