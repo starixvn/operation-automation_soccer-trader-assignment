@@ -117,4 +117,12 @@ public class TraderAssignmentController : ControllerBase
         }
     }
 
+    [HttpPost("m3")]
+    public ActionResult<AssignmentResponse> MinorThreeMatchAssignments([FromBody] AssignmentRequest request)
+    {
+        return Ok(new AssignmentResponse());
+    }
+
+
+
 }
