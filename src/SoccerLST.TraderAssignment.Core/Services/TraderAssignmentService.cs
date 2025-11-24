@@ -10,6 +10,8 @@ public class TraderAssignmentService
     private readonly IMatchAssignmentStrategy _majorStrategy;
     private readonly IMatchAssignmentStrategy _minorOneStrategy;
     private readonly IMatchAssignmentStrategy _minorTwoStrategy;
+    private readonly IMatchAssignmentStrategy _minorThreeStrategy;
+    private readonly IMatchAssignmentStrategy _minorFourStrategy;
 
     /// <summary>
     /// Initializes the service with injected strategies
@@ -27,6 +29,12 @@ public class TraderAssignmentService
 
         _minorTwoStrategy = strategyList.FirstOrDefault(s => s.MatchType == "M2")
             ?? throw new InvalidOperationException("Minor 2 match strategy (M2) not registered");
+
+        _minorThreeStrategy = strategyList.FirstOrDefault(s => s.MatchType == "M3")
+                            ?? throw new InvalidOperationException("Minor 3 match strategy (M3) not registered");
+
+        _minorFourStrategy = strategyList.FirstOrDefault(s => s.MatchType == "M4")
+                             ?? throw new InvalidOperationException("Minor 4 match strategy (M4) not registered");
     }
 
     /// <summary>
@@ -51,5 +59,22 @@ public class TraderAssignmentService
     public AssignmentResponse MinorTwoMatchAssignments(AssignmentRequest request)
     {
         return _minorTwoStrategy.Assign(request);
+    }
+
+
+    /// <summary>
+    /// Assigns traders to Minor 3 (M3) matches (MaxBet 8000-20,000)
+    /// </summary>
+    public AssignmentResponse MinorThreeMatchAssignments(AssignmentRequest request)
+    {
+        return _minorThreeStrategy.Assign(request);
+    }
+
+    /// <summary>
+    /// Assigns traders to Minor 4 (M4) matches (MaxBet 1500-8000)
+    /// </summary>
+    public AssignmentResponse MinorFourMatchAssignments(AssignmentRequest request)
+    {
+        return _minorFourStrategy.Assign(request);
     }
 }

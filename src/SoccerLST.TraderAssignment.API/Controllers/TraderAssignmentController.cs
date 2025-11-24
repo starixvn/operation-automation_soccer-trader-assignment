@@ -120,9 +120,47 @@ public class TraderAssignmentController : ControllerBase
     [HttpPost("m3")]
     public ActionResult<AssignmentResponse> MinorThreeMatchAssignments([FromBody] AssignmentRequest request)
     {
-        return Ok(new AssignmentResponse());
+        try
+        {
+            _logger.LogInformation("Received M3 assignment optimization request with {TraderCount} traders and {MatchCount} matches",
+                request.TraderShifts.Count, request.Matches.Count);
+
+
+            var result = _assignmentService.MinorThreeMatchAssignments(request);
+
+            _logger.LogInformation("M3 assignment optimization completed. Status: {Status}, Assigned: {Assigned}/{Total}",
+                result.Status, result.AssignedMatches, result.TotalMatches);
+
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error optimizing M3 trader assignments");
+            return StatusCode(500, new { error = "An error occurred while optimizing M3 assignments", details = ex.Message });
+
+        }
     }
 
+    [HttpPost("m4")]
+    public ActionResult<AssignmentResponse> MinorFourMatchAssignments([FromBody] AssignmentRequest request)
+    {
+        try
+        {
+            _logger.LogInformation("Received M4 assignment optimization request with {TraderCount} traders and {MatchCount} matches",
+                request.TraderShifts.Count, request.Matches.Count);
 
 
+            var result = _assignmentService.MinorFourMatchAssignments(request);
+
+            _logger.LogInformation("M4 assignment optimization completed. Status: {Status}, Assigned: {Assigned}/{Total}",
+                result.Status, result.AssignedMatches, result.TotalMatches);
+
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error optimizing M4 trader assignments");
+            return StatusCode(500, new { error = "An error occurred while optimizing M4 assignments", details = ex.Message });
+        }
+    }
 }

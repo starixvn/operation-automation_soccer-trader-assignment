@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using SoccerLST.TraderAssignment.Core.Services;
 using SoccerLST.TraderAssignment.Core.Services.Strategies;
 
@@ -18,7 +19,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMatchAssignmentStrategy, MajorMatchAssignmentStrategy>();
         services.AddScoped<IMatchAssignmentStrategy, MinorOneMatchAssignmentStrategy>();
         services.AddScoped<IMatchAssignmentStrategy, MinorTwoMatchAssignmentStrategy>();
-
+        services.AddScoped<IMatchAssignmentStrategy, MinorThreeMatchAssignmentStrategy>();
+        services.AddScoped<IMatchAssignmentStrategy, MinorFourMatchAssignmentStrategy>();
         // Register main service
         services.AddScoped<TraderAssignmentService>();
 
