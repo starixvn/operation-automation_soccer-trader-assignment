@@ -1,3 +1,5 @@
+using SoccerLST.TraderAssignment.Core.Enum;
+
 namespace SoccerLST.TraderAssignment.Core.Models;
 
 public class Match
@@ -27,4 +29,6 @@ public class Match
     public bool IsEXPT { get; set; } = false;
 
     public bool IsEAL { get; set; } = false;
+
+    public System.Enum MatchType { get; set; } = MatchTypeEnum.OTHER;
 }
