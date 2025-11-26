@@ -1,7 +1,7 @@
 using Google.OrTools.Sat;
 using SoccerLST.TraderAssignment.Core.Models;
 
-namespace SoccerLST.TraderAssignment.Core.Services.Strategies;
+namespace SoccerLST.TraderAssignment.Core.Services.Strategies.M2;
 
 /// <summary>
 /// Assignment strategy for Minor 2 (M2) matches
@@ -274,7 +274,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
                 var traderScore = traderPoints * priorityLeagueBonus;
                 var matchWeight = Math.Pow(match.MaxBet / 1000.0, 2);
-                var finalScore = coverageBonus + (traderScore * matchWeight);
+                var finalScore = coverageBonus + traderScore * matchWeight;
 
                 var assignment = x[(trader.Id, match.Id)];
                 objectiveTerms.Add(LinearExpr.Term(assignment, (long)Math.Round(finalScore)));
@@ -304,7 +304,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     // Check both directions:
                     // 1. Job → Match: match.Start == job.End (match starts right after job ends)
                     // 2. Match → Job: match.End == job.Start (match ends right before job starts)
-                    bool isConsecutive = (match.Start == job.End) || (match.End == job.Start);
+                    bool isConsecutive = match.Start == job.End || match.End == job.Start;
 
                     if (isConsecutive)
                     {
@@ -335,8 +335,8 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                 // Check if match aligns with shift boundaries:
                 // 1. Match starts exactly when shift starts
                 // 2. Match ends exactly when shift ends
-                bool alignsWithShiftStart = (match.Start == trader.Start);
-                bool alignsWithShiftEnd = (match.End == trader.End);
+                bool alignsWithShiftStart = match.Start == trader.Start;
+                bool alignsWithShiftEnd = match.End == trader.End;
 
                 if (alignsWithShiftStart || alignsWithShiftEnd)
                 {
@@ -427,7 +427,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                 }
 
                 // Check if trader has capacity for all matches in group
-                return t.M2Capacity >= (groupMatches.Count + existingJobs);
+                return t.M2Capacity >= groupMatches.Count + existingJobs;
             }).ToList();
 
             // Special case: If only one trader has sufficient capacity for all matches in group,
@@ -557,7 +557,7 @@ public class MinorTwoMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     assignment.PairType = "Single Trader (M2)";
 
                     var traderPoints = LevelPoints.GetValueOrDefault(assignedTrader.Level, 1);
-                    var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
+                    var matchWeight = match.MaxBet / 1000.0 * (match.MaxBet / 1000.0);
                     assignment.Score = (long)(traderPoints * matchWeight);
                 }
 

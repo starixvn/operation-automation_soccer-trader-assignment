@@ -1,7 +1,7 @@
 using Google.OrTools.Sat;
 using SoccerLST.TraderAssignment.Core.Models;
 
-namespace SoccerLST.TraderAssignment.Core.Services.Strategies;
+namespace SoccerLST.TraderAssignment.Core.Services.Strategies.M4;
 
 /// <summary>
 /// Assignment strategy for Minor 4 (M4) matches

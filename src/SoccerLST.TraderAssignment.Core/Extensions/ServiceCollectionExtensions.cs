@@ -1,7 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SoccerLST.TraderAssignment.Core.Services;
-using SoccerLST.TraderAssignment.Core.Services.Strategies;
+using SoccerLST.TraderAssignment.Core.Services.Strategies.M1;
+using SoccerLST.TraderAssignment.Core.Services.Strategies.M2;
+using SoccerLST.TraderAssignment.Core.Services.Strategies.M3;
+using SoccerLST.TraderAssignment.Core.Services.Strategies.M4;
+using SoccerLST.TraderAssignment.Core.Services.Strategies.MJ;
 
 namespace SoccerLST.TraderAssignment.Core.Extensions;
 

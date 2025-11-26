@@ -1,7 +1,7 @@
 using Google.OrTools.Sat;
 using SoccerLST.TraderAssignment.Core.Models;
 
-namespace SoccerLST.TraderAssignment.Core.Services.Strategies;
+namespace SoccerLST.TraderAssignment.Core.Services.Strategies.MJ;
 
 /// <summary>
 /// Assignment strategy for Major (MJ) matches
@@ -353,11 +353,11 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var ouScore = ouPoints * ouPrioritySkillBonus * ouPriorityLeagueBonus;
 
                     var pairScore = hdpScore * ouScore * tierBonus * leagueBonus;
-                    var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
+                    var matchWeight = match.MaxBet / 1000.0 * (match.MaxBet / 1000.0);
 
                     // Add initial base score of 1,000,000 to ensure all matches have minimum value
                     const long initScore = 1000000;
-                    var finalScore = initScore + (pairScore * matchWeight * eplEliteBoost);
+                    var finalScore = initScore + pairScore * matchWeight * eplEliteBoost;
 
                     var hdpVar = x[(hdpTrader.Id, match.Id, "HDP")];
                     var ouVar = x[(ouTrader.Id, match.Id, "OU")];
@@ -409,7 +409,7 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var matchWeight = match.MaxBet / 1000.0;
 
                     // Add initial base score of 1,000,000 to ensure all matches have minimum value
-                    var finalScore = initScore + (score * matchWeight);
+                    var finalScore = initScore + score * matchWeight;
 
                     var varAssigned = x[(trader.Id, match.Id, role)];
 
@@ -459,7 +459,7 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var matchWeight = match.MaxBet / 1000.0;
                     const long coverageBonus = 10000; // Large bonus to encourage 2-trader coverage
 
-                    var finalScore = initScore + coverageBonus + pairScore + (hdpScore * ouScore * matchWeight);
+                    var finalScore = initScore + coverageBonus + pairScore + hdpScore * ouScore * matchWeight;
 
                     objectiveTerms.Add(LinearExpr.Term(pairAssigned, (long)Math.Round(finalScore)));
                 }
@@ -531,8 +531,8 @@ public class MajorMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
                     var hdpPrioritySkillBonus = GetPrioritySkillBonus(hdpTrader, "HDP");
                     var ouPrioritySkillBonus = GetPrioritySkillBonus(ouTrader, "OU");
 
-                    var pairScore = (hdpPoints * hdpPriority * hdpPrioritySkillBonus) * (ouPoints * ouPriority * ouPrioritySkillBonus) * tierBonus * leagueBonus;
-                    var matchWeight = (match.MaxBet / 1000.0) * (match.MaxBet / 1000.0);
+                    var pairScore = hdpPoints * hdpPriority * hdpPrioritySkillBonus * (ouPoints * ouPriority * ouPrioritySkillBonus) * tierBonus * leagueBonus;
+                    var matchWeight = match.MaxBet / 1000.0 * (match.MaxBet / 1000.0);
 
                     // Note: We don't include EPL multiplier or Elite boost in displayed score
                     // Those are optimization weights only, not actual performance scores
