@@ -409,4 +409,53 @@ public partial class MinorOneMatchAssignmentStrategyPriorityTests
     }
 
     #endregion
+
+    #region Boundary Condition Tests
+
+    [Test]
+    public void Assign_MatchEndEqualsThirdShiftEnd_AssignsToSecondTrader()
+    {
+        // Arrange - Two traders: Second and Third level
+        // Match end time equals Third trader's shift end time
+        // Expected: Match should be assigned to Second trader (higher priority)
+        // even though Third trader's shift can technically accommodate the match
+        var request = new AssignmentRequest
+        {
+            TraderShifts = new List<TraderShift>
+            {
+                CreateTraderShift("1", "SecondTrader", new string[] { }, "Second", false,
+                    start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-09-28T18:00:00Z"),
+                    m1Capacity: 1),
+                CreateTraderShift("2", "ThirdTrader", new string[] { }, "Third", false,
+                    start: DateTimeOffset.Parse("2025-09-28T08:00:00Z"),
+                    end: DateTimeOffset.Parse("2025-09-28T16:00:00Z"),  // Shift ends at 16:00
+                    m1Capacity: 1)
+            },
+            Matches = new List<Match>
+            {
+                CreateMatch("1", "100",
+                    DateTimeOffset.Parse("2025-09-28T14:00:00Z"),  // Match: 14:00 - 16:00
+                    DateTimeOffset.Parse("2025-09-28T16:00:00Z"),  // Ends exactly at Third's shift end
+                    50000)  // M1 range: 40,000 - 70,000
+            },
+            PreconfiguredPairs = new List<PreconfiguredPair>()
+        };
+
+        // Act
+        var result = _strategy.Assign(request);
+
+        // Assert
+        result.Success.Should().BeTrue();
+        result.AssignedMatches.Should().Be(1, "match should be assigned");
+
+        var assignment = result.Assignments.First(a => a.Hdp != "N/A");
+        assignment.Hdp.Should().Be("SecondTrader",
+            "Second trader should be assigned (higher priority than Third)");
+        assignment.Ou.Should().Be("SecondTrader",
+            "Second trader should be assigned (higher priority than Third)");
+        assignment.MaxBet.Should().Be(50000);
+    }
+
+    #endregion
 }

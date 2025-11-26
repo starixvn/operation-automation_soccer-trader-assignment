@@ -211,7 +211,7 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // Base bonus to prioritize coverage - any assignment is better than no assignment
         const long coverageBonus = 1_000_000;
-        const long consecutiveMatchBonus = 50_000; // Bonus for consecutive matches (0-2 hour gap)
+        const long consecutiveMatchBonus = 500; // Bonus for consecutive matches (0-2 hour gap)
 
         // 1. Individual match assignment scores
         foreach (var match in matches)
@@ -267,7 +267,7 @@ public class MinorOneMatchAssignmentStrategy : RealMatchAssignmentStrategyBase
 
         // 3. Shift boundary bonus: Match aligns perfectly with shift boundaries
         // Encourages efficient use of trader shifts
-        const long shiftBoundaryBonus = 30_000; // Bonus for matches that align with shift start/end
+        const long shiftBoundaryBonus = 500; // Bonus for matches that align with shift start/end
 
         foreach (var trader in traderShifts)
         {
