@@ -28,7 +28,7 @@ RUN apk add --no-cache \
     curl \
     libgomp
 
-# Copy published application
+## Copy published application
 COPY --from=publish /app/publish .
 
 # Expose port
