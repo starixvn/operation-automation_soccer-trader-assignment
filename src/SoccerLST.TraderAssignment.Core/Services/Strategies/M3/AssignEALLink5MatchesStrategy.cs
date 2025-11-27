@@ -22,30 +22,34 @@ namespace SoccerLST.TraderAssignment.Core.Services.Strategies.M3
         {
             // Group EAL events by Start time
             var groupsByStartTime = events
-                .Where(e => e.IsEAL && !e.IsAlreadyHandled)
+                .Where(e => e is { IsEAL: true, IsAlreadyHandled: false })
                 .GroupBy(e => e.Start)
                 .ToList();
 
             var validGroups = new List<IList<Match>>();
 
-            foreach (var group in groupsByStartTime)
+            foreach (var matches in groupsByStartTime.Select(group => group.ToList()))
             {
-                var matches = group.ToList();
-
-                if (matches.Count == RequiredGroupSize)
+                switch (matches.Count)
                 {
-                    // Check if the group satisfies condition
-                    if (SatisfiesCondition(matches))
+                    case RequiredGroupSize:
                     {
-                        validGroups.Add(matches);
+                        // Check if the group satisfies condition
+                        if (SatisfiesCondition(matches))
+                        {
+                            validGroups.Add(matches);
+                        }
+
+                        break;
                     }
-                }
-                else if (matches.Count > RequiredGroupSize)
-                {
-                    // Find all non-overlapping subsets of RequiredGroupSize items that satisfy condition
-                    // Each match can only appear in one group
-                    var nonOverlappingSubsets = FindNonOverlappingValidSubsets(matches, RequiredGroupSize);
-                    validGroups.AddRange(nonOverlappingSubsets);
+                    case > RequiredGroupSize:
+                    {
+                        // Find all non-overlapping subsets of RequiredGroupSize items that satisfy condition
+                        // Each match can only appear in one group
+                        var nonOverlappingSubsets = FindNonOverlappingValidSubsets(matches, RequiredGroupSize);
+                        validGroups.AddRange(nonOverlappingSubsets);
+                        break;
+                    }
                 }
             }
 
@@ -125,13 +129,7 @@ namespace SoccerLST.TraderAssignment.Core.Services.Strategies.M3
             var combinations = Utils.GenerateCombinations(matches, count);
 
             // Find all combinations that satisfy the condition
-            foreach (var combination in combinations)
-            {
-                if (SatisfiesCondition(combination))
-                {
-                    validSubsets.Add(combination);
-                }
-            }
+            validSubsets.AddRange(combinations.Where(SatisfiesCondition));
 
             return validSubsets;
         }

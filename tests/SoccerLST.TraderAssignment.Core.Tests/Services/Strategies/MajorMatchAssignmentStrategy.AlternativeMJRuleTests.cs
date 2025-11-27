@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using SoccerLST.TraderAssignment.Core.Models;
-using SoccerLST.TraderAssignment.Core.Services.Strategies.MJ;
+using SoccerLST.TraderAssignment.Core.Services.Strategies;
 
 namespace SoccerLST.TraderAssignment.Core.Tests.Services.Strategies;
 

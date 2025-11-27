@@ -1,7 +1,7 @@
 using Google.OrTools.Sat;
 using SoccerLST.TraderAssignment.Core.Models;
 
-namespace SoccerLST.TraderAssignment.Core.Services.Strategies.M1;
+namespace SoccerLST.TraderAssignment.Core.Services.Strategies;
 
 /// <summary>
 /// Assignment strategy for Minor 1 (M1) matches

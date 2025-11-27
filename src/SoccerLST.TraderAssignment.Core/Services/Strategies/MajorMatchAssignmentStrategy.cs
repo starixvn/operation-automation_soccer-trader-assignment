@@ -1,7 +1,7 @@
 using Google.OrTools.Sat;
 using SoccerLST.TraderAssignment.Core.Models;
 
-namespace SoccerLST.TraderAssignment.Core.Services.Strategies.MJ;
+namespace SoccerLST.TraderAssignment.Core.Services.Strategies;
 
 /// <summary>
 /// Assignment strategy for Major (MJ) matches

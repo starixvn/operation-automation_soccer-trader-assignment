@@ -8,7 +8,7 @@ public static class AssignNonEALAndEXPTMatchesStrategy
     public static void Assign(AssignmentRequest request, IList<MatchAssignment> assignments)
     {
         var group = GroupTwoMatches(request.Matches);
-        Utils.ProcessAssignTraderToGroupMatches(request.TraderShifts,group, assignments);
+        ProcessAssignTraderToGroupMatches(request.TraderShifts,group, assignments);
     }
 
     private static IList<IList<Match>> GroupTwoMatches(IList<Match> events)
@@ -30,16 +30,19 @@ public static class AssignNonEALAndEXPTMatchesStrategy
         {
             var matches = group.ToList();
 
-            if (matches.Count == groupSize)
+            switch (matches.Count)
             {
-                // Exactly 2 matches - add as a group
-                validGroups.Add(matches);
-            }
-            else if (matches.Count > groupSize)
-            {
-                // More than 2 matches - find non-overlapping pairs
-                var nonOverlappingPairs = FindNonOverlappingPairs(matches);
-                validGroups.AddRange(nonOverlappingPairs);
+                case groupSize:
+                    // Exactly 2 matches - add as a group
+                    validGroups.Add(matches);
+                    break;
+                case > groupSize:
+                {
+                    // More than 2 matches - find non-overlapping pairs
+                    var nonOverlappingPairs = FindNonOverlappingPairs(matches);
+                    validGroups.AddRange(nonOverlappingPairs);
+                    break;
+                }
             }
         }
 
@@ -113,5 +116,67 @@ public static class AssignNonEALAndEXPTMatchesStrategy
         }
 
         return result;
+    }
+
+    public static void ProcessAssignTraderToGroupMatches(
+        IList<TraderShift> traderShifts,
+        IList<IList<Match>> groupMatches,
+        IList<MatchAssignment> assignments)
+    {
+        var canAssign = true;
+        foreach (var groupMatch in groupMatches)
+        {
+            foreach (var match in groupMatch)
+            {
+                foreach (var shift in traderShifts)
+                {
+                    if (!Utils.IsMatchWithinShift(shift, match))
+                    {
+                        canAssign = false;
+                    }
+
+                    if (canAssign && shift.AssignedJobs != null)
+                    {
+                        foreach (var assignedJob in shift.AssignedJobs)
+                        {
+                            if (Utils.HasTimeOverlap(match, assignedJob))
+                            {
+                                canAssign = false;
+                            }
+                        }
+                    }
+
+                    if (!shift.IsEXPTMatchAssignable)
+                    {
+                        canAssign = false;
+                    }
+
+                    if (canAssign && Utils.IsLeagueIgnored(shift, match))
+                    {
+                        canAssign = false;
+                    }
+                    if (canAssign)
+                    {
+                        assignments.Add(new MatchAssignment()
+                        {
+                            RowNumber = match.Id,
+                            Hdp = shift.Name,
+                            Ou = shift.Name
+                        });
+
+                        shift.AssignedJobs ??= [];
+                        shift.AssignedJobs.Add(new AssignedJob()
+                        {
+                            Type = "M3",
+                            Start = match.Start,
+                            End = match.End
+                        });
+                        match.IsAlreadyHandled = true;
+                        break;
+
+                    }
+                }
+            }
+        }
     }
 }

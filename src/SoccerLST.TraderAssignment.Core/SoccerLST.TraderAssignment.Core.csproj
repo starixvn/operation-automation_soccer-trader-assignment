@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Strategies\M1\" />
     <Folder Include="Services\Strategies\M2\" />
+    <Folder Include="Services\Strategies\MJ\" />
   </ItemGroup>
 
 </Project>

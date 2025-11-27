@@ -108,10 +108,7 @@ public static class Utils
                             Ou = shift.Name
                         });
 
-                        if (shift.AssignedJobs is null)
-                        {
-                            shift.AssignedJobs = new List<AssignedJob>();
-                        }
+                        shift.AssignedJobs ??= new List<AssignedJob>();
                         shift.AssignedJobs.Add(new AssignedJob()
                         {
                             Type = "M3",
