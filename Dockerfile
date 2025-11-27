@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:9.0-alpine AS builder
 WORKDIR /src
 
 # Copy csproj files and restore dependencies
@@ -19,13 +19,14 @@ FROM build AS publish
 RUN dotnet publish "SoccerLST.TraderAssignment.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Stage 3: Runtime
-FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:9.0-alpine AS base
+
 WORKDIR /app
 
 # Install dependencies for Google OR-Tools
-RUN apt-get update && apt-get install -y \
-    libgomp1 \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    curl \
+    libgomp
 
 # Copy published application
 COPY --from=publish /app/publish .
