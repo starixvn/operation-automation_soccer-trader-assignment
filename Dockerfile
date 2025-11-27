@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM hub.nexdev.net/base/dotnet/core/sdk:9.0-alpine AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:9.0-alpine AS build
 WORKDIR /src
 
 # Copy csproj files and restore dependencies
